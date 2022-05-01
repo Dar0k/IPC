@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Group xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Group xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
    <children>
       <ImageView fitHeight="443.0" fitWidth="635.0" opacity="0.74" pickOnBounds="true">
          <image>
-            <Image url="@Images/fondo2.jpg" />
+            <Image url="@../resources/fondo2.jpg" />
          </image>
       </ImageView>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-color: transparent;">
          <children>
             <VBox alignment="CENTER" maxWidth="283.0" minHeight="320.0" minWidth="125.0" prefHeight="441.0" prefWidth="125.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7);">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 12;" text="TEST">
+                  <Button fx:id="testButton" mnemonicParsing="false" onAction="#handleTestButton" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 12;" text="TEST">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -30,7 +30,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="RESULT">
+                  <Button fx:id="resultButton" mnemonicParsing="false" onAction="#handleResultButton" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="RESULT">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -38,7 +38,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-color: transparent;" text="PROFILE">
+                  <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfileButton" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-color: transparent;" text="PROFILE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-radius: 50; -fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" text="LOG OUT">
+                  <Button fx:id="logOutButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-radius: 50; -fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" text="LOG OUT">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -66,7 +66,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Yes" textFill="WHITE">
+                  <Button fx:id="confirmateLogOutButton" mnemonicParsing="false" onAction="#handleConfirmateLogOut" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Yes" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>

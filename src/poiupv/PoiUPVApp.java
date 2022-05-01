@@ -26,7 +26,7 @@ public class PoiUPVApp extends Application {
         
         LogInDefController logInCtrl = loader.<LogInDefController>getController();
         logInCtrl.initStage(stage);
-        stage.setTitle("Puntos de interes UPV");
+        stage.setTitle("Log in");
         stage.setScene(scene);
         stage.show();
     }

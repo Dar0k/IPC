@@ -7,8 +7,11 @@ package poiupv;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -52,6 +55,42 @@ public class MainTestController implements Initializable {
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
         primaryStage.setTitle("MAIN");
+    }
+
+    @FXML
+    private void handleResult(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleProfile(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainProfile.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        MainProfileController profileController = loader.<MainProfileController>getController();
+        profileController.initStage(primaryStage);
+        primaryStage.setScene(scene);
+    }
+
+    @FXML
+    private void handleLogOut(ActionEvent event) throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainLogOut.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        MainLogOutController logOutController = loader.<MainLogOutController>getController();
+        logOutController.initStage(primaryStage);
+        primaryStage.setScene(scene);
+    }
+
+    @FXML
+    private void handleContinue(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleRandomAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleList(ActionEvent event) {
     }
     
 }

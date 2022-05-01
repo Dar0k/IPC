@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Group xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.SignUpDefController">
+   <children>
+      <ImageView fitHeight="457.0" fitWidth="680.0" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/fondo1.jpg" />
+         </image>
+      </ImageView>
+      <HBox prefHeight="457.0" prefWidth="679.0" style="-fx-background-image: transparent;">
+         <children>
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="457.0" prefWidth="691.0" style="-fx-background-color: rgba(255,255,255,0.75); -fx-background-radius: 0; -fx-background-insets: 0;">
+               <children>
+                  <Label alignment="BOTTOM_CENTER" text="SIGN UP">
+                     <font>
+                        <Font name="Serif Regular" size="47.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="659.0" spacing="5.0">
+                     <children>
+                        <VBox alignment="CENTER" maxWidth="459.0" minHeight="306.0" minWidth="189.0" prefHeight="330.0" prefWidth="459.0" spacing="15.0">
+                           <children>
+                              <HBox prefHeight="85.0" prefWidth="600.0" spacing="15.0">
+                                 <children>
+                                    <VBox prefHeight="85.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Username: " />
+                                          <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="197.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1.25 0;" text="dbsjbvjk sv.kjf k" />
+                                          <Label alignment="TOP_LEFT" prefHeight="36.0" prefWidth="226.0" style="-fx-text-fill: red;" text="Must containing between 6 and 15 characters or digits without spaces" textFill="RED" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="200.0" prefHeight="85.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Email:" />
+                                          <TextField fx:id="emailTextField" prefHeight="26.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1.25 0;" text="robyandy2002@alumnu.upv.es" />
+                                          <Label alignment="TOP_LEFT" prefHeight="36.0" prefWidth="200.0" style="-fx-text-fill: red;" text="Email already register/wrong email format" textFill="RED" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fillHeight="false" prefHeight="84.0" prefWidth="415.0" spacing="15.0">
+                                 <children>
+                                    <VBox fillWidth="false" prefHeight="85.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Password:" />
+                                          <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                                             <children>
+                                                <PasswordField fx:id="passwordInput" prefHeight="26.0" prefWidth="171.0" style="-fx-border-color: black;" text="12345678901234567890" />
+                                                <Group>
+                                                   <children>
+                                                      <ImageView fitHeight="31.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../resources/OpenEye.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Line endY="8.034704208374023" layoutX="27.0" layoutY="8.0" startX="-26.537826538085938" startY="-8.53553295135498" />
+                                                   </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Group>
+                                             </children>
+                                          </HBox>
+                                          <Label alignment="TOP_LEFT" prefHeight="60.0" prefWidth="189.0" style="-fx-text-fill: red;" text="Must contains between 8 and 20 characters / at least one upper and lower case letter/ as well as some digits and some special characters (!@#$%&amp;*()-+=)" textAlignment="JUSTIFY" textFill="#fc0000" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="85.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Repeat Password:" />
+                                          <HBox alignment="CENTER" prefHeight="27.0" prefWidth="221.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                                             <children>
+                                                <PasswordField fx:id="repeatPasswordInput" prefHeight="9.0" prefWidth="176.0" style="-fx-border-color: black;" text="12345678901234567890" />
+                                                <Group>
+                                                   <children>
+                                                      <ImageView fitHeight="31.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../resources/OpenEye.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Line endY="8.034704208374023" layoutX="27.0" layoutY="8.0" startX="-26.537826538085938" startY="-8.53553295135498" />
+                                                   </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Group>
+                                             </children>
+                                          </HBox>
+                                          <Label alignment="TOP_LEFT" minHeight="34.0" prefHeight="68.0" prefWidth="185.0" style="-fx-text-fill: red;" text="Password not the same" textFill="#002eff" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="91.0" prefWidth="440.0">
+                                 <children>
+                                    <VBox fillWidth="false" maxWidth="255.0" prefHeight="94.0" prefWidth="179.0">
+                                       <children>
+                                          <Label text="Date of Birth:">
+                                             <VBox.margin>
+                                                <Insets bottom="3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                                             <children>
+                                                <DatePicker fx:id="agePicker" focusTraversable="false" prefHeight="26.0" prefWidth="201.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+                                             </children>
+                                          </HBox>
+                                          <Label alignment="TOP_LEFT" minHeight="34.0" prefHeight="46.0" prefWidth="174.0" style="-fx-text-fill: red;" text="Must be at least 12 years old" textFill="RED" wrapText="true">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" top="25.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" maxWidth="260.0" prefHeight="296.0" prefWidth="175.0" spacing="25.0" style="-fx-border-color: black; -fx-border-width: 0 0 0 1.15; -fx-border-insets: 2;">
+                           <children>
+                              <VBox prefHeight="90.0" prefWidth="128.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" spacing="10.0" />
+                                    <HBox alignment="CENTER" spacing="10.0" />
+                                 </children>
+                              </VBox>
+                              <Button fx:id="chooseImageButton" mnemonicParsing="false" onAction="#handleChooseImage" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CHOOSE IMAGE" textFill="WHITE">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" right="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="83.0" prefWidth="455.0" spacing="25.0">
+                     <children>
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="nextButton" mnemonicParsing="false" onAction="#handleNextButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="NEXT" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="457.0" prefWidth="0.0" />
+         </children>
+      </HBox>
+   </children>
+</Group>

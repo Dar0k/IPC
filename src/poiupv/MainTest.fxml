@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="443.0" fitWidth="635.0" opacity="0.74" pickOnBounds="true">
          <image>
-            <Image url="@Images/fondo2.jpg" />
+            <Image url="@../resources/fondo2.jpg" />
          </image>
       </ImageView>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-color: transparent;">
@@ -29,7 +29,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="resultButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="RESULT">
+                  <Button fx:id="resultButton" mnemonicParsing="false" onAction="#handleResult" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="RESULT">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -37,7 +37,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="profileButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-color: transparent;" text="PROFILE">
+                  <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfile" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-color: transparent;" text="PROFILE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-radius: 50; -fx-background-color: transparent;" text="LOG OUT">
+                  <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-radius: 50; -fx-background-color: transparent;" text="LOG OUT">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -60,17 +60,17 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="441.0" prefWidth="522.0" spacing="25.0">
                <children>
-                  <Button fx:id="continueButton" alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 50; -fx-text-fill: black; -fx-font-size: 30;" text="Continue">
+                  <Button fx:id="continueButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#handleContinue" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 50; -fx-text-fill: black; -fx-font-size: 30;" text="Continue">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Button>
-                  <Button fx:id="randomButton" alignment="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 50; -fx-text-fill: black; -fx-font-size: 30;" text="Random">
+                  <Button fx:id="randomButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleRandomAction" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 50; -fx-text-fill: black; -fx-font-size: 30;" text="Random">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Button>
-                  <Button fx:id="listButton" alignment="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 50; -fx-text-fill: black; -fx-font-size: 30;" text="List">
+                  <Button fx:id="listButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleList" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 50; -fx-text-fill: black; -fx-font-size: 30;" text="List">
                      <font>
                         <Font size="23.0" />
                      </font>

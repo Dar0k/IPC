@@ -14,55 +14,56 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="421.0" prefWidth="571.0" style="-fx-background-image: url('file:/C:/Users/robya/Desktop/ProyectoInter/IPC_FXMLCore-master/src/images/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
+<HBox prefHeight="421.0" prefWidth="572.0" style="-fx-background-image: url('../resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
    <children>
-      <VBox alignment="CENTER" prefHeight="440.0" prefWidth="220.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,.75);">
+      <VBox alignment="CENTER" prefHeight="421.0" prefWidth="279.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,.75);">
          <children>
             <Label alignment="BOTTOM_CENTER" text="LOG IN">
                <font>
                   <Font name="Serif Regular" size="43.0" />
                </font>
             </Label>
-            <VBox fillWidth="false" maxWidth="180.0" prefHeight="64.0" prefWidth="180.0" style="-fx-background-color: Color.rgb(255, 255, 255, 100);">
+            <VBox fillWidth="false" maxWidth="200.0" prefHeight="64.0" prefWidth="180.0" style="-fx-background-color: transparemt;">
                <children>
                   <Label text="Username: " />
-                  <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1.25 0; -fx-border-color: black;" />
-                  <Label fx:id="usernameError" prefHeight="17.0" prefWidth="180.0" text="Incorrect username" textFill="RED" visible="false">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
+                  <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="238.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1.25 0; -fx-border-color: black;" />
+                  <Label fx:id="usernameError" prefHeight="17.0" prefWidth="180.0" text="Incorrect username" textFill="RED" visible="false" />
                </children>
             </VBox>
-            <VBox fillWidth="false" maxWidth="180.0" prefHeight="68.0" prefWidth="198.0">
+            <VBox fillWidth="false" maxWidth="200.0" prefHeight="68.0" prefWidth="198.0">
                <children>
                   <Label text="Password:" />
-                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="180.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                  <HBox alignment="CENTER" prefHeight="27.0" prefWidth="225.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
                      <children>
-                        <PasswordField fx:id="userPasswordField" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: transparent;" text="12345678901234567890" />
                         <Group>
                            <children>
-                              <ImageView fx:id="passwordShowEye" fitHeight="31.0" fitWidth="27.0" onMouseDragged="#handlePasswordEyeClicked" onMouseEntered="#handlePasswordEyeHover" onMouseExited="#handlePasswordEyeHoverExit" pickOnBounds="true" preserveRatio="true">
+                              <TextField fx:id="passwordTextField" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: transparent;" visible="false" />
+                              <PasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: transparent;" />
+                           </children>
+                        </Group>
+                        <Group fx:id="passwordShowEye" onMouseClicked="#handleEyeCicked">
+                           <children>
+                              <ImageView fitHeight="16.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/OpenEye.png" />
+                                    <Image url="@../resources/OpenEye.png" />
                                  </image>
                               </ImageView>
-                              <Line fx:id="passwordEyeLine" endY="8.034704208374023" layoutX="27.0" layoutY="8.0" startX="-26.537826538085938" startY="-8.53553295135498" />
+                              <Line fx:id="passwordEyeLine" endY="8.034704208374023" layoutX="27.0" layoutY="8.0" startX="-26.217239379882812" startY="-6.757354736328125" />
                            </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Group>
                      </children>
                   </HBox>
                   <Label fx:id="passwordError" prefHeight="121.0" prefWidth="215.0" text="Incorrect password" textFill="RED" visible="false">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <Label fx:id="signUpLink" onMouseClicked="#handleSignUpClick" onMouseEntered="#handleSignUpHover" onMouseExited="#handleSignUpHoverExit" text="Sign Up" textFill="#2b00ff">
+            <Label fx:id="signUpLink" onMouseClicked="#handleSignUpClick" text="Sign Up" textFill="#2b00ff">
                <font>
                   <Font size="15.0" />
                </font>
@@ -70,7 +71,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#handleEnterPressed" onMouseEntered="#handleEnterHover" onMouseExited="#handleEnterHoverExit" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="ENTER" textFill="WHITE">
+            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#handleEnterPressed" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="ENTER" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>

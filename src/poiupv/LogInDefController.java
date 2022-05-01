@@ -5,13 +5,18 @@
  */
 package poiupv;
 
+import DBAccess.NavegacionDAOException;
+import java.io.IOException;
 import javafx.scene.text.Font;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,6 +28,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import model.Navegacion;
+
 
 /**
  * FXML Controller class
@@ -35,21 +42,24 @@ public class LogInDefController implements Initializable {
     @FXML
     private Label usernameError;
     @FXML
-    private ImageView passwordShowEye;
-    @FXML
     private Label passwordError;
     @FXML
     private Label signUpLink;
     @FXML
-    private Button enterButton;
-    private boolean passwordShow = false;
+    private Button enterButton;    
+    @FXML
+    private Group passwordShowEye;
     @FXML
     private Line passwordEyeLine;
-    private PasswordField userPassword;
     @FXML
     private TextField usernameField;
     @FXML
-    private PasswordField userPasswordField;
+    private PasswordField passwordField;
+    @FXML
+    private TextField passwordTextField;
+    
+    Navegacion navegation;
+    private boolean passwordShow = false;    
 
     public void initStage(Stage stage)
     {
@@ -59,73 +69,55 @@ public class LogInDefController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+    public void initialize(URL url, ResourceBundle rb) {        
+        try {            
+            navegation = Navegacion.getSingletonNavegacion();
+        } catch (NavegacionDAOException ex) {
+            Logger.getLogger(LogInDefController.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+        passwordField.textProperty().addListener((obs, oldVal, newVal) -> {
+            passwordTextField.setText(newVal);
+        });
+        passwordTextField.textProperty().addListener((obs, oldVal, newVal) -> {
+            passwordField.setText(newVal);
+        });
+    }
     @FXML
-    private void handleSignUpHoverExit(MouseEvent event) {
-        signUpLink.setFont(new Font(15));
+    private void handleEyeCicked(MouseEvent event) {
+        boolean temp = passwordEyeLine.isVisible();
+        passwordEyeLine.setVisible(!temp);
+        passwordField.setVisible(!temp);
+        passwordTextField.setVisible(temp);
     }
 
     @FXML
-    private void handleSignUpHover(MouseEvent event) {
-       signUpLink.setFont(new Font(17));
-    }
-
-    @FXML
-    private void handleSignUpClick(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleEnterHoverExit(MouseEvent event) {
-        enterButton.setPrefSize(98, 31);
-    }
-
-    @FXML
-    private void handleEnterHover(MouseEvent event) {
-        enterButton.setPrefSize(100, 33);
+    private void handleSignUpClick(MouseEvent event) throws IOException {
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("SignUpDef.fxml"));
+        Parent root = (Parent) myLoader.load();
+        Scene scene = new Scene(root);
+        SignUpDefController signUpContr = myLoader.<SignUpDefController>getController();
+        signUpContr.initStage(primaryStage);
+        primaryStage.setScene(scene);      
     }
 
     @FXML
     private void handleEnterPressed(ActionEvent event) throws Exception {
-        if(!checkLogin(usernameField, userPasswordField)) //CHECK IF INPUT DATA IS CORRECT
+        if (!navegation.exitsNickName(usernameField.getText())){
+           usernameError.setVisible(true);
+           passwordError.setVisible(true);
+        }
+        if(navegation.loginUser(usernameField.getText(), passwordField.getText()) == null) //CHECK IF INPUT DATA IS CORRECT
         {
-          passwordError.setVisible(true);
-          usernameError.setVisible(true);
+           passwordError.setVisible(true);          
         }
         else
         {
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("MainTestController.fxml"));
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
             Parent root = (Parent) myLoader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
         }
-    }
+    }    
 
-    @FXML
-    private void handlePasswordEyeHoverExit(MouseEvent event) {
-    }
-
-    @FXML
-    private void handlePasswordEyeHover(MouseEvent event) {
-    }
-
-    @FXML
-    private void handlePasswordEyeClicked(MouseEvent event) {
-        if(!passwordShow)
-        {
-            passwordShow = true;
-            passwordEyeLine.setVisible(true);
-            
-        }
-        else
-        {
-            
-            passwordEyeLine.setVisible(false);
-        }
-    }
-    private boolean checkLogin(TextField user, PasswordField password )
-    {
-        return true;
-    }
     
 }
