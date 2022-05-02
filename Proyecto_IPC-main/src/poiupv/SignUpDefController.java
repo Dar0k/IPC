@@ -6,6 +6,7 @@
 package poiupv;
 
 import DBAccess.NavegacionDAOException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -32,11 +33,13 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
+import javafx.stage.FileChooser;
 import javax.swing.text.NavigationFilter;
 import model.Navegacion;
 import model.User;
@@ -198,8 +201,10 @@ public class SignUpDefController implements Initializable {
         BooleanBinding validFields = Bindings.and(validUsername, validPassword).and(validReenterPassword).and(validEmail).and(validAge);
         
         signUpButton.disableProperty().bind(Bindings.not(validFields));        
-        signUpButton.setOnAction( (event)->{            
-            try {
+        signUpButton.setOnAction( (event)->{  
+            try {signUpCheck();}
+            catch(Exception e){}
+            /*try {
                 FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
                 Parent root;
                 root = (Parent) myLoader.load();
@@ -212,13 +217,33 @@ public class SignUpDefController implements Initializable {
                     User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
                 } catch (NavegacionDAOException ex) {
                     Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
+                }
             } catch (IOException ex) {
                 Logger.getLogger(LogInDefController.class.getName()).log(Level.SEVERE, null, ex);
-            }            
+            }
+            */
         });  
     }
+    private void signUpCheck() throws Exception
+    {
+                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+                Parent root = (Parent) myLoader.load();
+                Scene scene = new Scene(root);
+                MainTestController mtCtrl = myLoader.<MainTestController>getController();
+                mtCtrl.initStage(primaryStage);
+                primaryStage.setScene(scene);
+                //                  REGISTER
+                /*try {        
+                    ImagePattern help = (ImagePattern) avaPrin.getFill();
+                    Image image = help.getImage();
+                    User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
+                } catch (NavegacionDAOException ex) {
+                    Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(LogInDefController.class.getName()).log(Level.SEVERE, null, ex);*/
     
+    }
     public void initStage(Stage stage)
     {
         prevScene = stage.getScene();
@@ -229,10 +254,24 @@ public class SignUpDefController implements Initializable {
     }
 
     @FXML
-    private void handleChooseImage(ActionEvent event) {
+    private void handleChooseImage(ActionEvent event) throws Exception {
+        FileChooser fileChoose = new FileChooser();
+        //fileChoose.setInitialDirectory(new File("../resources"));
+        FileChooser.ExtensionFilter fileExtensions = 
+        new FileChooser.ExtensionFilter(
+        "Images", "*.jpeg", "*.png", "*.jpg");
+
+        fileChoose.getExtensionFilters().add(fileExtensions);
+        fileChoose.setTitle("Open File");  
+        File file = fileChoose.showOpenDialog(primaryStage);
+        System.out.print(file);
+        sel.setStroke(Color.TRANSPARENT);
+        //avaPrin.setFill(new ImagePattern(new Image(file.toString()))); //CHANGE TOSTRING TO FIT MAIN IMAGE
+        
+          
         
     }   
-
+    
     @FXML
     private void handleSelectAvatar(MouseEvent event) {
         Node source = (Node)event.getSource();

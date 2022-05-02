@@ -106,6 +106,13 @@ public class LogInDefController implements Initializable {
 
     @FXML
     private void handleEnterPressed(ActionEvent event) throws Exception {
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+            Parent root = (Parent) myLoader.load();
+            Scene scene = new Scene(root);
+            MainTestController mtCtrl = myLoader.<MainTestController>getController();
+            mtCtrl.initStage(primaryStage);
+            primaryStage.setScene(scene);
+        /*    
         if (!navegation.exitsNickName(usernameField.getText())){
            usernameError.setVisible(true);
            passwordError.setVisible(true);
@@ -120,8 +127,11 @@ public class LogInDefController implements Initializable {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
             Parent root = (Parent) myLoader.load();
             Scene scene = new Scene(root);
+            MainTestController mtCtrl = myLoader.<MainTestController>getController();
+            mtCtrl.initStage(primaryStage);
             primaryStage.setScene(scene);            
         }
+*/
     }    
 
     

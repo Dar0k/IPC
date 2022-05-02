@@ -141,7 +141,7 @@
                                        <children>
                                           <ImageView fx:id="showPassword" fitHeight="31.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/OpenEye.png" />
+                                                <Image url="@../resources/OpenEye.png" />
                                              </image>
                                           </ImageView>
                                           <Line endY="8.034704208374023" layoutX="27.0" layoutY="8.0" startX="-26.537826538085938" startY="-8.53553295135498" />
@@ -165,7 +165,7 @@
                                        <children>
                                           <ImageView fx:id="handleShowPassword" fitHeight="31.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/OpenEye.png" />
+                                                <Image url="@../resources/OpenEye.png" />
                                              </image>
                                           </ImageView>
                                           <Line endY="8.034704208374023" layoutX="27.0" layoutY="8.0" startX="-26.537826538085938" startY="-8.53553295135498" />
