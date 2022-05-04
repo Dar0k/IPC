@@ -204,24 +204,6 @@ public class SignUpDefController implements Initializable {
         signUpButton.setOnAction( (event)->{  
             try {signUpCheck();}
             catch(Exception e){}
-            /*try {
-                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
-                Parent root;
-                root = (Parent) myLoader.load();
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-                //                  REGISTER
-                /*try {        
-                    ImagePattern help = (ImagePattern) avaPrin.getFill();
-                    Image image = help.getImage();
-                    User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
-                } catch (NavegacionDAOException ex) {
-                    Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(LogInDefController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            */
         });  
     }
     private void signUpCheck() throws Exception
@@ -274,38 +256,12 @@ public class SignUpDefController implements Initializable {
     
     @FXML
     private void handleSelectAvatar(MouseEvent event) {
-        Node source = (Node)event.getSource();
-        if(source.getId().equals(ava1.getId())){
-            ava1.setStroke(Color.BLACK);  
-            ava1.setStrokeWidth(1.5);
-            avaPrin.setFill(ava1.getFill());
-            sel.setStroke(Color.TRANSPARENT);
-            sel = ava1;
-        }else if(source.getId().equals(ava2.getId())){
-            ava2.setStroke(Color.BLACK);
-            ava2.setStrokeWidth(1.5);
-            avaPrin.setFill(ava2.getFill());
-            sel.setStroke(Color.TRANSPARENT);
-            sel = ava2;
-        }else if(source.getId().equals(ava3.getId())){
-            ava3.setStroke(Color.BLACK);
-            ava3.setStrokeWidth(1.5);
-            avaPrin.setFill(ava3.getFill());
-            sel.setStroke(Color.TRANSPARENT);
-            sel = ava3;
-        }else if(source.getId().equals(ava4.getId())){
-            ava4.setStroke(Color.BLACK);
-            ava4.setStrokeWidth(1.5);
-            avaPrin.setFill(ava4.getFill());
-            sel.setStroke(Color.TRANSPARENT);
-            sel = ava4;
-        }else if(source.getId().equals(ava5.getId())){
-            ava5.setStroke(Color.BLACK);
-            ava5.setStrokeWidth(1.5);
-            avaPrin.setFill(ava5.getFill());
-            sel.setStroke(Color.TRANSPARENT);
-            sel = ava5;          
-        }
+        Circle source = (Circle)event.getSource();
+        source.setStroke(Color.BLACK);  
+        source.setStrokeWidth(1.5);
+        avaPrin.setFill(ava1.getFill());
+        sel.setStroke(Color.TRANSPARENT);
+        sel = source;        
     }
 
     @FXML

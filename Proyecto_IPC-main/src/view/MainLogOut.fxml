@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Group xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
+<Group xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
    <children>
       <ImageView fitHeight="443.0" fitWidth="635.0" opacity="0.74" pickOnBounds="true">
          <image>
@@ -22,15 +22,7 @@
          <children>
             <VBox alignment="CENTER" maxWidth="283.0" minHeight="320.0" minWidth="125.0" prefHeight="441.0" prefWidth="125.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7);">
                <children>
-                  <Button fx:id="testButton" mnemonicParsing="false" onAction="#handleTestButton" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 12;" text="TEST">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="resultButton" mnemonicParsing="false" onAction="#handleResultButton" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="RESULT">
+                  <Button fx:id="testButton" mnemonicParsing="false" onAction="#handleTest" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="TEST">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -38,7 +30,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfileButton" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-color: transparent;" text="PROFILE">
+                  <Button fx:id="resultButton" mnemonicParsing="false" onAction="#handleResult" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="RESULT">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -46,9 +38,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="logOutButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: black; -fx-background-radius: 50; -fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" text="LOG OUT">
+                  <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfile" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="PROFILE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="logOutButton" mnemonicParsing="false" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: transparent;" text="LOG OUT">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -56,7 +56,7 @@
                   </Button>
                </children>
                <padding>
-                  <Insets bottom="25.0" left="20.0" right="20.0" top="25.0" />
+                  <Insets bottom="25.0" left="10.0" right="10.0" top="25.0" />
                </padding>
             </VBox>
             <VBox alignment="CENTER" prefHeight="441.0" prefWidth="515.0" spacing="15.0">
@@ -70,6 +70,9 @@
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </VBox>

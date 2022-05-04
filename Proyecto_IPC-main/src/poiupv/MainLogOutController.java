@@ -14,6 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -53,29 +56,28 @@ public class MainLogOutController implements Initializable {
     
 
     @FXML
-    private void handleTestButton(ActionEvent event) throws Exception{
+    private void handleTest(ActionEvent event) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
         MainTestController mainTCtrl = loader.<MainTestController>getController();
         mainTCtrl.initStage(primaryStage);
-        primaryStage.setScene(scene);
-        
+        primaryStage.setScene(scene);        
     }
 
     @FXML
     //TO COMPLETE
-    private void handleResultButton(ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+    private void handleResult(ActionEvent event) throws Exception {
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
         MainTestController mainTCtrl = loader.<MainTestController>getController();
         mainTCtrl.initStage(primaryStage);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(scene);*/
     }
 
     @FXML
-    private void handleProfileButton(ActionEvent event) throws Exception{
+    private void handleProfile(ActionEvent event) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainProfile.fxml"));
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
@@ -93,6 +95,26 @@ public class MainLogOutController implements Initializable {
         LogInDefController mainTCtrl = loader.<LogInDefController>getController();
         mainTCtrl.initStage(primaryStage);
         primaryStage.setScene(scene);
+    }
+
+    @FXML
+    private void OnMouseHoverExited(MouseEvent event) {
+        Button source = (Button)event.getSource();
+        if(source.equals(logOutButton)){
+            source.setStyle(" -fx-font-weight: bold; -fx-background-color: transparent;");
+        }else{
+            source.setStyle("-fx-background-color: transparent; -fx-background-radius: 0;");
+        }
+    }
+
+    @FXML
+    private void OnMouseHoverEnter(MouseEvent event) {
+        Button source = (Button)event.getSource();
+        if(source.equals(logOutButton)){
+            source.setStyle("-fx-background-color: rgb(200,200,200,0.5); -fx-background-radius: 50; -fx-font-weight: bold;");
+        }else{
+            source.setStyle("-fx-background-color: rgb(200,200,200,0.5); -fx-background-radius: 50;");
+        }
     }
     
 }
