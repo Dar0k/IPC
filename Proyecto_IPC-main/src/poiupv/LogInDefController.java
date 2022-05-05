@@ -112,6 +112,9 @@ public class LogInDefController implements Initializable {
             MainTestController mtCtrl = myLoader.<MainTestController>getController();
             mtCtrl.initStage(primaryStage);
             primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            
         /*    
         if (!navegation.exitsNickName(usernameField.getText())){
            usernameError.setVisible(true);

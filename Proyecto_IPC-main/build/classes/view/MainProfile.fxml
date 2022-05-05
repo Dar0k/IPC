@@ -25,45 +25,7 @@
       </ImageView>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-color: transparent;">
          <children>
-            <VBox alignment="CENTER" maxWidth="283.0" minHeight="320.0" minWidth="125.0" prefHeight="441.0" prefWidth="125.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7);">
-               <padding>
-                  <Insets bottom="25.0" left="20.0" right="20.0" top="25.0" />
-               </padding>
-               <children>
-                  <Button fx:id="testButton" mnemonicParsing="false" onAction="#handleTest" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="TEST">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="resultButton" mnemonicParsing="false" onAction="#handleResult" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="RESULT">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="profileButton" mnemonicParsing="false" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="PROFILE">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleLogOut" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="LOG OUT">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </VBox>
+            <fx:include fx:id="sidebar" source="Sidebar.fxml"/>
             <VBox alignment="CENTER" fillWidth="false" maxWidth="596.0" minHeight="306.0" minWidth="189.0" prefHeight="531.0" prefWidth="596.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;">
                <children>
                   <Label text="USERNAME">

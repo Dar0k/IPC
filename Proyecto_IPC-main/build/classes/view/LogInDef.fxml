@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="aux" prefHeight="438.0" prefWidth="591.0" style="-fx-background-image: url('../resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
+<HBox fx:id="aux" prefHeight="438.0" prefWidth="591.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
    <children>
       <VBox alignment="CENTER" maxWidth="235.0" prefHeight="371.0" prefWidth="235.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,.75);">
          <children>

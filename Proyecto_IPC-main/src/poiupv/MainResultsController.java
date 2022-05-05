@@ -15,9 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -25,13 +23,18 @@ import javafx.stage.Stage;
  *
  * @author DROCPER
  */
-public class MainLogOutController implements Initializable {
+public class MainResultsController implements Initializable {
     
     private Stage primaryStage;
-    private String prevTitle;
     private Scene prevScene;
+    private String prevTitle;
+    
     @FXML
-    private Button confirmateLogOutButton;
+    private Button continueButton;
+    @FXML
+    private Button randomButton;
+    @FXML
+    private Button listButton;
     @FXML
     private VBox sidebar;
     @FXML
@@ -46,27 +49,31 @@ public class MainLogOutController implements Initializable {
         sidebarController.initialize(url, rb);
         updateSidebar();
     }
+    
     public void initStage(Stage stage)
     {
         primaryStage = stage;
-        primaryStage.setTitle("Log Out");
+        primaryStage.setTitle("Results");
         sidebarController.primaryStage = primaryStage;
     }
     
     public void updateSidebar()
     {
         sidebarController.clearSidebar();
-        sidebarController.boldLogOutButton();
+        sidebarController.boldResultsButton();
     }
-  
+    
+
     @FXML
-    private void handleConfirmateLogOut(ActionEvent event) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogInDef.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        LogInDefController mainTCtrl = loader.<LogInDefController>getController();
-        mainTCtrl.initStage(primaryStage);
-        primaryStage.setScene(scene);
+    private void handleContinue(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleRandom(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleList(ActionEvent event) {
     }
     
 }

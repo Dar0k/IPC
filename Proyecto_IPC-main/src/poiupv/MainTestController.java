@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -29,21 +30,15 @@ public class MainTestController implements Initializable {
     private String prevTitle;
     
     @FXML
-    private Button testButton;
-    @FXML
-    private Button resultButton;
-    @FXML
-    private Button profileButton;
-    @FXML
-    private Button logoutButton;
-    @FXML
     private Button continueButton;
     @FXML
     private Button randomButton;
     @FXML
     private Button listButton;
     @FXML
-    private Button logOutButton;
+    private VBox sidebar;
+    @FXML
+    private SidebarController sidebarController;
 
     /**
      * Initializes the controller class.
@@ -51,6 +46,8 @@ public class MainTestController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        sidebarController.initialize(url, rb);
+        updateSidebar();
     }
     
     public void initStage(Stage stage)
@@ -59,34 +56,16 @@ public class MainTestController implements Initializable {
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
         primaryStage.setTitle("MAIN");
+        sidebarController.primaryStage = primaryStage;
+        
     }
     
-        
-    @FXML
-    private void handleResult(ActionEvent event) {
-        
-        
+    public void updateSidebar()
+    {
+        sidebarController.clearSidebar();
+        sidebarController.boldTestButton();
     }
-
-    @FXML
-    private void handleProfile(ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainProfile.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        MainProfileController profileController = loader.<MainProfileController>getController();
-        profileController.initStage(primaryStage);
-        primaryStage.setScene(scene);
-    }
-
-    @FXML
-    private void handleLogOut(ActionEvent event) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainLogOut.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        MainLogOutController logOutController = loader.<MainLogOutController>getController();
-        logOutController.initStage(primaryStage);
-        primaryStage.setScene(scene);
-    }
+    
 
     @FXML
     private void handleContinue(ActionEvent event) {
@@ -98,26 +77,6 @@ public class MainTestController implements Initializable {
 
     @FXML
     private void handleList(ActionEvent event) {
-    }
-
-    @FXML
-    private void OnMouseHoverExited(MouseEvent event) {
-        Button source = (Button)event.getSource();
-        if(source.equals(testButton)){
-            source.setStyle(" -fx-font-weight: bold; -fx-background-color: transparent;");
-        }else{
-            source.setStyle("-fx-background-color: transparent; -fx-background-radius: 0;");
-        }
-    }
-
-    @FXML
-    private void OnMouseHoverEnter(MouseEvent event) {
-        Button source = (Button)event.getSource();
-        if(source.equals(testButton)){
-            source.setStyle("-fx-background-color: rgb(200,200,200,0.5); -fx-background-radius: 50; -fx-font-weight: bold;");
-        }else{
-            source.setStyle("-fx-background-color: rgb(200,200,200,0.5); -fx-background-radius: 50;");
-        }
     }
     
 }

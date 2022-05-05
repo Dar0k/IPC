@@ -211,7 +211,7 @@ public class SignUpDefController implements Initializable {
                 FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
                 Parent root = (Parent) myLoader.load();
                 Scene scene = new Scene(root);
-                MainTestController mtCtrl = myLoader.<MainTestController>getController();
+                MainResultsController mtCtrl = myLoader.<MainResultsController>getController();
                 mtCtrl.initStage(primaryStage);
                 primaryStage.setScene(scene);
                 //                  REGISTER
