@@ -226,6 +226,7 @@ public class SignUpDefController implements Initializable {
                 Logger.getLogger(LogInDefController.class.getName()).log(Level.SEVERE, null, ex);*/
     
     }
+    
     public void initStage(Stage stage)
     {
         prevScene = stage.getScene();
@@ -238,7 +239,12 @@ public class SignUpDefController implements Initializable {
     @FXML
     private void handleChooseImage(ActionEvent event) throws Exception {
         FileChooser fileChoose = new FileChooser();
-        //fileChoose.setInitialDirectory(new File("../resources"));
+        File recordsDir = new File(System.getProperty("user.Desktop"), "src/resources");
+        System.out.println(recordsDir);
+        if (! recordsDir.exists()) {
+            recordsDir.mkdirs();
+        }
+        fileChoose.setInitialDirectory(recordsDir);
         FileChooser.ExtensionFilter fileExtensions = 
         new FileChooser.ExtensionFilter(
         "Images", "*.jpeg", "*.png", "*.jpg");
@@ -247,21 +253,20 @@ public class SignUpDefController implements Initializable {
         fileChoose.setTitle("Open File");  
         File file = fileChoose.showOpenDialog(primaryStage);
         System.out.print(file);
+        String imageUrl = file.toURI().toURL().toExternalForm();
+        Image image = new Image(imageUrl);
+        avaPrin.setFill(new ImagePattern(image));
         sel.setStroke(Color.TRANSPARENT);
-        //avaPrin.setFill(new ImagePattern(new Image(file.toString()))); //CHANGE TOSTRING TO FIT MAIN IMAGE
-        
-          
-        
     }   
     
     @FXML
     private void handleSelectAvatar(MouseEvent event) {
         Circle source = (Circle)event.getSource();
+        sel.setStroke(Color.TRANSPARENT);
+        sel = source;
         source.setStroke(Color.BLACK);  
         source.setStrokeWidth(1.5);
-        avaPrin.setFill(ava1.getFill());
-        sel.setStroke(Color.TRANSPARENT);
-        sel = source;        
+        avaPrin.setFill(source.getFill());                
     }
 
     @FXML
@@ -293,8 +298,12 @@ public class SignUpDefController implements Initializable {
     public void checkEditUsername(String str){
         if(!User.checkNickName(str)) {
             usernameError.setVisible(true);
-            usernameError.setText(" user name error ");
             validUsername.setValue(Boolean.FALSE);
+            if(str.length() < 6 || str.length() > 15){
+                usernameError.setText("Must contain between 6 and 15 characters");
+            }else {
+                usernameError.setText("The only special characters permited are '-' and '_'");
+            }          
         }else {
             usernameError.setVisible(false);
             validUsername.setValue(Boolean.TRUE);
@@ -304,8 +313,20 @@ public class SignUpDefController implements Initializable {
     public void checkEditPassword(String pas){
         if(!User.checkPassword(pas)){
             passwordError.setVisible(true);
-            passwordError.setText(" password error ");
-            validPassword.setValue(Boolean.FALSE); 
+            validPassword.setValue(Boolean.FALSE);
+            if (pas.length() < 8 || pas.length() > 20){
+                passwordError.setText("Must contain between 8 and 20 characters");
+            }else if (!pas.matches("^.*[A-Z].*$")){
+                passwordError.setText("Must contain at least one uppercase");
+            }else if (!pas.matches("^.*[0-9].*$")){
+                passwordError.setText("Must contain at least one diggit");
+            }else if (!pas.matches("^.*[a-z].*$")) {
+                passwordError.setText("Must contain at least one lowercase");
+            }else if (pas.contains(" ")){
+                passwordError.setText("Can not contain any blank spaces");
+            }else {
+                passwordError.setText("Must contain at least one of these characters: !@#$%&*&*()-+=");
+            }            
         }else {
             passwordError.setVisible(false);
             validPassword.setValue(Boolean.TRUE); 
@@ -315,7 +336,7 @@ public class SignUpDefController implements Initializable {
     public void checkEditReenterPassword(String pas, String rePas){
         if (!pas.equals(rePas) ){
             reenterPasswordError.setVisible(true);
-            reenterPasswordError.setText(" password not the same ");
+            reenterPasswordError.setText("Password is not the same");
             validReenterPassword.setValue(Boolean.FALSE);            
         }else {
             reenterPasswordError.setVisible(false);
@@ -326,7 +347,7 @@ public class SignUpDefController implements Initializable {
     public void checkEditEmail(String str){
         if(!User.checkEmail(str)){
             emailError.setVisible(true);
-            emailError.setText(" email error");
+            emailError.setText("Email error");
             validEmail.setValue(Boolean.FALSE); 
         }else {
             emailError.setVisible(false);
@@ -337,7 +358,7 @@ public class SignUpDefController implements Initializable {
     public void checkEditAge(LocalDate dtp){
         if(dtp.plusYears(12).isAfter(LocalDate.now())){
             ageError.setVisible(true);
-            ageError.setText(" age error ");
+            ageError.setText("Must be at least 12 years old");
             validAge.setValue(Boolean.FALSE); 
         } else {
             ageError.setVisible(false);

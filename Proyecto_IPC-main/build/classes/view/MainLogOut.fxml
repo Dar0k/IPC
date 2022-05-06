@@ -1,44 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Group xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
    <children>
-      <ImageView fitHeight="443.0" fitWidth="635.0" opacity="0.74" pickOnBounds="true">
-         <image>
-            <Image url="@../resources/fondo2.jpg" />
-         </image>
-      </ImageView>
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-color: transparent;">
+      <fx:include fx:id="sidebar" source="Sidebar.fxml" />
+      <VBox alignment="CENTER" prefHeight="441.0" prefWidth="515.0" spacing="15.0">
          <children>
-            <fx:include fx:id="sidebar" source="Sidebar.fxml"/>
-            <VBox alignment="CENTER" prefHeight="441.0" prefWidth="515.0" spacing="15.0">
-               <children>
-                  <Label prefHeight="50.0" prefWidth="388.0" style="-fx-text-fill: black;" text="Are you sure you want to log out?" textAlignment="JUSTIFY" textFill="#0a0a0a" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="confirmateLogOutButton" mnemonicParsing="false" onAction="#handleConfirmateLogOut" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Yes" textFill="WHITE">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </VBox>
+            <Label prefHeight="50.0" prefWidth="388.0" style="-fx-text-fill: black;" text="Are you sure you want to log out?" textAlignment="JUSTIFY" textFill="#0a0a0a" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="confirmateLogOutButton" mnemonicParsing="false" onAction="#handleConfirmateLogOut" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Yes" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
-      </HBox>
+      </VBox>
    </children>
-</Group>
+</HBox>
