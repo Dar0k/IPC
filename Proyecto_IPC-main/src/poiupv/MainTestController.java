@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.User;
 
 /**
  * FXML Controller class
@@ -39,6 +40,8 @@ public class MainTestController implements Initializable {
     private VBox sidebar;
     @FXML
     private SidebarController sidebarController;
+    
+    User user;
 
     /**
      * Initializes the controller class.
@@ -48,20 +51,22 @@ public class MainTestController implements Initializable {
         // TODO
         sidebarController.initialize(url, rb);
         updateSidebar();
+        
     }
     
-    public void initStage(Stage stage)
+    public void initStage(Stage stage, User us)
     {
         primaryStage = stage;
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
         primaryStage.setTitle("MAIN");
         sidebarController.primaryStage = primaryStage;
-        
+        user = us;
+        sidebarController.setUser(user);
     }
     
     public void updateSidebar()
-    {
+    {        
         sidebarController.clearSidebar();
         sidebarController.boldTestButton();
     }

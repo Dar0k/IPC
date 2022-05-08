@@ -21,7 +21,7 @@
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <VBox fx:id="aux" alignment="CENTER" fillWidth="false" maxWidth="596.0" minHeight="306.0" minWidth="189.0" prefHeight="531.0" prefWidth="596.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;">
          <children>
-            <Label text="USERNAME">
+            <Label fx:id="username" text="USERNAME">
                <font>
                   <Font name="Serif Regular" size="30.0" />
                </font>
@@ -44,7 +44,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="91.0" spacing="10.0">
                            <children>
-                              <Circle fx:id="ava1" fill="#0084ff" onMouseClicked="#handleSelectAvatar" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.5">
+                              <Circle fx:id="ava1" fill="#0084ff" onMouseClicked="#handleSelectAvatar" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="1.5">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -75,7 +75,7 @@
                               </Circle>
                            </children>
                         </HBox>
-                        <Button fx:id="chooseImageButton1" mnemonicParsing="false" onAction="#handleChooseImage" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: white; -fx-background-insets: 0 0 0 0; -fx-background-radius: 50; -fx-border-color: black; -fx-border-radius: 50;" text="CHOOSE IMAGE">
+                        <Button fx:id="chooseImageButton" mnemonicParsing="false" onAction="#handleChooseImage" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: white; -fx-background-insets: 0 0 0 0; -fx-background-radius: 50; -fx-border-color: black; -fx-border-radius: 50;" text="CHOOSE IMAGE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

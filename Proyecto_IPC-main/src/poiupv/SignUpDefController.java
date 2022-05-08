@@ -202,29 +202,29 @@ public class SignUpDefController implements Initializable {
         
         signUpButton.disableProperty().bind(Bindings.not(validFields));        
         signUpButton.setOnAction( (event)->{  
-            try {signUpCheck();}
-            catch(Exception e){}
+            try {
+                signUpCheck();
+            } catch (IOException ex) {
+                System.out.println("error");
+            }
         });  
     }
-    private void signUpCheck() throws Exception
-    {
-                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
-                Parent root = (Parent) myLoader.load();
-                Scene scene = new Scene(root);
-                MainResultsController mtCtrl = myLoader.<MainResultsController>getController();
-                mtCtrl.initStage(primaryStage);
-                primaryStage.setScene(scene);
-                //                  REGISTER
-                /*try {        
-                    ImagePattern help = (ImagePattern) avaPrin.getFill();
-                    Image image = help.getImage();
-                    User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
-                } catch (NavegacionDAOException ex) {
-                    Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(LogInDefController.class.getName()).log(Level.SEVERE, null, ex);*/
-    
+    private void signUpCheck() throws IOException
+    {        
+        //                  REGISTER
+        try {        
+            ImagePattern imPa = (ImagePattern) avaPrin.getFill();
+            Image image = imPa.getImage();
+            User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+            Parent root = (Parent) myLoader.load();
+            Scene scene = new Scene(root);
+            MainTestController mtCtrl = myLoader.<MainTestController>getController();
+            mtCtrl.initStage(primaryStage, result);
+            primaryStage.setScene(scene);
+        } catch (NavegacionDAOException ex) {
+            Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }
     
     public void initStage(Stage stage)
@@ -232,8 +232,7 @@ public class SignUpDefController implements Initializable {
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
         primaryStage = stage;
-        primaryStage.setTitle("SIGN UP");
-        
+        primaryStage.setTitle("SIGN UP");        
     }
 
     @FXML
@@ -296,11 +295,21 @@ public class SignUpDefController implements Initializable {
     }
     
     public void checkEditUsername(String str){
-        if(!User.checkNickName(str)) {
+        if(!User.checkNickName(str) ||str.equals("remove") || navegation.exitsNickName(str)) {
             usernameError.setVisible(true);
             validUsername.setValue(Boolean.FALSE);
             if(str.length() < 6 || str.length() > 15){
                 usernameError.setText("Must contain between 6 and 15 characters");
+            }else if (navegation.exitsNickName(str)){
+                usernameError.setText("Username already taken");
+            /*}else if(str.equals("remove")){
+                try {
+                    navegation.removeAllData();
+                    System.out.println("data removed");
+                } catch (NavegacionDAOException ex) {
+                    Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }*/
             }else {
                 usernameError.setText("The only special characters permited are '-' and '_'");
             }          

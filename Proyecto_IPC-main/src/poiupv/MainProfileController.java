@@ -39,6 +39,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.ImageIcon;
 import model.Navegacion;
 import model.User;
 
@@ -55,6 +56,7 @@ public class MainProfileController implements Initializable {
     private BooleanProperty validReenterPassword;
     private BooleanProperty validEmail;
     private BooleanProperty validAge;
+    private BooleanProperty modified;
     
     
     @FXML
@@ -70,7 +72,9 @@ public class MainProfileController implements Initializable {
     @FXML
     private Circle ava5;
     @FXML
-    private Button chooseImageButton1;
+    private Label username;
+    @FXML
+    private Button chooseImageButton;
     @FXML
     private DatePicker agePicker;
     @FXML
@@ -132,8 +136,7 @@ public class MainProfileController implements Initializable {
         Image im2 = new Image("https://th.bing.com/th/id/OIP.AaMb_876cSr06RW4AJ3XyAHaGk?pid=ImgDet&w=500&h=444&rs=1");
         Image im3 = new Image("https://th.bing.com/th/id/OIP.XnD-Oh_qsK18OPXdbLWh7gHaFw?pid=ImgDet&rs=1");
         Image im4 = new Image("https://th.bing.com/th/id/OIP.ErgU0tyLu4W4Mv5t6nbdbAHaGV?pid=ImgDet&w=741&h=634&rs=1");
-        Image im5 = new Image("https://thumbs.dreamstime.com/b/american-eagle-isolated-close-up-portrait-36632728.jpg");
-        avaPrin.setFill(new ImagePattern(im1));          
+        Image im5 = new Image("https://thumbs.dreamstime.com/b/american-eagle-isolated-close-up-portrait-36632728.jpg");                 
         ava1.setFill(new ImagePattern(im1));
         ava2.setFill(new ImagePattern(im2));
         ava3.setFill(new ImagePattern(im3));
@@ -145,37 +148,63 @@ public class MainProfileController implements Initializable {
         validReenterPassword = new SimpleBooleanProperty();
         validEmail = new SimpleBooleanProperty();
         validAge = new SimpleBooleanProperty();
+        modified = new SimpleBooleanProperty();
         
         validPassword.setValue(Boolean.FALSE);
         validReenterPassword.setValue(Boolean.FALSE);
         validEmail.setValue(Boolean.FALSE);
         validAge.setValue(Boolean.FALSE);
+        modified.setValue(Boolean.FALSE);
         
         passwordField.textProperty().addListener((observable, oldValue, newValue)->{             
             checkEditPassword(newValue); 
             checkEditReenterPassword(newValue, reenterPasswordField.getText()); 
-            checkEditReenterPassword(newValue, reenterPasswordTextField.getText());              
+            checkEditReenterPassword(newValue, reenterPasswordTextField.getText());
+            if(modified.getValue() == false){
+                modified.setValue(Boolean.TRUE);
+            }
         });        
         passwordTextField.textProperty().addListener((observable, oldValue, newValue)->{
             checkEditPassword(newValue); 
             checkEditReenterPassword(newValue, reenterPasswordField.getText());
-            checkEditReenterPassword(newValue, reenterPasswordTextField.getText()); 
+            checkEditReenterPassword(newValue, reenterPasswordTextField.getText());
+            if(modified.getValue() == false){
+                modified.setValue(Boolean.TRUE);
+            }
         });
         
         reenterPasswordField.textProperty().addListener((observable, oldValue, newValue)->{
-            checkEditReenterPassword(passwordField.getText(), newValue); 
+            checkEditReenterPassword(passwordField.getText(), newValue);
+            if(modified.getValue() == false){
+                modified.setValue(Boolean.TRUE);
+            }
         });
         reenterPasswordTextField.textProperty().addListener((observable, oldValue, newValue)->{
-            checkEditReenterPassword(passwordTextField.getText(), newValue); 
+            checkEditReenterPassword(passwordTextField.getText(), newValue);
+            if(modified.getValue() == false){
+                modified.setValue(Boolean.TRUE);
+            }
         });
         
         emailField.textProperty().addListener((observable, oldValue, newValue)->{
-            checkEditEmail(newValue); 
+            checkEditEmail(newValue);
+            if(modified.getValue() == false){
+                modified.setValue(Boolean.TRUE);
+            }
         });
         
         agePicker.valueProperty().addListener((observable, oldValue, newValue)->{
-            checkEditAge(newValue); 
-        });         
+            checkEditAge(newValue);
+            if(modified.getValue() == false){
+                modified.setValue(Boolean.TRUE);
+            }
+        });      
+        
+        avaPrin.fillProperty().addListener((observable, oldValue, newValue)->{
+            if(modified.getValue() == false){
+                modified.setValue(Boolean.TRUE);
+            }
+        });
         
         passwordField.textProperty().addListener((obs, oldVal, newVal) -> {
             passwordTextField.setText(newVal);
@@ -190,7 +219,14 @@ public class MainProfileController implements Initializable {
             reenterPasswordField.setText(newVal);
         });
         
-        BooleanBinding validFields = Bindings.and(validReenterPassword, validPassword).and(validEmail).and(validAge);
+        modified.addListener((obs, oldVal, newVal) -> {
+            sidebarController.testButton.setDisable(newVal);
+            sidebarController.resultsButton.setDisable(newVal);
+            sidebarController.profileButton.setDisable(newVal);
+            sidebarController.logOutButton.setDisable(newVal);
+        });
+        
+        BooleanBinding validFields = Bindings.and(validReenterPassword, validPassword).and(validEmail).and(validAge).and(modified);
         
         saveButton.disableProperty().bind(Bindings.not(validFields));        
         saveButton.setOnAction( (event)->{  
@@ -212,14 +248,38 @@ public class MainProfileController implements Initializable {
     private void cancelCheck() throws Exception
     {
         //open dialog box to that wont saev anything
-        //reput the correct data    
+        //reput the correct data   
+        initStage(primaryStage, user);
     }
     
-    public void initStage(Stage stage)
+    public void initStage(Stage stage, User us)
     {
         primaryStage = stage;
         primaryStage.setTitle("Profile");
         sidebarController.primaryStage = primaryStage;
+        user = us;
+        sidebarController.setUser(user);
+        Image im = us.getAvatar();
+        ImagePattern imPa = new ImagePattern(im);
+        avaPrin.setFill(imPa);
+        boolean next = true;
+        int i = 0;
+        Circle [] c = {ava1, ava2, ava3, ava4, ava5};
+        
+        while(next && i < 5 ){
+            ImagePattern tempImPa = (ImagePattern) c[i].getFill();
+            Image tempImage = tempImPa.getImage();
+            System.out.println(tempImPa.equals(imPa));
+            System.out.println(imPa.toString());
+            System.out.println(tempImPa.toString());
+            i++;
+        }
+        username.setText(us.getNickName());
+        passwordField.setText(us.getPassword());
+        reenterPasswordField.setText(us.getPassword());
+        emailField.setText(us.getEmail());
+        agePicker.setValue(us.getBirthdate());
+        modified.setValue(Boolean.FALSE);
     }
     
     public void updateSidebar()

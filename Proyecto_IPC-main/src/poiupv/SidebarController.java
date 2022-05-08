@@ -7,6 +7,8 @@ package poiupv;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontPosture;
+import model.User;
 
 /**
  * FXML Controller class
@@ -41,9 +44,10 @@ public class SidebarController implements Initializable {
     protected Button profileButton;
     @FXML
     protected Button logOutButton;
-
     @FXML
     private VBox sb;
+    
+    User user;
 
     /**
      * Initializes the controller class.
@@ -52,7 +56,10 @@ public class SidebarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    
+    protected void setUser(User us){
+        user = us;
+    }
     
     protected void clearSidebar() {
         Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 15);
@@ -88,9 +95,10 @@ public class SidebarController implements Initializable {
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
         MainTestController mTCtrl = loader.<MainTestController>getController();
-        mTCtrl.initStage(primaryStage);
+        mTCtrl.initStage(primaryStage, user);
         primaryStage.setScene(scene);
         primaryStage.show();
+        System.out.println(user.getNickName());
     }
 
     @FXML
@@ -100,9 +108,10 @@ public class SidebarController implements Initializable {
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
         MainResultsController mRCtrl = loader.<MainResultsController>getController();
-        mRCtrl.initStage(primaryStage);
+        mRCtrl.initStage(primaryStage, user);
         primaryStage.setScene(scene);
         primaryStage.show();
+        System.out.println(user.getNickName());
     }
 
     @FXML
@@ -111,9 +120,10 @@ public class SidebarController implements Initializable {
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
         MainProfileController mPCtrl = loader.<MainProfileController>getController();
-        mPCtrl.initStage(primaryStage);
+        mPCtrl.initStage(primaryStage, user);
         primaryStage.setScene(scene);
         primaryStage.show();
+        System.out.println(user.getNickName());
     }
 
     @FXML
@@ -122,9 +132,10 @@ public class SidebarController implements Initializable {
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
         MainLogOutController mLCtrl = loader.<MainLogOutController>getController();
-        mLCtrl.initStage(primaryStage);
+        mLCtrl.initStage(primaryStage, user);
         primaryStage.setScene(scene);
         primaryStage.show();
+        System.out.println(user.getNickName());
     }
 
     @FXML

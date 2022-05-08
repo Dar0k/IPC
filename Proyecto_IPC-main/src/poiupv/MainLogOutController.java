@@ -19,6 +19,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.User;
 
 /**
  * FXML Controller class
@@ -36,6 +37,8 @@ public class MainLogOutController implements Initializable {
     private VBox sidebar;
     @FXML
     private SidebarController sidebarController;
+    
+    User user;
 
     /**
      * Initializes the controller class.
@@ -46,11 +49,13 @@ public class MainLogOutController implements Initializable {
         sidebarController.initialize(url, rb);
         updateSidebar();
     }
-    public void initStage(Stage stage)
+    public void initStage(Stage stage, User us)
     {
         primaryStage = stage;
         primaryStage.setTitle("Log Out");
         sidebarController.primaryStage = primaryStage;
+        user = us;
+        sidebarController.setUser(user);
     }
     
     public void updateSidebar()
