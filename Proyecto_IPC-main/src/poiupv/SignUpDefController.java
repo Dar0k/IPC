@@ -118,6 +118,7 @@ public class SignUpDefController implements Initializable {
     Navegacion navegation;
     User user; 
     Circle sel;
+    int avatarSel;
     /**
      * Initializes the controller class.
      */
@@ -302,14 +303,14 @@ public class SignUpDefController implements Initializable {
                 usernameError.setText("Must contain between 6 and 15 characters");
             }else if (navegation.exitsNickName(str)){
                 usernameError.setText("Username already taken");
-            /*}else if(str.equals("remove")){
+            }else if(str.equals("remove")){
                 try {
                     navegation.removeAllData();
                     System.out.println("data removed");
                 } catch (NavegacionDAOException ex) {
                     Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }*/
+            
             }else {
                 usernameError.setText("The only special characters permited are '-' and '_'");
             }          

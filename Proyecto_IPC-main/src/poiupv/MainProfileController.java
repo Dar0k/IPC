@@ -9,6 +9,7 @@ import DBAccess.NavegacionDAOException;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -31,6 +35,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.layout.VBox;
@@ -38,6 +43,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.ImageIcon;
 import model.Navegacion;
@@ -61,16 +67,6 @@ public class MainProfileController implements Initializable {
     
     @FXML
     private Circle avaPrin;
-    @FXML
-    private Circle ava1;
-    @FXML
-    private Circle ava2;
-    @FXML
-    private Circle ava3;
-    @FXML
-    private Circle ava4;
-    @FXML
-    private Circle ava5;
     @FXML
     private Label username;
     @FXML
@@ -115,7 +111,7 @@ public class MainProfileController implements Initializable {
 
     Navegacion navegation;
     User user; 
-    Circle sel;    
+    
     /**
      * Initializes the controller class.
      */
@@ -126,23 +122,10 @@ public class MainProfileController implements Initializable {
         updateSidebar();
         
         try {
-            // TODO
             navegation = Navegacion.getSingletonNavegacion();
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
-        }           
-        sel = ava1;
-        Image im1 = new Image("https://th.bing.com/th/id/OIP.EQBqKixnFE0c6UryfIgS-AHaGQ?pid=ImgDet&rs=1");
-        Image im2 = new Image("https://th.bing.com/th/id/OIP.AaMb_876cSr06RW4AJ3XyAHaGk?pid=ImgDet&w=500&h=444&rs=1");
-        Image im3 = new Image("https://th.bing.com/th/id/OIP.XnD-Oh_qsK18OPXdbLWh7gHaFw?pid=ImgDet&rs=1");
-        Image im4 = new Image("https://th.bing.com/th/id/OIP.ErgU0tyLu4W4Mv5t6nbdbAHaGV?pid=ImgDet&w=741&h=634&rs=1");
-        Image im5 = new Image("https://thumbs.dreamstime.com/b/american-eagle-isolated-close-up-portrait-36632728.jpg");                 
-        ava1.setFill(new ImagePattern(im1));
-        ava2.setFill(new ImagePattern(im2));
-        ava3.setFill(new ImagePattern(im3));
-        ava4.setFill(new ImagePattern(im4));
-        ava5.setFill(new ImagePattern(im5));     
-        
+        }  
         
         validPassword = new SimpleBooleanProperty();
         validReenterPassword = new SimpleBooleanProperty();
@@ -233,6 +216,8 @@ public class MainProfileController implements Initializable {
             try {saveCheck();}
             catch(Exception e){}
         });
+        
+        cancelButton.disableProperty().bind(Bindings.not(modified));
         cancelButton.setOnAction( (event)->{  
             try {cancelCheck();}
             catch(Exception e){}
@@ -242,14 +227,50 @@ public class MainProfileController implements Initializable {
     private void saveCheck() throws Exception
     {
         // open dialog box to confirm that wants to save
-        //update DB    
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Save");
+        alert.setHeaderText("Are you sure you want to save?");
+        alert.setContentText("Your profile information will be updated but you can't undo the action. Are you sure you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("OK");
+            ImagePattern imPa = (ImagePattern) avaPrin.getFill();
+            Image image = imPa.getImage();
+            user.setAvatar(image);
+            user.setBirthdate(agePicker.getValue());
+            user.setEmail(emailField.getText());
+            user.setPassword(passwordField.getText());
+            initStage(primaryStage, user);
+        } else {
+            System.out.println("CANCEL");
+        }   
     }
     
     private void cancelCheck() throws Exception
     {
         //open dialog box to that wont saev anything
-        //reput the correct data   
-        initStage(primaryStage, user);
+        /*FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/CancelDialogBox.fxml"));
+        Pane root = (Pane) myLoader.load();
+        CancelDialogBoxController cancelDiaBox = myLoader.<CancelDialogBoxController>getController();
+        cancelDiaBox.initData(0);
+        Scene scene = new Scene (root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Cancel");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.show();*/
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Cancelation");
+        alert.setHeaderText("Are you sure you want to cancel?");
+        alert.setContentText("All your modifications will be discarted. Are you sure you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("OK");
+            initStage(primaryStage, user);
+        } else {
+            System.out.println("CANCEL");
+        }
     }
     
     public void initStage(Stage stage, User us)
@@ -262,18 +283,6 @@ public class MainProfileController implements Initializable {
         Image im = us.getAvatar();
         ImagePattern imPa = new ImagePattern(im);
         avaPrin.setFill(imPa);
-        boolean next = true;
-        int i = 0;
-        Circle [] c = {ava1, ava2, ava3, ava4, ava5};
-        
-        while(next && i < 5 ){
-            ImagePattern tempImPa = (ImagePattern) c[i].getFill();
-            Image tempImage = tempImPa.getImage();
-            System.out.println(tempImPa.equals(imPa));
-            System.out.println(imPa.toString());
-            System.out.println(tempImPa.toString());
-            i++;
-        }
         username.setText(us.getNickName());
         passwordField.setText(us.getPassword());
         reenterPasswordField.setText(us.getPassword());
@@ -307,19 +316,8 @@ public class MainProfileController implements Initializable {
         System.out.print(file);
         String imageUrl = file.toURI().toURL().toExternalForm();
         Image image = new Image(imageUrl);
-        avaPrin.setFill(new ImagePattern(image));
-        sel.setStroke(Color.TRANSPARENT);    
-    }
-    
-    @FXML
-    private void handleSelectAvatar(MouseEvent event) {
-        Circle source = (Circle)event.getSource();
-        sel.setStroke(Color.TRANSPARENT);
-        sel = source;
-        source.setStroke(Color.BLACK);  
-        source.setStrokeWidth(1.5);
-        avaPrin.setFill(source.getFill());  
-    }    
+        avaPrin.setFill(new ImagePattern(image));   
+    }   
 
     @FXML
     private void handleEyeCicked(MouseEvent event) {
