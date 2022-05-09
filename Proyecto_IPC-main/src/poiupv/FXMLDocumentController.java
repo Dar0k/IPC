@@ -16,18 +16,24 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.User;
 import poiupv.Poi;
 
 /**
@@ -43,21 +49,46 @@ public class FXMLDocumentController implements Initializable {
     // la variable zoomGroup se utiliza para dar soporte al zoom
     // el escalado se realiza sobre este nodo, al escalar el Group no mueve sus nodos
     private Group zoomGroup;
+    private Stage primaryStage;
+    private Scene previousScene;
+    private String previousTitle;
+    private User user;
 
-    @FXML
     private ListView<Poi> map_listview;
     @FXML
     private ScrollPane map_scrollpane;
-    @FXML
     private Slider zoom_slider;
-    @FXML
     private MenuButton map_pin;
-    @FXML
     private MenuItem pin_info;
-    @FXML
     private Label posicion;
-
     @FXML
+    private Label questionNumber;
+    @FXML
+    private Label questionLabel;
+    @FXML
+    private RadioButton buttonA;
+    @FXML
+    private RadioButton buttonB;
+    @FXML
+    private RadioButton buttonC;
+    @FXML
+    private RadioButton buttonD;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button nextButton;
+    @FXML
+    private ImageView map;
+    
+    void initStage(Stage stage, User us)
+    {
+        primaryStage = stage;
+        previousScene = stage.getScene();
+        previousTitle = stage.getTitle();
+        user = us;
+        
+    }
+
     void zoomIn(ActionEvent event) {
         //================================================
         // el incremento del zoom dependerá de los parametros del 
@@ -66,7 +97,6 @@ public class FXMLDocumentController implements Initializable {
         zoom_slider.setValue(sliderVal += 0.1);
     }
 
-    @FXML
     void zoomOut(ActionEvent event) {
         double sliderVal = zoom_slider.getValue();
         zoom_slider.setValue(sliderVal + -0.1);
@@ -88,7 +118,6 @@ public class FXMLDocumentController implements Initializable {
         map_scrollpane.setVvalue(scrollV);
     }
 
-    @FXML
     void listClicked(MouseEvent event) {
         Poi itemSelected = map_listview.getSelectionModel().getSelectedItem();
 
@@ -113,23 +142,15 @@ public class FXMLDocumentController implements Initializable {
         map_pin.setVisible(true);
     }
 
-    private void initData() {
-        hm.put("2F", new Poi("2F", "Edificion del DSIC", 325, 225));
-        hm.put("Agora", new Poi("Agora", "Agora", 600, 360));
-        map_listview.getItems().add(hm.get("2F"));
-        map_listview.getItems().add(hm.get("Agora"));
-    }
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        initData();
+        
         //==========================================================
         // inicializamos el slider y enlazamos con el zoom
-        zoom_slider.setMin(0.5);
-        zoom_slider.setMax(1.5);
-        zoom_slider.setValue(1.0);
-        zoom_slider.valueProperty().addListener((o, oldVal, newVal) -> zoom((Double) newVal));
+        
         
         //=========================================================================
         //Envuelva el contenido de scrollpane en un grupo para que 
@@ -142,23 +163,37 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    @FXML
-    private void muestraPosicion(MouseEvent event) {
-        posicion.setText("sceneX: " + (int) event.getSceneX() + ", sceneY: " + (int) event.getSceneY() + "\n"
-                + "         X: " + (int) event.getX() + ",          Y: " + (int) event.getY());
-    }
-
-    @FXML
+    
     private void cerrarAplicacion(ActionEvent event) {
         ((Stage)zoom_slider.getScene().getWindow()).close();
     }
 
+
     @FXML
-    private void acercaDe(ActionEvent event) {
-        Alert mensaje= new Alert(Alert.AlertType.INFORMATION);
-        mensaje.setTitle("Acerca de");
-        mensaje.setHeaderText("IPC - 2022");
-        mensaje.showAndWait();
+    private void handleButtonA(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonB(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonC(ActionEvent event) {
+    }
+
+    @FXML
+    private void mapMouseRelease(MouseEvent event) {
+        map.setCursor(Cursor.DEFAULT);
+    }
+
+    @FXML
+    private void mapMousePress(MouseEvent event) {
+        map.setCursor(Cursor.MOVE);
+        
+    }
+
+    @FXML
+    private void muestraPosicion(MouseEvent event) {
     }
 
 }
