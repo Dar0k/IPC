@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 12, 2022, 7:49:30 AM
+    Author     : robyandy
+*/
+.date-picker .text-field {
+        -fx-background-color: transparent
+}
+
+
+.date-picker .arrow-button {
+	-fx-background-color: black;
+	-fx-background-radius: 0;
+}
+.date-picker .arrow-button:hover {
+	-fx-background-color: rgba(183, 183, 183, 1);
+}
+.date-picker .arrow-button .arrow {
+	-fx-background-color: white;
+}
+
+.date-picker .cell {
+	-fx-background-color: white;
+}
+.date-picker .cell:hover {
+	-fx-background-color: rgba(230, 230, 230, 1);
+        -fx-text-fill: black;
+}
+.date-picker .cell:focused {
+	-fx-background-color: rgba(221, 221, 221, 1);
+        
+}
+
+.date-picker .selected:focused {
+	-fx-background-color: black;
+	-fx-text-fill: white;
+}
+
+.date-picker-popup  {
+	-fx-border-color: transparent;
+}
+.date-picker-popup .month-year-pane {
+	-fx-background-color: black;
+}
+.date-picker-popup .month-year-pane .label {
+	-fx-text-fill: white;
+}
+
+.date-picker-popup .spinner .button{
+        -fx-background-color: transparent;
+}
+
+.date-picker-popup .spinner .button .left-arrow:hover,
+.date-picker-popup .spinner .button .right-arrow:hover {
+        -fx-background-color: white;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+	-fx-background-color: grey;
+}

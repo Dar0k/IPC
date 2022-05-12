@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <VBox alignment="CENTER" prefHeight="441.0" prefWidth="522.0" spacing="25.0">
@@ -18,7 +18,7 @@
                   <VBox alignment="CENTER" prefHeight="26.0" prefWidth="510.0" spacing="10.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="73.0" text="Starting date:" textAlignment="CENTER" />
-                        <DatePicker id="datePicker" fx:id="datePicker" onAction="#loadResults" prefHeight="23.0" prefWidth="174.0" />
+                        <DatePicker fx:id="datePicker" onAction="#loadResults" prefHeight="23.0" prefWidth="174.0" promptText="Select Date" style="-fx-background-color: transparent; -fx-border-width: 0 0 1.25 0; -fx-border-color: black;" stylesheets="@datePickerStyleSheet.css" />
                      </children>
                      <VBox.margin>
                         <Insets top="30.0" />

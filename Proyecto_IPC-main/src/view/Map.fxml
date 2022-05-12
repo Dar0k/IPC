@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+   <top>
+      <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
+        <items>
+            <ToggleButton mnemonicParsing="false" text="point">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group1" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" text="line" toggleGroup="$group1" />
+            <ToggleButton mnemonicParsing="false" text="arc" toggleGroup="$group1" />
+            <ToggleButton mnemonicParsing="false" text="text" toggleGroup="$group1" />
+            <ToggleButton mnemonicParsing="false" text="del" toggleGroup="$group1" />
+            <ColorPicker />
+            <Region prefHeight="30.0" prefWidth="202.0" />
+            <Button mnemonicParsing="false" text="ques" />
+        </items>
+      </ToolBar>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+               <content>
+                  <AnchorPane prefHeight="360.0" prefWidth="599.0">
+                     <children>
+                        <ImageView fitHeight="520.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../resources/carta_nautica.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <VBox alignment="BOTTOM_RIGHT" prefHeight="348.0" prefWidth="591.0">
+               <children>
+                  <Button mnemonicParsing="false" text="+" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <Label fx:id="questionLabel" text="Label">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <VBox fx:id="vboxRadio" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rad" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                        <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                        <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+         </children></VBox>
+   </right>
+</BorderPane>

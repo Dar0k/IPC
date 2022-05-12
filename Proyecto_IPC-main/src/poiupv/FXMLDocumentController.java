@@ -116,6 +116,20 @@ public class FXMLDocumentController implements Initializable {
         buttons[0].setText(list.get(pool.get(0)).getText());
         
         questionNumber.setText("Problem " + number);
+        
+        /*for(int i = 0; i < 4; i++)
+        {
+            buttons[i].textProperty().bind(map.getRad(i).textProperty());
+            
+        }
+        
+        for(int i = 0; i < 4; i++)
+        {
+            buttons[i].selectedProperty().bind(map.getRad(i).selectedProperty());
+            
+        }*/
+       
+        
 
         
     }
