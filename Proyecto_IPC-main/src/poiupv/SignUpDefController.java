@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -40,6 +41,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import javax.swing.text.NavigationFilter;
 import model.Navegacion;
 import model.User;
@@ -262,6 +264,8 @@ public class SignUpDefController implements Initializable {
     @FXML
     private void handleSelectAvatar(MouseEvent event) {
         Circle source = (Circle)event.getSource();
+        /*FadeTransition fadeTransition = 
+            new FadeTransition(Duration.millis(3000), );*/
         sel.setStroke(Color.TRANSPARENT);
         sel = source;
         source.setStroke(Color.BLACK);  
