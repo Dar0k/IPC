@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -27,12 +28,15 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+            <VBox fx:id="vboxRadio" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
-                  <RadioButton fx:id="buttonA" mnemonicParsing="false" onAction="#handleButtonA" text="RadioButton" />
-                  <RadioButton fx:id="buttonB" mnemonicParsing="false" onAction="#handleButtonB" text="RadioButton" />
-                  <RadioButton fx:id="buttonC" mnemonicParsing="false" onAction="#handleButtonC" text="RadioButton" />
-                  <RadioButton fx:id="buttonD" mnemonicParsing="false" onAction="#handleButtonC" text="RadioButton" />
+                  <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="rad" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                  <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                  <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -64,13 +68,6 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ScrollPane>
-            <VBox layoutX="691.0" layoutY="230.0" prefHeight="92.0" prefWidth="53.0" spacing="5.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-               </children>
-            </VBox>
          </children>
       </Pane>
       <HBox alignment="CENTER_LEFT" spacing="15.0">
@@ -78,8 +75,8 @@
             <Insets bottom="12.0" right="12.0" top="20.0" />
          </VBox.margin>
          <children>
-            <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Button" />
-            <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Button" />
+            <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#handleGoBackButton" prefHeight="30.0" prefWidth="60.0" text="Go Back" />
+            <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleSendButton" prefHeight="30.0" prefWidth="60.0" text="Send" />
          </children>
       </HBox>
    </children>

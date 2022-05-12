@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -21,6 +23,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
@@ -28,11 +31,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Answer;
+import model.Problem;
 import model.User;
 import poiupv.Poi;
 
@@ -53,6 +59,7 @@ public class FXMLDocumentController implements Initializable {
     private Scene previousScene;
     private String previousTitle;
     private User user;
+    private Problem problem;
 
     private ListView<Poi> map_listview;
     @FXML
@@ -66,26 +73,50 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label questionLabel;
     @FXML
-    private RadioButton buttonA;
-    @FXML
-    private RadioButton buttonB;
-    @FXML
-    private RadioButton buttonC;
-    @FXML
-    private RadioButton buttonD;
-    @FXML
-    private Button cancelButton;
-    @FXML
-    private Button nextButton;
-    @FXML
     private ImageView map;
+    @FXML
+    private ToggleGroup rad;
+    @FXML
+    private VBox vboxRadio;
+    @FXML
+    private RadioButton radioButtonA;
+    @FXML
+    private RadioButton radioButtonB;
+    @FXML
+    private RadioButton radioButtonC;
+    @FXML
+    private RadioButton radioButtonD;
+    @FXML
+    private Button goBackButton;
+    @FXML
+    private Button sendButton;
     
-    void initStage(Stage stage, User us)
+    void initStage(Stage stage, User us, Problem prob, int number)
     {
         primaryStage = stage;
         previousScene = stage.getScene();
         previousTitle = stage.getTitle();
         user = us;
+        problem = prob;
+        questionLabel.setText(problem.getText());
+        List<Answer> list = problem.getAnswers();
+        RadioButton [] buttons = {radioButtonA, radioButtonB, radioButtonC, radioButtonD};
+        List<Integer> pool = new ArrayList<Integer>();
+        pool.add(0);
+        pool.add(1);
+        pool.add(2);
+        pool.add(3);
+        Random generator = new Random();
+        
+        for(int i = 4; i > 1; i--)
+        {
+            int random = generator.nextInt(1000);
+            buttons[i-1].setText(list.get(pool.remove(random % i)).getText());
+        }
+        buttons[0].setText(list.get(pool.get(0)).getText());
+        
+        questionNumber.setText("Problem " + number);
+
         
     }
 
@@ -152,6 +183,7 @@ public class FXMLDocumentController implements Initializable {
         // inicializamos el slider y enlazamos con el zoom
         
         
+        
         //=========================================================================
         //Envuelva el contenido de scrollpane en un grupo para que 
         //ScrollPane vuelva a calcular las barras de desplazamiento tras el escalado
@@ -169,17 +201,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
 
-    @FXML
-    private void handleButtonA(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleButtonB(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleButtonC(ActionEvent event) {
-    }
 
     @FXML
     private void mapMouseRelease(MouseEvent event) {
@@ -195,5 +216,25 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void muestraPosicion(MouseEvent event) {
     }
+
+    @FXML
+    private void handleGoBackButton(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Go Back");
+        alert.setHeaderText("Are you sure you want to exit?");
+        alert.setContentText("The test will not be submitted and all progress will be lost");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void handleSendButton(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Send");
+        alert.setHeaderText("Are you sure you want to send");
+        alert.setContentText("");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    
 
 }
