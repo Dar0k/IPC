@@ -78,6 +78,7 @@ public class MainTestController implements Initializable {
 
     @FXML
     private void handleRandom(ActionEvent event) {
+        
     }
 
     @FXML
