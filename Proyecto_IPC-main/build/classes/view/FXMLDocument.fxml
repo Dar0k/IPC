@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="633.0" prefWidth="904.0" spacing="10.0" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLDocumentController">
+<VBox alignment="CENTER" prefHeight="438.0" prefWidth="758.0" spacing="10.0" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLDocumentController">
    <children>
       <HBox prefHeight="36.0" prefWidth="744.0">
          <children>
@@ -49,20 +49,16 @@
       </VBox>
       <Pane prefHeight="313.0" prefWidth="604.0">
          <children>
-            <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
+            <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="160.0" prefWidth="598.0" vbarPolicy="NEVER">
                <content>
-                  <Pane>
-                     <children>
-                        <ImageView fx:id="map" layoutX="-100.0" layoutY="-119.0" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true">
-                           <image>
-                              <Image url="@../resources/carta_nautica.jpg" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </ImageView>
-                     </children>
-                  </Pane>
+                  <ImageView fx:id="map" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true">
+                     <image>
+                        <Image url="@../resources/carta_nautica.jpg" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
                </content>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />

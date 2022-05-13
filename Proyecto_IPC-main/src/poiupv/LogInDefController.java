@@ -105,16 +105,7 @@ public class LogInDefController implements Initializable {
     }
 
     @FXML
-    private void handleEnterPressed(ActionEvent event) throws Exception {
-        /*  FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
-            Parent root = (Parent) myLoader.load();
-            Scene scene = new Scene(root);
-            MainTestController mtCtrl = myLoader.<MainTestController>getController();
-            mtCtrl.initStage(primaryStage);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        */    
-            
+    private void handleEnterPressed(ActionEvent event) throws Exception {           
             
         if (!navegation.exitsNickName(usernameField.getText())){
            usernameError.setVisible(true);
@@ -132,7 +123,13 @@ public class LogInDefController implements Initializable {
             Scene scene = new Scene(root);
             MainTestController mtCtrl = myLoader.<MainTestController>getController();
             mtCtrl.initStage(primaryStage, user);
-            primaryStage.setScene(scene);            
+            primaryStage.setScene(scene);     
+            /*FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTestList.fxml"));
+            Parent root = (Parent) myLoader.load();
+            Scene scene = new Scene(root);
+            MainTestListController mtCtrl = myLoader.<MainTestListController>getController();
+            mtCtrl.initStage(primaryStage, user);
+            primaryStage.setScene(scene);*/
         }
 
     }    

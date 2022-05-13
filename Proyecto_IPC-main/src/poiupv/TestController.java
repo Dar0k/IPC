@@ -7,7 +7,6 @@ package poiupv;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -42,21 +41,15 @@ import javafx.util.Duration;
 import model.Answer;
 import model.Problem;
 import model.User;
-import poiupv.Poi;
 
 /**
+ * FXML Controller class
  *
- * @author jsoler
+ * @author robyandy
  */
-public class FXMLDocumentController implements Initializable {
+public class TestController implements Initializable {
 
-    //=======================================
-    // hashmap para guardar los puntos de interes POI
-    private final HashMap<String, Poi> hm = new HashMap<>();
-    // ======================================
-    // la variable zoomGroup se utiliza para dar soporte al zoom
-    // el escalado se realiza sobre este nodo, al escalar el Group no mueve sus nodos
-      private Group zoomGroup;
+    private Group zoomGroup;
     private Stage primaryStage;
     private Scene previousScene;
     private String previousTitle;
@@ -64,24 +57,21 @@ public class FXMLDocumentController implements Initializable {
     private Problem problem;
     private ListView<Poi> map_listview;
     
-    @FXML
-    private ScrollPane map_scrollpane;
     private Slider zoom_slider;
     private MenuButton map_pin;
     private MenuItem pin_info;
-    private Label posicion;
+    
+    
     @FXML
     private Label questionNumber;
     @FXML
     private Label questionLabel;
     @FXML
-    private ImageView map;
-    @FXML
-    private ToggleGroup rad;
-    @FXML
     private VBox vboxRadio;
     @FXML
     private RadioButton radioButtonA;
+    @FXML
+    private ToggleGroup rad;
     @FXML
     private RadioButton radioButtonB;
     @FXML
@@ -89,10 +79,21 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private RadioButton radioButtonD;
     @FXML
+    private ScrollPane map_scrollpane;
+    @FXML
+    private ImageView map;
+    @FXML
     private Button goBackButton;
     @FXML
     private Button sendButton;
-    
+    @FXML
+    private SidebarController sidebarController;
+    @FXML
+    private VBox sidebar; 
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -100,8 +101,8 @@ public class FXMLDocumentController implements Initializable {
         //==========================================================
         // inicializamos el slider y enlazamos con el zoom
         
-        //sidebarController.initialize(url, rb);
-        //updateSidebar();
+        sidebarController.initialize(url, rb);
+        updateSidebar();
         
         //=========================================================================
         //Envuelva el contenido de scrollpane en un grupo para que 
@@ -111,6 +112,12 @@ public class FXMLDocumentController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
+    }
+    
+    public void updateSidebar()
+    {
+        sidebarController.clearSidebar();
+        sidebarController.boldTestButton();
     }
     
     void initStage(Stage stage, User us, Problem prob, int number)
@@ -251,6 +258,5 @@ public class FXMLDocumentController implements Initializable {
         alert.setHeaderText("Are you sure you want to send");
         alert.setContentText("");
         Optional<ButtonType> result = alert.showAndWait();
-    }  
-
+    }      
 }
