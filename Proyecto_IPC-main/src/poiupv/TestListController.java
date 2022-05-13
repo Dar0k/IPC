@@ -27,6 +27,7 @@ import javafx.scene.control.ListView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import java.util.ArrayList;
+import javafx.beans.binding.Bindings;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 
@@ -56,6 +57,10 @@ public class TestListController implements Initializable {
     Navegacion navegation;
     
     ObservableList problems;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button SelectButton;
 
     /**
      * Initializes the controller class.
@@ -65,6 +70,7 @@ public class TestListController implements Initializable {
         // TODO
         sidebarController.initialize(url, rb);
         updateSidebar();
+        SelectButton.disableProperty().bind(problemsList.getSelectionModel().selectionModeProperty().isNull());
         
     }
     
@@ -94,7 +100,7 @@ public class TestListController implements Initializable {
             System.out.println(e);
         }
         int count = 1;
-        ArrayList<Problem> problemsArrayList = new ArrayList<Problem>();
+        problemsArrayList = new ArrayList<Problem>();
         for (Problem problem: navegation.getProblems()) {
             System.out.println(problem.getText());
             problemsArrayList.add(problem);
@@ -108,6 +114,34 @@ public class TestListController implements Initializable {
                 problemDescription.setText(problemsArrayList.get(index).getText());
             }
         });
+    }
+
+    @FXML
+    private void handleCancelButton(ActionEvent event) throws Exception {
+    
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        MainTestController mTCtrl = loader.<MainTestController>getController();
+        mTCtrl.initStage(primaryStage, user);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
+        
+        
+    }
+
+    @FXML
+    private void handleSelectButton(ActionEvent event) throws Exception {
+        System.out.println("test");
+        int index = problemsList.getSelectionModel().getSelectedIndex();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        FXMLDocumentController mTCtrl = loader.<FXMLDocumentController>getController();
+        mTCtrl.initStage(primaryStage, user, problemsArrayList.get(index), index+1);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
 }

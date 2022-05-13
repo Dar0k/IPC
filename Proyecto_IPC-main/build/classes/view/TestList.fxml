@@ -31,7 +31,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="111.0" prefWidth="454.0">
                      <children>
-                        <Label id="problemDescription" fx:id="problemDescription" />
+                        <Label id="problemDescription" fx:id="problemDescription" prefHeight="98.0" prefWidth="431.0" />
                      </children></VBox>
                </children>
                <VBox.margin>
@@ -40,7 +40,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="51.0" prefWidth="419.0" spacing="25.0">
                <children>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -48,7 +48,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="saveButton" disable="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
+                  <Button fx:id="SelectButton" disable="true" mnemonicParsing="false" onAction="#handleSelectButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
