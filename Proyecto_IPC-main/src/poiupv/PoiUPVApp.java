@@ -33,6 +33,7 @@ public class PoiUPVApp extends Application {
         //Problem problem = new Problem("Problem", new Answer("Answer1", false), new Answer("Answer2", false), new Answer("Answer3", false), new Answer("Answer4", true));
         
         // logInCtrl.initStage(stage,null, problem, 1);
+        logInCtrl.initStage(stage);
         stage.setTitle("Log in");
         stage.setScene(scene);
         stage.show();

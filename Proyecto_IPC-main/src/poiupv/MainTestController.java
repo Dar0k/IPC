@@ -82,7 +82,14 @@ public class MainTestController implements Initializable {
     }
 
     @FXML
-    private void handleList(ActionEvent event) {
+    private void handleList(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/TestList.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        TestListController mTCtrl = loader.<TestListController>getController();
+        mTCtrl.initStage(primaryStage, user);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
     
 }

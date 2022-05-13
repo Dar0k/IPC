@@ -18,22 +18,74 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
       <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
         <items>
-            <ToggleButton mnemonicParsing="false" text="point">
+            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;">
                <toggleGroup>
                   <ToggleGroup fx:id="group1" />
                </toggleGroup>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/black-circle.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </ToggleButton>
-            <ToggleButton mnemonicParsing="false" text="line" toggleGroup="$group1" />
-            <ToggleButton mnemonicParsing="false" text="arc" toggleGroup="$group1" />
-            <ToggleButton mnemonicParsing="false" text="text" toggleGroup="$group1" />
-            <ToggleButton mnemonicParsing="false" text="del" toggleGroup="$group1" />
+            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/remove.png" />
+                     </image>
+                  </ImageView>
+               </graphic></ToggleButton>
+            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/arc.png" />
+                     </image>
+                  </ImageView>
+               </graphic></ToggleButton>
+            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+               <graphic>
+                  <ImageView fitHeight="91.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/text.png" />
+                     </image>
+                  </ImageView>
+               </graphic></ToggleButton>
+            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+               <graphic>
+                  <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/eraser.png" />
+                     </image>
+                  </ImageView>
+               </graphic></ToggleButton>
             <ColorPicker />
-            <Region prefHeight="30.0" prefWidth="202.0" />
-            <Button mnemonicParsing="false" text="ques" />
+            <Region prefHeight="49.0" prefWidth="50.0" />
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/trash-can.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Region prefHeight="49.0" prefWidth="132.0" />
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/quiz.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
         </items>
       </ToolBar>
    </top>
