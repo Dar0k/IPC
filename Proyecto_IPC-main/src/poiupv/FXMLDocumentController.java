@@ -17,9 +17,11 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -232,12 +234,23 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void handleGoBackButton(ActionEvent event) {
+    private void handleGoBackButton(ActionEvent event) throws Exception{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Go Back");
         alert.setHeaderText("Are you sure you want to exit?");
         alert.setContentText("The test will not be submitted and all progress will be lost");
         Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+            MainTestController controller = loader.<MainTestController>getController();
+            controller.initStage(primaryStage, user);
+            primaryStage.setScene(scene);
+            
+        } else {
+            System.out.println("CANCEL");
+        }
     }
 
     @FXML

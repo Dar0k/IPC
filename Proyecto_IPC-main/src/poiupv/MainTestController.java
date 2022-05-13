@@ -6,6 +6,8 @@
 package poiupv;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +19,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Navegacion;
+import model.Problem;
 import model.User;
 
 /**
@@ -77,12 +81,31 @@ public class MainTestController implements Initializable {
     }
 
     @FXML
-    private void handleRandom(ActionEvent event) {
+    private void handleRandom(ActionEvent event) throws Exception {
+        Navegacion navegation = Navegacion.getSingletonNavegacion();
+        List<Problem> problemas = navegation.getProblems();
+        System.out.println(problemas.size());
+        Random generator = new Random();
+        int index = generator.nextInt(1000) % (problemas.size() -1);
+        Problem p = problemas.get(index);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
         
-    }
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        FXMLDocumentController controller = loader.<FXMLDocumentController>getController();
+        controller.initStage(primaryStage, user, p, index+1);
+        primaryStage.setScene(scene);
+     }
 
     @FXML
-    private void handleList(ActionEvent event) {
+    private void handleList(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/TestList.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        TestListController mTCtrl = loader.<TestListController>getController();
+        mTCtrl.initStage(primaryStage, user);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
     
 }
