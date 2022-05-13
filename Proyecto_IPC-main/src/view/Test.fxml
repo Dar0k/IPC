@@ -14,10 +14,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="623.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="651.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
-      <VBox alignment="CENTER" prefHeight="507.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;">
+      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
@@ -29,7 +29,7 @@
             </HBox>
             <VBox prefHeight="169.0" prefWidth="405.0" spacing="10.0">
                <children>
-                  <Label fx:id="questionLabel" prefHeight="198.0" prefWidth="413.0" text="Label" wrapText="true" />
+                  <Label fx:id="questionLabel" prefHeight="115.0" prefWidth="858.0" text="Label" wrapText="true" />
                   <HBox>
                      <VBox.margin>
                         <Insets />
