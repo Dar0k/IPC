@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -22,7 +23,7 @@
    <top>
       <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
         <items>
-            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <ToggleButton fx:id="dot" mnemonicParsing="false" onAction="#handdleDot" style="-fx-background-color: transparent;">
                <toggleGroup>
                   <ToggleGroup fx:id="group1" />
                </toggleGroup>
@@ -34,7 +35,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+            <ToggleButton fx:id="line" mnemonicParsing="false" onAction="#hanndleLine" style="-fx-background-color: transparent;" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,7 +43,7 @@
                      </image>
                   </ImageView>
                </graphic></ToggleButton>
-            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+            <ToggleButton fx:id="arc" mnemonicParsing="false" onAction="#handdleArc" style="-fx-background-color: transparent;" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="62.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -50,7 +51,7 @@
                      </image>
                   </ImageView>
                </graphic></ToggleButton>
-            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+            <ToggleButton fx:id="text" mnemonicParsing="false" onAction="#handdleText" style="-fx-background-color: transparent;" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="91.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +59,7 @@
                      </image>
                   </ImageView>
                </graphic></ToggleButton>
-            <ToggleButton mnemonicParsing="false" style="-fx-background-color: transparent;" toggleGroup="$group1">
+            <ToggleButton fx:id="eraser" mnemonicParsing="false" onAction="#handdleEraser" style="-fx-background-color: transparent;" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,9 +67,9 @@
                      </image>
                   </ImageView>
                </graphic></ToggleButton>
-            <ColorPicker />
-            <Region prefHeight="49.0" prefWidth="50.0" />
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <ColorPicker fx:id="colorPicker" />
+            <Region fx:id="reg1" prefHeight="49.0" prefWidth="74.0" />
+            <Button fx:id="trash" mnemonicParsing="false" onAction="#handdleTrash" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -76,8 +77,8 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Region prefHeight="49.0" prefWidth="132.0" />
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <Region fx:id="reg2" prefHeight="49.0" prefWidth="132.0" />
+            <Button fx:id="quest" mnemonicParsing="false" onAction="#handdleQuest" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -105,19 +106,54 @@
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <VBox alignment="BOTTOM_RIGHT" prefHeight="348.0" prefWidth="591.0">
+            <VBox alignment="BOTTOM_RIGHT" fillWidth="false" spacing="30.0" StackPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="+" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
+                  <VBox alignment="BOTTOM_RIGHT" fillWidth="false" prefHeight="51.0" prefWidth="10.0">
+                     <children>
+                        <Button fx:id="zoomPlus" mnemonicParsing="false" onAction="#handdleZoom" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 1 1 0.5 1;">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/plus.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="zoomMinus" mnemonicParsing="false" onAction="#handdleZoom" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 1 1 1;">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/minus-sign.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <Button fx:id="reduceScreen" alignment="CENTER" mnemonicParsing="false" onAction="#handdleReduceScreen" prefHeight="33.0" prefWidth="0.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/shortscreen.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
          </children>
       </StackPane>
    </center>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="questFields" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+            <VBox prefHeight="458.0" prefWidth="100.0" spacing="10.0">
                <children>
                   <Label fx:id="questionLabel" text="Label">
                      <font>
@@ -143,4 +179,12 @@
             </VBox>
          </children></VBox>
    </right>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20.0">
+         <children>
+            <Label text="PosX: 1561.46" />
+            <Label text="PosY: 1561.46" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

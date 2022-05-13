@@ -24,7 +24,7 @@ import model.User;
  *
  * @author DROCPER
  */
-public class MainTestController implements Initializable {
+public class TestListController implements Initializable {
     
     private Stage primaryStage;
     private Scene prevScene;
