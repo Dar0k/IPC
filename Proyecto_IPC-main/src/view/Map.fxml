@@ -14,13 +14,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
       <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
         <items>
@@ -98,7 +97,7 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <ImageView fx:id="map1" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true">
+                        <ImageView fx:id="map1" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true" visible="false">
                            <image>
                               <Image url="@../resources/carta_nautica.jpg" />
                            </image>
@@ -113,51 +112,50 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ScrollPane>
-            <Pane pickOnBounds="false" prefHeight="224.0" prefWidth="463.0">
+            <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0" StackPane.alignment="BOTTOM_RIGHT">
                <children>
-                  <VBox layoutX="632.0" layoutY="221.0" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0">
+                  <VBox alignment="BOTTOM_RIGHT">
                      <children>
-                        <VBox>
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
-                                 <graphic>
-                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/plus.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0">
-                                 <graphic>
-                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/minus-sign.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </VBox>
-                        <Button alignment="CENTER" mnemonicParsing="false">
+                        <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                            <graphic>
                               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../resources/shortscreen.png" />
+                                    <Image url="@../resources/plus.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/minus-sign.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
                      </children>
-                     <padding>
-                        <Insets right="5.0" />
-                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </VBox>
+                  <Button alignment="CENTER" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/shortscreen.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
-            </Pane>
+               <padding>
+                  <Insets right="5.0" />
+               </padding>
+               <StackPane.margin>
+                  <Insets bottom="5.0" />
+               </StackPane.margin>
+            </VBox>
          </children>
       </StackPane>
    </center>
