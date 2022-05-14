@@ -91,20 +91,18 @@ public class MainTestController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
         
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         FXMLDocumentController controller = loader.<FXMLDocumentController>getController();
         controller.initStage(primaryStage, user, p, index+1);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
      }
 
     @FXML
     private void handleList(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/TestList.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         TestListController mTCtrl = loader.<TestListController>getController();
         mTCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
     }
     

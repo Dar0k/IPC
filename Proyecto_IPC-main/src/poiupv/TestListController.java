@@ -121,10 +121,9 @@ public class TestListController implements Initializable {
     
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         MainTestController mTCtrl = loader.<MainTestController>getController();
         mTCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
         
         
@@ -137,10 +136,9 @@ public class TestListController implements Initializable {
         int index = problemsList.getSelectionModel().getSelectedIndex();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         FXMLDocumentController mTCtrl = loader.<FXMLDocumentController>getController();
         mTCtrl.initStage(primaryStage, user, problemsArrayList.get(index), index+1);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
     }
 

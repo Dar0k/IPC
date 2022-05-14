@@ -93,10 +93,9 @@ public class SidebarController implements Initializable {
     private void handleTest(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         MainTestController mTCtrl = loader.<MainTestController>getController();
         mTCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
         System.out.println(user.getNickName());
     }
@@ -106,10 +105,9 @@ public class SidebarController implements Initializable {
     private void handleResult(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         MainResultsController mRCtrl = loader.<MainResultsController>getController();
         mRCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
         System.out.println(user.getNickName());
     }
@@ -118,10 +116,9 @@ public class SidebarController implements Initializable {
     private void handleProfile(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainProfile.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         MainProfileController mPCtrl = loader.<MainProfileController>getController();
         mPCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
         System.out.println(user.getNickName());
     }
@@ -130,10 +127,9 @@ public class SidebarController implements Initializable {
     private void handleLogOut(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainLogOut.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         MainLogOutController mLCtrl = loader.<MainLogOutController>getController();
         mLCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
         System.out.println(user.getNickName());
     }

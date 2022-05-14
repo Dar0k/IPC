@@ -241,10 +241,9 @@ public class TestController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
             Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root);
             MainTestController controller = loader.<MainTestController>getController();
             controller.initStage(primaryStage, user);
-            primaryStage.setScene(scene);
+            primaryStage.getScene().setRoot(root);
             
         } else {
             System.out.println("CANCEL");

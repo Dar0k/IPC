@@ -98,11 +98,9 @@ public class LogInDefController implements Initializable {
     private void handleSignUpClick(MouseEvent event) throws IOException {
         FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/SignUpDef.fxml"));
         Parent root = (Parent) myLoader.load();
-        Scene scene = new Scene(root);
         SignUpDefController signUpContr = myLoader.<SignUpDefController>getController();
         signUpContr.initStage(primaryStage);
-        primaryStage.setScene(scene);      
-    }
+        primaryStage.getScene().setRoot(root);    }
 
     @FXML
     private void handleEnterPressed(ActionEvent event) throws Exception {           
@@ -120,13 +118,12 @@ public class LogInDefController implements Initializable {
         {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
             Parent root = (Parent) myLoader.load();
-            Scene scene = new Scene(root);
             MainTestController mtCtrl = myLoader.<MainTestController>getController();
             mtCtrl.initStage(primaryStage, user);
-            primaryStage.setScene(scene);     
+            primaryStage.getScene().setRoot(root);    
             /*FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTestList.fxml"));
             Parent root = (Parent) myLoader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             MainTestListController mtCtrl = myLoader.<MainTestListController>getController();
             mtCtrl.initStage(primaryStage, user);
             primaryStage.setScene(scene);*/

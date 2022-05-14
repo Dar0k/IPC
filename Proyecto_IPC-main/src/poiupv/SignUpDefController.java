@@ -56,6 +56,7 @@ public class SignUpDefController implements Initializable {
     private Stage primaryStage;
     private Scene prevScene;
     private String prevTitle; 
+    private Parent prevRoot;
     
     private BooleanProperty validUsername;
     private BooleanProperty validPassword;
@@ -221,10 +222,9 @@ public class SignUpDefController implements Initializable {
             User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
             Parent root = (Parent) myLoader.load();
-            Scene scene = new Scene(root);
             MainTestController mtCtrl = myLoader.<MainTestController>getController();
             mtCtrl.initStage(primaryStage, result);
-            primaryStage.setScene(scene);
+            primaryStage.getScene().setRoot(root);
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -233,6 +233,7 @@ public class SignUpDefController implements Initializable {
     public void initStage(Stage stage)
     {
         prevScene = stage.getScene();
+        prevRoot = stage.getScene().getRoot();
         prevTitle = stage.getTitle();
         primaryStage = stage;
         primaryStage.setTitle("SIGN UP");        
@@ -275,7 +276,7 @@ public class SignUpDefController implements Initializable {
 
     @FXML
     private void handleCancelButton(ActionEvent event) {
-        primaryStage.setScene(prevScene);
+        primaryStage.getScene().setRoot(prevRoot);
         primaryStage.setTitle(prevTitle);
     }
 
