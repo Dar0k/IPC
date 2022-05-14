@@ -70,7 +70,7 @@ public class TestListController implements Initializable {
         // TODO
         sidebarController.initialize(url, rb);
         updateSidebar();
-        SelectButton.disableProperty().bind(problemsList.getSelectionModel().selectionModeProperty().isNull());
+        //SelectButton.disableProperty().bind(problemsList.getSelectionModel().selectionModeProperty().isNull());
         
     }
     
@@ -102,7 +102,6 @@ public class TestListController implements Initializable {
         int count = 1;
         problemsArrayList = new ArrayList<Problem>();
         for (Problem problem: navegation.getProblems()) {
-            System.out.println(problem.getText());
             problemsArrayList.add(problem);
             problemsList.getItems().add("Problem " + count);
             count++;
@@ -110,6 +109,7 @@ public class TestListController implements Initializable {
         problemsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                SelectButton.setDisable(false);
                 int index = problemsList.getSelectionModel().getSelectedIndex();
                 problemDescription.setText(problemsArrayList.get(index).getText());
             }
