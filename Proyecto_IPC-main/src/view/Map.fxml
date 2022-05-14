@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
@@ -11,15 +12,14 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
       <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
         <items>
@@ -93,60 +93,70 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+            <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
                <content>
-                  <AnchorPane prefHeight="360.0" prefWidth="599.0">
+                  <Pane>
                      <children>
-                        <ImageView fitHeight="520.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                        <ImageView fx:id="map1" layoutX="-100.0" layoutY="-119.0" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true">
                            <image>
                               <Image url="@../resources/carta_nautica.jpg" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
                         </ImageView>
                      </children>
-                  </AnchorPane>
+                  </Pane>
                </content>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
             </ScrollPane>
-            <VBox alignment="BOTTOM_RIGHT" fillWidth="false" spacing="30.0" StackPane.alignment="CENTER">
+            <Pane pickOnBounds="false">
                <children>
-                  <VBox alignment="BOTTOM_RIGHT" fillWidth="false" prefHeight="51.0" prefWidth="10.0">
+                  <VBox layoutX="632.0" layoutY="221.0" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0">
                      <children>
-                        <Button fx:id="zoomPlus" mnemonicParsing="false" onAction="#handdleZoom" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 1 1 0.5 1;">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/plus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="zoomMinus" mnemonicParsing="false" onAction="#handdleZoom" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 1 1 1;">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/minus-sign.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <VBox>
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/plus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/minus-sign.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
+                        </VBox>
+                        <Button alignment="CENTER" mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/shortscreen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
-                     <VBox.margin>
+                     <padding>
                         <Insets right="5.0" />
-                     </VBox.margin>
+                     </padding>
                   </VBox>
-                  <Button fx:id="reduceScreen" alignment="CENTER" mnemonicParsing="false" onAction="#handdleReduceScreen" prefHeight="33.0" prefWidth="0.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/shortscreen.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
-            </VBox>
+            </Pane>
          </children>
       </StackPane>
    </center>
@@ -179,12 +189,4 @@
             </VBox>
          </children></VBox>
    </right>
-   <bottom>
-      <HBox alignment="CENTER_LEFT" spacing="20.0">
-         <children>
-            <Label text="PosX: 1561.46" />
-            <Label text="PosY: 1561.46" />
-         </children>
-      </HBox>
-   </bottom>
 </BorderPane>
