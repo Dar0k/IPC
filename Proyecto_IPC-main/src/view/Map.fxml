@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
       <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
         <items>
@@ -91,78 +92,76 @@
       </ToolBar>
    </top>
    <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <ImageView fx:id="map1" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true" visible="false">
-                           <image>
-                              <Image url="@../resources/carta_nautica.jpg" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </ImageView>
-                     </children>
-                  </AnchorPane>
-               </content>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </ScrollPane>
-            <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0" StackPane.alignment="BOTTOM_RIGHT">
+      <SplitPane dividerPositions="0.95" BorderPane.alignment="CENTER">
+         <items>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="BOTTOM_RIGHT">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <ImageView fx:id="map1" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true" visible="false">
                                  <image>
-                                    <Image url="@../resources/plus.png" />
+                                    <Image url="@../resources/carta_nautica.jpg" />
                                  </image>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
                               </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0">
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ScrollPane>
+                  <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0" StackPane.alignment="BOTTOM_RIGHT">
+                     <children>
+                        <VBox alignment="BOTTOM_RIGHT">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/plus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/minus-sign.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                        <Button alignment="CENTER" mnemonicParsing="false">
                            <graphic>
                               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../resources/minus-sign.png" />
+                                    <Image url="@../resources/shortscreen.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
                      </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" />
+                     </StackPane.margin>
                   </VBox>
-                  <Button alignment="CENTER" mnemonicParsing="false">
-                     <graphic>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/shortscreen.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
-               <padding>
-                  <Insets right="5.0" />
-               </padding>
-               <StackPane.margin>
-                  <Insets bottom="5.0" />
-               </StackPane.margin>
-            </VBox>
-         </children>
-      </StackPane>
-   </center>
-   <right>
-      <VBox fx:id="questFields" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="458.0" prefWidth="100.0" spacing="10.0">
+            </StackPane>
+            <VBox minWidth="110.0" prefHeight="458.0" prefWidth="100.0" spacing="10.0">
                <children>
                   <Label fx:id="questionLabel" text="Label">
                      <font>
@@ -185,7 +184,11 @@
                      </VBox.margin>
                   </VBox>
                </children>
+               <padding>
+                  <Insets left="10.0" top="5.0" />
+               </padding>
             </VBox>
-         </children></VBox>
-   </right>
+         </items>
+      </SplitPane>
+   </center>
 </BorderPane>
