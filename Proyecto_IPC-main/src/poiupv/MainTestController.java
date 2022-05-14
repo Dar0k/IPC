@@ -88,10 +88,10 @@ public class MainTestController implements Initializable {
         Random generator = new Random();
         int index = generator.nextInt(1000) % (problemas.size() -1);
         Problem p = problemas.get(index);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
         
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Test.fxml"));        
         Parent root = (Parent) loader.load();
-        FXMLDocumentController controller = loader.<FXMLDocumentController>getController();
+        TestController controller = loader.<TestController>getController();
         controller.initStage(primaryStage, user, p, index+1);
         primaryStage.getScene().setRoot(root);
      }

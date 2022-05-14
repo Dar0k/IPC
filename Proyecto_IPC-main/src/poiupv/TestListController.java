@@ -134,9 +134,9 @@ public class TestListController implements Initializable {
     private void handleSelectButton(ActionEvent event) throws Exception {
         System.out.println("test");
         int index = problemsList.getSelectionModel().getSelectedIndex();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Test.fxml"));
         Parent root = (Parent) loader.load();
-        FXMLDocumentController mTCtrl = loader.<FXMLDocumentController>getController();
+        TestController mTCtrl = loader.<TestController>getController();
         mTCtrl.initStage(primaryStage, user, problemsArrayList.get(index), index+1);
         primaryStage.getScene().setRoot(root);
         primaryStage.show();

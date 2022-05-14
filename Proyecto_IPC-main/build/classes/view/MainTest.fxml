@@ -9,7 +9,7 @@
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainTestController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
-      <VBox alignment="CENTER" prefHeight="441.0" prefWidth="522.0" spacing="25.0">
+      <VBox alignment="CENTER" prefHeight="441.0" prefWidth="684.0" spacing="25.0">
          <children>
             <Button fx:id="randomButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleRandom" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 50; -fx-text-fill: black; -fx-font-size: 30;" text="Random">
                <font>
