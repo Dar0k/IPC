@@ -68,10 +68,9 @@ public class MainLogOutController implements Initializable {
     private void handleConfirmateLogOut(ActionEvent event) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogInDef.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         LogInDefController mainTCtrl = loader.<LogInDefController>getController();
         mainTCtrl.initStage(primaryStage);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
     }
     
 }

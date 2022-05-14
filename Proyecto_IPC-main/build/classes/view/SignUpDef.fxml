@@ -18,7 +18,7 @@
 
 <VBox fx:id="aux" alignment="CENTER" prefHeight="480.0" prefWidth="646.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.SignUpDefController">
    <children>
-      <VBox alignment="CENTER" prefHeight="508.0" prefWidth="664.0" spacing="20.0" style="-fx-background-color: rgba(255,255,255,.65);">
+      <VBox alignment="CENTER" prefHeight="501.0" prefWidth="646.0" spacing="20.0" style="-fx-background-color: rgba(255,255,255,.65);">
          <children>
             <Label alignment="BOTTOM_CENTER" text="SIGN UP">
                <font>

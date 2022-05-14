@@ -70,7 +70,7 @@ public class TestListController implements Initializable {
         // TODO
         sidebarController.initialize(url, rb);
         updateSidebar();
-        SelectButton.disableProperty().bind(problemsList.getSelectionModel().selectionModeProperty().isNull());
+        //SelectButton.disableProperty().bind(problemsList.getSelectionModel().selectionModeProperty().isNull());
         
     }
     
@@ -102,7 +102,6 @@ public class TestListController implements Initializable {
         int count = 1;
         problemsArrayList = new ArrayList<Problem>();
         for (Problem problem: navegation.getProblems()) {
-            System.out.println(problem.getText());
             problemsArrayList.add(problem);
             problemsList.getItems().add("Problem " + count);
             count++;
@@ -110,6 +109,7 @@ public class TestListController implements Initializable {
         problemsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                SelectButton.setDisable(false);
                 int index = problemsList.getSelectionModel().getSelectedIndex();
                 problemDescription.setText(problemsArrayList.get(index).getText());
             }
@@ -121,10 +121,9 @@ public class TestListController implements Initializable {
     
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         MainTestController mTCtrl = loader.<MainTestController>getController();
         mTCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
         
         
@@ -135,12 +134,11 @@ public class TestListController implements Initializable {
     private void handleSelectButton(ActionEvent event) throws Exception {
         System.out.println("test");
         int index = problemsList.getSelectionModel().getSelectedIndex();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Test.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        FXMLDocumentController mTCtrl = loader.<FXMLDocumentController>getController();
+        TestController mTCtrl = loader.<TestController>getController();
         mTCtrl.initStage(primaryStage, user, problemsArrayList.get(index), index+1);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
     }
 

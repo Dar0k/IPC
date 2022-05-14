@@ -88,23 +88,21 @@ public class MainTestController implements Initializable {
         Random generator = new Random();
         int index = generator.nextInt(1000) % (problemas.size() -1);
         Problem p = problemas.get(index);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLDocument.fxml"));
         
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Test.fxml"));        
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        FXMLDocumentController controller = loader.<FXMLDocumentController>getController();
+        TestController controller = loader.<TestController>getController();
         controller.initStage(primaryStage, user, p, index+1);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
      }
 
     @FXML
     private void handleList(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/TestList.fxml"));
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
         TestListController mTCtrl = loader.<TestListController>getController();
         mTCtrl.initStage(primaryStage, user);
-        primaryStage.setScene(scene);
+        primaryStage.getScene().setRoot(root);
         primaryStage.show();
     }
     
