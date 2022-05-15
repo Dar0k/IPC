@@ -92,6 +92,7 @@ public class MainTestController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Test.fxml"));        
         Parent root = (Parent) loader.load();
         TestController controller = loader.<TestController>getController();
+        System.out.println(user);
         controller.initStage(primaryStage, user, p, index+1);
         primaryStage.getScene().setRoot(root);
      }

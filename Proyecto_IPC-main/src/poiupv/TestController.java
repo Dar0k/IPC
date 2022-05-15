@@ -125,7 +125,9 @@ public class TestController implements Initializable {
         primaryStage = stage;
         previousScene = stage.getScene();
         previousTitle = stage.getTitle();
+        sidebarController.primaryStage = primaryStage;
         user = us;
+        sidebarController.setUser(user);
         problem = prob;
         questionLabel.setText(problem.getText());
         List<Answer> list = problem.getAnswers();

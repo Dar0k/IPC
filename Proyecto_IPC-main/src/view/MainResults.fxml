@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <VBox alignment="CENTER" prefHeight="441.0" prefWidth="522.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10; -fx-background-radius: 25;">
@@ -26,7 +26,7 @@
                   </VBox>
                   <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="378.0" prefWidth="510.0" spacing="15.0">
                      <children>
-                        <TableView fx:id="tableResults" prefHeight="305.0" prefWidth="450.0">
+                        <TableView fx:id="tableResults" prefHeight="305.0" prefWidth="450.0" stylesheets="@../resources/tableView.css">
                           <columns>
                             <TableColumn fx:id="hits" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" style="-fx-alignment: CENTER" text="Hits" />
                             <TableColumn fx:id="faults" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" style="-fx-alignment: CENTER" text="Faults" />

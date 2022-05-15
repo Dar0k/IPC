@@ -1,0 +1,12 @@
+.table-view {
+    -fx-border: none;
+    -fx-background-color: #f6f6f6;
+    -fx-border-radius: 15px;
+}
+.table-view .table-cell {
+    -fx-padding: 5px;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #efefef;
+}
