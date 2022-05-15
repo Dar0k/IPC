@@ -7,25 +7,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
-      <VBox alignment="CENTER" prefHeight="441.0" prefWidth="841.0" spacing="15.0">
+      <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
          <children>
-            <Label prefHeight="50.0" prefWidth="388.0" style="-fx-text-fill: black;" text="Are you sure you want to log out?" textAlignment="JUSTIFY" textFill="#0a0a0a" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Button fx:id="confirmateLogOutButton" mnemonicParsing="false" onAction="#handleConfirmateLogOut" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Yes" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+            <VBox alignment="CENTER" prefHeight="441.0" prefWidth="841.0" spacing="15.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="388.0" style="-fx-text-fill: black;" text="Are you sure you want to log out?" textAlignment="JUSTIFY" textFill="#0a0a0a" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="confirmateLogOutButton" mnemonicParsing="false" onAction="#handleConfirmateLogOut" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Yes" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </HBox>
