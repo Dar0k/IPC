@@ -26,14 +26,14 @@
                   </VBox>
                   <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="378.0" prefWidth="510.0" spacing="15.0">
                      <children>
-                        <TableView fx:id="tableResults" prefHeight="305.0" prefWidth="450.0" stylesheets="@../resources/tableView.css">
+                        <TableView fx:id="tableResults" maxWidth="425.0" prefHeight="305.0" prefWidth="425.0" stylesheets="@../resources/tableView.css">
                           <columns>
-                            <TableColumn fx:id="hits" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" style="-fx-alignment: CENTER" text="Hits" />
-                            <TableColumn fx:id="faults" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" style="-fx-alignment: CENTER" text="Faults" />
-                              <TableColumn fx:id="timestamp" maxWidth="225.0" minWidth="200.0" prefWidth="225.0" style="-fx-alignment: CENTER" text="Timestamp" />
+                            <TableColumn fx:id="hits" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER" text="Hits" />
+                            <TableColumn fx:id="faults" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER" text="Faults" />
+                              <TableColumn fx:id="timestamp" maxWidth="215.0" minWidth="215.0" prefWidth="215.0" resizable="false" style="-fx-alignment: CENTER" text="Timestamp" />
                           </columns>
                            <VBox.margin>
-                              <Insets bottom="30.0" left="20.0" right="20.0" />
+                              <Insets bottom="30.0" />
                            </VBox.margin>
                         </TableView>
                      </children></VBox>

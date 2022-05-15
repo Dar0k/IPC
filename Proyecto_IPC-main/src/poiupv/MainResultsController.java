@@ -117,19 +117,5 @@ public class MainResultsController implements Initializable {
                 tableResults.getItems().add(sess);
             }
         }
-    }
-    
-
-    @FXML
-    private void handleContinue(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleRandom(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleList(ActionEvent event) {
-    }
-    
+    }    
 }
