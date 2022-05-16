@@ -152,34 +152,7 @@ public class FXMLDocumentController implements Initializable {
         }*/
     }
 
-    void zoomIn(ActionEvent event) {
-        //================================================
-        // el incremento del zoom dependerá de los parametros del 
-        // slider y del resultado esperado
-        double sliderVal = zoom_slider.getValue();
-        zoom_slider.setValue(sliderVal += 0.1);
-    }
-
-    void zoomOut(ActionEvent event) {
-        double sliderVal = zoom_slider.getValue();
-        zoom_slider.setValue(sliderVal + -0.1);
-    }
     
-    // esta funcion es invocada al cambiar el value del slider zoom_slider
-    private void zoom(double scaleValue) {
-        //===================================================
-        //guardamos los valores del scroll antes del escalado
-        double scrollH = map_scrollpane.getHvalue();
-        double scrollV = map_scrollpane.getVvalue();
-        //===================================================
-        // escalamos el zoomGroup en X e Y con el valor de entrada
-        zoomGroup.setScaleX(scaleValue);
-        zoomGroup.setScaleY(scaleValue);
-        //===================================================
-        // recuperamos el valor del scroll antes del escalado
-        map_scrollpane.setHvalue(scrollH);
-        map_scrollpane.setVvalue(scrollV);
-    }
 
     void listClicked(MouseEvent event) {
         Poi itemSelected = map_listview.getSelectionModel().getSelectedItem();

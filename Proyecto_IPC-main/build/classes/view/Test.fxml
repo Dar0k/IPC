@@ -14,95 +14,100 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="651.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="651.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
-      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;" HBox.hgrow="ALWAYS">
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
+      <HBox alignment="CENTER" prefHeight="519.0" prefWidth="528.0" HBox.hgrow="ALWAYS">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="415.0">
+            <VBox alignment="CENTER" maxHeight="531.0" maxWidth="596.0" prefHeight="531.0" prefWidth="596.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
                <children>
-                  <Label fx:id="questionNumber" text="Label" />
-               </children>
-            </HBox>
-            <VBox prefHeight="169.0" prefWidth="405.0" spacing="10.0">
-               <children>
-                  <Label fx:id="questionLabel" prefHeight="115.0" prefWidth="858.0" text="Label" wrapText="true" />
-                  <HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="415.0">
+                     <children>
+                        <Label fx:id="questionNumber" text="Label" />
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="169.0" prefWidth="405.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="questionLabel" prefHeight="115.0" prefWidth="858.0" text="Label" wrapText="true" />
+                        <HBox>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <children>
+                              <VBox fx:id="vboxRadio" prefHeight="44.0" prefWidth="208.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="rad" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="44.0" prefWidth="207.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                                    <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
+                  </VBox>
+                  <AnchorPane prefHeight="167.0" prefWidth="406.0">
                      <children>
-                        <VBox fx:id="vboxRadio" prefHeight="44.0" prefWidth="208.0" spacing="10.0">
-                           <children>
-                              <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="rad" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="44.0" prefWidth="207.0" spacing="10.0">
-                           <children>
-                              <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
-                              <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </VBox>
-            <AnchorPane prefHeight="167.0" prefWidth="406.0">
-               <children>
-                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="167.0" prefWidth="413.0" vbarPolicy="NEVER">
-                     <content>
-                        <ImageView fx:id="map" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true">
-                           <image>
-                              <Image url="@../resources/carta_nautica.jpg" />
-                           </image>
+                        <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="167.0" prefWidth="413.0" vbarPolicy="NEVER">
+                           <content>
+                              <ImageView fx:id="map" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../resources/carta_nautica.jpg" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </ImageView>
+                           </content>
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
-                        </ImageView>
-                     </content>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
-            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="347.0" spacing="25.0">
-               <children>
-                  <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#handleGoBackButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="sendButton" disable="true" mnemonicParsing="false" onAction="#handleSendButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="347.0" spacing="25.0">
+                     <children>
+                        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#handleGoBackButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="sendButton" disable="true" mnemonicParsing="false" onAction="#handleSendButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="22.0" />
+                     </padding>
+                  </HBox>
                </children>
                <padding>
-                  <Insets bottom="22.0" />
+                  <Insets left="30.0" right="30.0" top="25.0" />
                </padding>
-            </HBox>
+            </VBox>
          </children>
-         <padding>
-            <Insets left="30.0" right="30.0" top="25.0" />
-         </padding></VBox>
+      </HBox>
    </children>
 </HBox>

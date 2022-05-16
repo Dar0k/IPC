@@ -6,8 +6,10 @@
         <group>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MainTestController.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/TestListController.java</file>
+            <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/PoiUPVApp.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/FXMLDocumentController.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/SidebarController.java</file>
+            <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MapController.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MainProfileController.java</file>
         </group>
     </open-files>

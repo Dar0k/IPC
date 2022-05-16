@@ -9,62 +9,67 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="652.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestListController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="652.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestListController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
-      <VBox alignment="CENTER" spacing="12.5" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;">
+      <HBox alignment="CENTER" prefHeight="441.0" prefWidth="546.0" HBox.hgrow="ALWAYS">
          <children>
-            <Label text="SELECT PROBLEM">
-               <VBox.margin>
-                  <Insets top="25.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <ListView fx:id="problemsList" prefHeight="146.0" prefWidth="262.0" stylesheets="@../resources/testList.css">
-               <VBox.margin>
-                  <Insets left="120.0" right="120.0" />
-               </VBox.margin>
-            </ListView>
-            <VBox alignment="CENTER" prefHeight="160.0" prefWidth="502.0">
+            <VBox alignment="CENTER" maxHeight="531.0" maxWidth="596.0" prefHeight="531.0" prefWidth="596.0" spacing="12.5" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-insets: 10 20 10 20; -fx-background-radius: 25;">
                <children>
-                  <Label id="problemDescription" fx:id="problemDescription" prefHeight="170.0" prefWidth="443.0" wrapText="true">
+                  <Label text="SELECT PROBLEM">
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="problemsList" prefHeight="146.0" prefWidth="262.0" stylesheets="@../resources/testList.css">
+                     <VBox.margin>
+                        <Insets left="120.0" right="120.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <VBox alignment="CENTER" prefHeight="160.0" prefWidth="502.0">
+                     <children>
+                        <Label id="problemDescription" fx:id="problemDescription" prefHeight="170.0" prefWidth="443.0" wrapText="true">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                     </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                  </Label>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="419.0" spacing="25.0">
+                     <children>
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="SelectButton" disable="true" mnemonicParsing="false" onAction="#handleSelectButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="22.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <VBox.margin>
+               <HBox.margin>
                   <Insets />
-               </VBox.margin>
+               </HBox.margin>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="419.0" spacing="25.0">
-               <children>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="SelectButton" disable="true" mnemonicParsing="false" onAction="#handleSelectButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="22.0" />
-               </padding>
-            </HBox>
          </children>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin></VBox>
+      </HBox>
    </children>
 </HBox>
