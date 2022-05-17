@@ -96,11 +96,11 @@
          <items>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseDragged="#handleMouseDrag" onMouseMoved="#muestraPosicion" onMousePressed="#handleMapMousePress" onMouseReleased="#handleMapMouseRelease" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
                      <content>
-                        <AnchorPane>
+                        <AnchorPane fx:id="anchorPane">
                            <children>
-                              <ImageView fx:id="map1" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true" visible="false">
+                              <ImageView fx:id="map1" onMouseDragged="#handleMouseDrag" onMousePressed="#handleMapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true" visible="false">
                                  <image>
                                     <Image url="@../resources/carta_nautica.jpg" />
                                  </image>
