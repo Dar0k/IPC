@@ -93,6 +93,15 @@ public class MainResultsController implements Initializable {
         user = us;
         sidebarController.setUser(user);
         loadResults();
+        
+        tableResults.widthProperty().addListener((obs, oldv, newv) -> {            
+            hits.setMinWidth((double)newv*0.2);
+            hits.setMaxWidth((double)newv*0.2);
+            faults.setMinWidth((double)newv*0.2);            
+            faults.setMaxWidth((double)newv*0.2);
+            timestamp.setMinWidth((double)newv*0.6);           
+            timestamp.setMaxWidth((double)newv*0.6);           
+        });
     }
     
     public void updateSidebar()

@@ -107,6 +107,11 @@ public class MapController implements Initializable {
     private boolean textDone = true;
     @FXML
     private AnchorPane anchorPane;
+    private boolean isFullscreen = false;
+    @FXML
+    private VBox rootVbox;
+    private Node nodeTests;
+    private Node nodeButtons;
 
     /**
      * Initializes the controller class.
@@ -246,6 +251,7 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleFullScreen(ActionEvent event) {
+        
     }
 
     @FXML

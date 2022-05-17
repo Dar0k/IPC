@@ -15,180 +15,221 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
-   <top>
-      <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
-        <items>
-            <ToggleButton fx:id="dot" mnemonicParsing="false" onAction="#handleDot" style="-fx-background-color: transparent;">
-               <toggleGroup>
-                  <ToggleGroup fx:id="group1" />
-               </toggleGroup>
-               <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/black-circle.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="line" mnemonicParsing="false" onAction="#handleLine" style="-fx-background-color: transparent;" toggleGroup="$group1">
-               <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/remove.png" />
-                     </image>
-                  </ImageView>
-               </graphic></ToggleButton>
-            <ToggleButton fx:id="arc" mnemonicParsing="false" onAction="#handleArc" style="-fx-background-color: transparent;" toggleGroup="$group1">
-               <graphic>
-                  <ImageView fitHeight="62.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/arc.png" />
-                     </image>
-                  </ImageView>
-               </graphic></ToggleButton>
-            <ToggleButton fx:id="text" mnemonicParsing="false" onAction="#handleText" style="-fx-background-color: transparent;" toggleGroup="$group1">
-               <graphic>
-                  <ImageView fitHeight="91.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/text.png" />
-                     </image>
-                  </ImageView>
-               </graphic></ToggleButton>
-            <ToggleButton fx:id="eraser" mnemonicParsing="false" onAction="#handleEraser" style="-fx-background-color: transparent;" toggleGroup="$group1">
-               <graphic>
-                  <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/eraser.png" />
-                     </image>
-                  </ImageView>
-               </graphic></ToggleButton>
-            <ColorPicker fx:id="colorPicker" onAction="#handleColorPick" />
-            <Region fx:id="reg1" prefHeight="49.0" prefWidth="74.0" />
-            <Button fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/trash-can.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Region fx:id="reg2" prefHeight="49.0" prefWidth="132.0" />
-            <Button fx:id="quest" mnemonicParsing="false" onAction="#handleQuest" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/quiz.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-        </items>
-      </ToolBar>
-   </top>
-   <center>
-      <SplitPane fx:id="splitPane" dividerPositions="0.95" BorderPane.alignment="CENTER">
-         <items>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+
+<VBox fx:id="rootVbox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+   <children>
+      <VBox>
+         <children>
+            <Label text="Label" />
+            <Label text="Label" />
+            <VBox prefHeight="119.0" prefWidth="766.0">
                <children>
-                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseDragged="#handleMouseDrag" onMouseMoved="#muestraPosicion" onMousePressed="#handleMapMousePress" onMouseReleased="#handleMapMouseRelease" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
-                     <content>
-                        <AnchorPane>
-                           <children>
-                              <ImageView fx:id="map1" onMousePressed="#mapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true" visible="false">
-                                 <image>
-                                    <Image url="@../resources/carta_nautica.jpg" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </ScrollPane>
-                  <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0" StackPane.alignment="BOTTOM_RIGHT">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox alignment="BOTTOM_RIGHT">
+                        <RadioButton mnemonicParsing="false" text="RadioButton" />
+                        <RadioButton mnemonicParsing="false" text="RadioButton" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="RadioButton" />
+                        <RadioButton mnemonicParsing="false" text="RadioButton" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <BorderPane fx:id="map" minWidth="300.0" prefHeight="400.0" prefWidth="766.0">
+         <top>
+            <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
+              <items>
+                  <ToggleButton fx:id="dot" mnemonicParsing="false" onAction="#handleDot" style="-fx-background-color: transparent;">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group1" />
+                     </toggleGroup>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/black-circle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ToggleButton fx:id="line" mnemonicParsing="false" onAction="#handleLine" style="-fx-background-color: transparent;" toggleGroup="$group1">
+                     <graphic>
+                        <ImageView fitHeight="100.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/remove.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ToggleButton fx:id="arc" mnemonicParsing="false" onAction="#handleArc" style="-fx-background-color: transparent;" toggleGroup="$group1">
+                     <graphic>
+                        <ImageView fitHeight="62.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/arc.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ToggleButton fx:id="text" mnemonicParsing="false" onAction="#handleText" style="-fx-background-color: transparent;" toggleGroup="$group1">
+                     <graphic>
+                        <ImageView fitHeight="91.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/text.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ToggleButton fx:id="eraser" mnemonicParsing="false" onAction="#handleEraser" style="-fx-background-color: transparent;" toggleGroup="$group1">
+                     <graphic>
+                        <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/eraser.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ColorPicker fx:id="colorPicker" onAction="#handleColorPick" />
+                  <Region fx:id="reg1" prefHeight="49.0" prefWidth="74.0" />
+                  <Button fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/trash-can.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Region fx:id="reg2" prefHeight="49.0" prefWidth="132.0" />
+                  <Button fx:id="quest" mnemonicParsing="false" onAction="#handleQuest" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/quiz.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+              </items>
+            </ToolBar>
+         </top>
+         <center>
+            <SplitPane fx:id="splitPane" dividerPositions="0.95" BorderPane.alignment="CENTER">
+               <items>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
+                           <content>
+                              <AnchorPane fx:id="anchorPane">
+                                 <children>
+                                    <ImageView fx:id="map1" onMouseDragged="#handleMouseDrag" onMousePressed="#handleMapMousePress" onMouseReleased="#mapMouseRelease" pickOnBounds="true" visible="false">
+                                       <image>
+                                          <Image url="@../resources/carta_nautica.jpg" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ScrollPane>
+                        <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0" StackPane.alignment="BOTTOM_RIGHT">
                            <children>
-                              <Button fx:id="zoomInButton" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="20.0" prefWidth="20.0">
+                              <VBox alignment="BOTTOM_RIGHT">
+                                 <children>
+                                    <Button fx:id="zoomInButton" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="20.0" prefWidth="20.0">
+                                       <graphic>
+                                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/plus.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="zoomOutButton" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="27.0" prefWidth="30.0">
+                                       <graphic>
+                                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/minus-sign.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </VBox>
+                              <Button fx:id="fullscreen" alignment="CENTER" mnemonicParsing="false" onAction="#handleFullScreen">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../resources/plus.png" />
+                                          <Image url="@../resources/shortscreen.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="zoomOutButton" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="27.0" prefWidth="30.0">
-                                 <graphic>
-                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/minus-sign.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
+                           </children>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                           <StackPane.margin>
+                              <Insets bottom="5.0" />
+                           </StackPane.margin>
+                        </VBox>
+                     </children>
+                  </StackPane>
+                  <VBox fx:id="vboxQuest" minWidth="110.0" prefHeight="458.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="questionLabel" text="Label">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="rad" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                              <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
+                              <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </VBox>
-                        <Button fx:id="fullscreen" alignment="CENTER" mnemonicParsing="false" onAction="#handleFullScreen">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/shortscreen.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
                      </children>
                      <padding>
-                        <Insets right="5.0" />
+                        <Insets left="10.0" top="5.0" />
                      </padding>
-                     <StackPane.margin>
-                        <Insets bottom="5.0" />
-                     </StackPane.margin>
                   </VBox>
-               </children>
-            </StackPane>
-            <VBox fx:id="vboxQuest" minWidth="110.0" prefHeight="458.0" prefWidth="100.0" spacing="10.0">
+               </items>
+            </SplitPane>
+         </center>
+         <bottom>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="questionLabel" text="Label">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="rad" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
-                        <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
-                        <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </VBox>
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" text="Button" />
                </children>
-               <padding>
-                  <Insets left="10.0" top="5.0" />
-               </padding>
-            </VBox>
-         </items>
-      </SplitPane>
-   </center>
-</BorderPane>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</VBox>
