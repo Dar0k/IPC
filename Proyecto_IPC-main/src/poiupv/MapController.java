@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -21,14 +22,19 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -95,6 +101,12 @@ public class MapController implements Initializable {
     private double[] dividerPos;
     private String buttonSelection = "";
     private Line linePainting;
+    private Circle circle;
+    private double startXArc;
+    private TextField textField;
+    private boolean textDone = true;
+    @FXML
+    private AnchorPane anchorPane;
 
     /**
      * Initializes the controller class.
@@ -113,6 +125,7 @@ public class MapController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
+        
         
     }
     
@@ -168,9 +181,6 @@ public class MapController implements Initializable {
     private void mapMouseRelease(MouseEvent event) {
     }
 
-    @FXML
-    private void mapMousePress(MouseEvent event) {
-    }
 
     @FXML
     private void muestraPosicion(MouseEvent event) {
@@ -200,14 +210,17 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleEraser(ActionEvent event) {
+        buttonSelection = (buttonSelection.equals("eraser")) ? "" : "eraser"; 
     }
 
     @FXML
     private void handleColorPick(ActionEvent event) {
+        
     }
 
     @FXML
     private void handleTrash(ActionEvent event) {
+        zoomGroup.getChildren().retainAll(zoomGroup.getChildren().get(0));
     }
 
     @FXML
@@ -255,12 +268,13 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleMouseDrag(MouseEvent event) {
-        System.out.println("test");
         switch(buttonSelection)
         {
             case "dot":
                 break;
             case "arc":
+                double radio = Math.abs(event.getX() - startXArc);
+                circle.setRadius(radio);
                 break;
             case "line":
                 linePainting.setEndX(event.getX());
@@ -286,28 +300,66 @@ public class MapController implements Initializable {
         switch(buttonSelection)
         {
             case "dot":
+                Circle dot = new Circle(event.getX(), event.getY(), 10);
+                zoomGroup.getChildren().add(dot);
+                dot.setOnMousePressed(c -> removeElement(dot));
                 break;
             case "arc":
+                circle = new Circle(event.getX(), event.getY(), 10);
+                circle.setStroke(Color.RED);
+                circle.setFill(Color.TRANSPARENT);
+                startXArc = event.getX();
+                zoomGroup.getChildren().add(circle);
+                circle.setOnMousePressed(c -> removeElement(circle));
                 break;
             case "line":
-                map_scrollpane.setPannable(false);
                 linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
+                linePainting.setStrokeWidth(10);
                 zoomGroup.getChildren().add(linePainting);
+                linePainting.setOnMousePressed(c -> removeElement(linePainting));
                 linePainting.setOnContextMenuRequested(eventContext -> {
                     ContextMenu menuContext = new ContextMenu();
                     MenuItem deleteItem = new MenuItem("Delete");
                     menuContext.getItems().add(deleteItem);
+                    
                     deleteItem.setOnAction(eventMenu -> 
                     {
                         zoomGroup.getChildren().remove((Node)eventContext.getSource());
                         eventMenu.consume();
                     });
-                    menuContext.show(linePainting, eventContext.getSceneX(), eventContext.getSceneY());
+                    menuContext.show(linePainting, event.getSceneX(), event.getSceneY());
                     eventContext.consume();
                 });
                 break;
             case "text":
+                if(textDone)
+                {
+                    textField = new TextField();
+                    zoomGroup.getChildren().add(textField);
+                    textField.setLayoutX(event.getX());
+                    textField.setLayoutY(event.getY());
+                    textField.requestFocus();
+                    textField.setOnMousePressed(c -> removeElement(textField));
+                    textField.setOnAction(eventC ->{
+                        Text label = new Text(textField.getText());
+                        label.setX(textField.getLayoutX());
+                        label.setY(textField.getLayoutY());
+                        label.setStyle("-fx-font-familly:Gafatar; -fx-font-size:40;");
+                        zoomGroup.getChildren().add(label);
+                        zoomGroup.getChildren().remove(textField);
+                        eventC.consume();
+                        textDone = true;
+                        
+                        label.setOnMousePressed(c -> removeElement(label));
+                        
+                        
+
+                    });
+                    textDone = false;
+                }
                 break;
+            
+                
             default:
                 break;
                 
@@ -318,11 +370,15 @@ public class MapController implements Initializable {
 
 
     }
-
-    @FXML
-    private void handleMapMouseRelease(MouseEvent event) {
-        
+    
+    private void removeElement(Object node)
+    {
+        if(buttonSelection.equals("eraser"))
+        {
+            zoomGroup.getChildren().remove(node);
+        }
     }
 
+    
     
 }
