@@ -289,6 +289,13 @@ public class MainProfileController implements Initializable {
         emailField.setText(us.getEmail());
         agePicker.setValue(us.getBirthdate());
         modified.setValue(Boolean.FALSE);
+       
+        
+        primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
+            calcSize((double)newv);
+        });
+        calcSize(primaryStage.getHeight());
+
     }
     
     public void updateSidebar()
@@ -394,4 +401,18 @@ public class MainProfileController implements Initializable {
             validAge.setValue(Boolean.TRUE); 
         }
     }    
+    
+    private void calcSize (double newv){
+        if((double)newv >= 375 && (double)newv <460){double act = 460-(double)newv;
+            int stageDif = 460-375;
+            double per = 1 - (act/stageDif);
+            int radDif = 50-30;
+            int spaceDif = 10-5;
+            avaPrin.setRadius(30+(radDif * per));
+            aux.setSpacing(10.0+ (spaceDif * per));
+        }else{
+            avaPrin.setRadius(50);
+            aux.setSpacing(15.0);
+        }
+    }
 }

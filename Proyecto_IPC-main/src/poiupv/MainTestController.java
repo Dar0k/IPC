@@ -55,7 +55,6 @@ public class MainTestController implements Initializable {
         // TODO
         sidebarController.initialize(url, rb);
         updateSidebar();
-        
     }
     
     public void initStage(Stage stage, User us)
@@ -67,6 +66,10 @@ public class MainTestController implements Initializable {
         sidebarController.primaryStage = primaryStage;
         user = us;
         sidebarController.setUser(user);
+        primaryStage.setMinHeight(375);
+        primaryStage.setMinWidth(420);
+        
+        
     }
     
     public void updateSidebar()
