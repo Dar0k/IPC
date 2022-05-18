@@ -5,7 +5,12 @@
  */
 package poiupv;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +30,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +42,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
+import model.Answer;
+import model.Problem;
+import model.User;
 
 /**
  * FXML Controller class
@@ -78,10 +89,6 @@ public class MapController implements Initializable {
     @FXML
     private Button trash;
     @FXML
-    private Region reg2;
-    @FXML
-    private Button quest;
-    @FXML
     private ScrollPane map_scrollpane;
     @FXML
     private ImageView map1;
@@ -108,18 +115,60 @@ public class MapController implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     private boolean isFullscreen = false;
-    @FXML
-    private VBox rootVbox;
     private Node nodeTests;
     private Node nodeButtons;
+    @FXML
+    private ImageView transportador;
+    private double startTransX;
+    private double startTransY;
+    private double baseX;
+    private double baseY;
+    private User user;
+    private Problem problem;
+    @FXML
+    private Label questionNumber;
+    @FXML
+    private ImageView fullscreenImageView;
 
     /**
      * Initializes the controller class.
      */
     
-    public void initStage(Stage stage)
+     void initStage(Stage stage, User us, Problem prob, int number)
     {
         primaryStage = stage;
+        user = us;
+        problem = prob;
+        questionLabel.setText(problem.getText());
+        List<Answer> list = problem.getAnswers();
+        RadioButton [] buttons = {radioButtonA, radioButtonB, radioButtonC, radioButtonD};
+        List<Integer> pool = new ArrayList<Integer>();
+        pool.add(0);
+        pool.add(1);
+        pool.add(2);
+        pool.add(3);
+        Random generator = new Random();
+        
+        for(int i = 4; i > 1; i--)
+        {
+            int random = generator.nextInt(1000);
+            buttons[i-1].setText(list.get(pool.remove(random % i)).getText());
+        }
+        buttons[0].setText(list.get(pool.get(0)).getText());
+        
+        questionNumber.setText("Problem " + number);
+        
+        /*for(int i = 0; i < 4; i++)
+        {
+            buttons[i].textProperty().bind(map.getRad(i).textProperty());
+            
+        }
+        
+        for(int i = 0; i < 4; i++)
+        {
+            buttons[i].selectedProperty().bind(map.getRad(i).selectedProperty());
+            
+        }*/
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,6 +179,7 @@ public class MapController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
+        colorPicker.setValue(Color.BLACK);
         
         
     }
@@ -184,6 +234,8 @@ public class MapController implements Initializable {
 
     @FXML
     private void mapMouseRelease(MouseEvent event) {
+        map_scrollpane.setPannable(true);
+        map_scrollpane.getScene().setCursor(Cursor.DEFAULT);
     }
 
 
@@ -249,25 +301,26 @@ public class MapController implements Initializable {
         
     }
 
+   
     @FXML
-    private void handleFullScreen(ActionEvent event) {
-        
-    }
-
-    @FXML
-    private void handleQuest(ActionEvent event) {
+    private void handleQuest(ActionEvent event) throws Exception {
         if(questActive)
         {
             dividerPos = splitPane.getDividerPositions();
             nodeQuest = splitPane.getItems().get(1);
             splitPane.getItems().remove(nodeQuest);
             questActive = false;
+            String url = "." + File.separator + "src" + File.separator + "resources" + File.separator + "fullscreen.png";
+            fullscreenImageView.setImage(new Image(new FileInputStream(url)));
         }
         else
         {
             splitPane.getItems().add(nodeQuest);
             questActive = true;
             splitPane.setDividerPositions(dividerPos);
+            String url = "." + File.separator + "src" + File.separator + "resources" + File.separator + "shortscreen.png";    
+            fullscreenImageView.setImage(new Image(new FileInputStream(url)));
+
             
         }
     }
@@ -302,17 +355,21 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleMapMousePress(MouseEvent event) {
-        
+        map_scrollpane.setPannable(false);
         switch(buttonSelection)
         {
             case "dot":
                 Circle dot = new Circle(event.getX(), event.getY(), 10);
+                dot.setStroke(colorPicker.getValue());
+                dot.setFill(colorPicker.getValue());
                 zoomGroup.getChildren().add(dot);
                 dot.setOnMousePressed(c -> removeElement(dot));
+                dot.setOnMouseEntered(c -> { if(buttonSelection.equals("coords"))map_scrollpane.getScene().setCursor(Cursor.HAND);} );
+                dot.setOnMouseExited(c -> {if(buttonSelection.equals("coords"))map_scrollpane.getScene().setCursor(Cursor.DEFAULT);});
                 break;
             case "arc":
                 circle = new Circle(event.getX(), event.getY(), 10);
-                circle.setStroke(Color.RED);
+                circle.setStroke(colorPicker.getValue());
                 circle.setFill(Color.TRANSPARENT);
                 startXArc = event.getX();
                 zoomGroup.getChildren().add(circle);
@@ -321,8 +378,11 @@ public class MapController implements Initializable {
             case "line":
                 linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
                 linePainting.setStrokeWidth(10);
+                linePainting.setFill(colorPicker.getValue());
+                linePainting.setStroke(colorPicker.getValue());
                 zoomGroup.getChildren().add(linePainting);
-                linePainting.setOnMousePressed(c -> removeElement(linePainting));
+                Line temp = linePainting;
+                linePainting.setOnMousePressed(c -> removeElement(temp));
                 linePainting.setOnContextMenuRequested(eventContext -> {
                     ContextMenu menuContext = new ContextMenu();
                     MenuItem deleteItem = new MenuItem("Delete");
@@ -345,12 +405,14 @@ public class MapController implements Initializable {
                     textField.setLayoutX(event.getX());
                     textField.setLayoutY(event.getY());
                     textField.requestFocus();
-                    textField.setOnMousePressed(c -> removeElement(textField));
+                    //textField.setOnMousePressed(c -> removeElement(textField));
                     textField.setOnAction(eventC ->{
                         Text label = new Text(textField.getText());
                         label.setX(textField.getLayoutX());
                         label.setY(textField.getLayoutY());
                         label.setStyle("-fx-font-familly:Gafatar; -fx-font-size:40;");
+                        label.setStroke(colorPicker.getValue());
+                        label.setFill(colorPicker.getValue());
                         zoomGroup.getChildren().add(label);
                         zoomGroup.getChildren().remove(textField);
                         eventC.consume();
@@ -364,9 +426,13 @@ public class MapController implements Initializable {
                     textDone = false;
                 }
                 break;
+            case "cubo":
+                break;
             
                 
             default:
+                map_scrollpane.setPannable(true);
+                map_scrollpane.getScene().setCursor(Cursor.MOVE);
                 break;
                 
         }
@@ -383,7 +449,75 @@ public class MapController implements Initializable {
         {
             zoomGroup.getChildren().remove(node);
         }
+        if(buttonSelection.equals("cubo"))
+        {
+            int index = zoomGroup.getChildren().indexOf(node);
+            Node n =  zoomGroup.getChildren().get(index);
+            
+            if(n instanceof Shape)
+            {
+                Shape s = (Shape) n;
+                s.setStroke(colorPicker.getValue());
+                s.setFill(colorPicker.getValue());
+                zoomGroup.getChildren().set(index, s);
+            }
+            
+            
+        }
+        if(buttonSelection.equals("coords"))
+        {
+            if(node instanceof Circle)
+            {
+                Circle c = (Circle) node;
+                System.out.println(c.getCenterX());
+                System.out.println(c.getCenterY());
+            }
+        }
     }
+
+    @FXML
+    private void handleTransportador(ActionEvent event) {
+        transportador.setVisible(!transportador.isVisible());
+    }
+
+    @FXML
+    private void handleTranspMouseRelease(MouseEvent event) {
+        map_scrollpane.getScene().setCursor(Cursor.DEFAULT);
+        map_scrollpane.setPannable(true);
+        
+    }
+
+    @FXML
+    private void handleTranspMouseDrag(MouseEvent event) {
+        map_scrollpane.setPannable(false);
+        double despX = event.getSceneX() - startTransX;
+        double despY = event.getSceneY() - startTransY;
+        transportador.setTranslateX(baseX + despX);
+        transportador.setTranslateY(baseY + despY);
+    }
+
+    @FXML
+    private void handleTranspMousePress(MouseEvent event) {
+        
+        startTransX = event.getSceneX();
+        startTransY = event.getSceneY();
+        baseX = transportador.getTranslateX();
+        baseY = transportador.getTranslateY();
+        map_scrollpane.getScene().setCursor(Cursor.CROSSHAIR);
+        event.consume();             
+    }
+
+    @FXML
+    private void handleCambiarColor(ActionEvent event) {
+        buttonSelection = (buttonSelection.equals("cubo")) ? "" : "cubo";
+        
+    }
+
+    @FXML
+    private void handleCoordenadas(ActionEvent event) {
+        buttonSelection = (buttonSelection.equals("coords")) ? "" : "coords";
+    }
+    
 
     
     

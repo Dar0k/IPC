@@ -24,16 +24,16 @@ public class PoiUPVApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogInDef.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogInDef.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Map.fxml"));
         Parent root = loader.load();
                  
         Scene scene = new Scene(root);
         
-        LogInDefController logInCtrl = loader.<LogInDefController>getController();
-        //Problem problem = new Problem("Problem", new Answer("Answer1", false), new Answer("Answer2", false), new Answer("Answer3", false), new Answer("Answer4", true));
+        MapController logInCtrl = loader.<MapController>getController();
+        Problem problem = new Problem("Problem", new Answer("Answer1", false), new Answer("Answer2", false), new Answer("Answer3", false), new Answer("Answer4", true));
         
-        // logInCtrl.initStage(stage,null, problem, 1);
-        logInCtrl.initStage(stage);
+        logInCtrl.initStage(stage,null, problem, 1);
+        //LogInCtrl.initStage(stage);
         stage.setTitle("Log in");
         stage.setScene(scene);
         stage.show();
