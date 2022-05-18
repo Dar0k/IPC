@@ -171,7 +171,7 @@
                   </VBox>
                   <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="419.0" spacing="25.0">
                      <children>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
+                        <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -179,7 +179,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SAVE" textFill="WHITE">
+                        <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SAVE" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>

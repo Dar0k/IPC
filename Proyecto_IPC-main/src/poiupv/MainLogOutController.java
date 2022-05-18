@@ -57,26 +57,18 @@ public class MainLogOutController implements Initializable {
         // TODO
         sidebarController.initialize(url, rb);
         updateSidebar();
+        
+        calcFontSize(aux.getWidth());
+        calcButtonSize(aux.getHeight(), aux.getWidth());
         aux.widthProperty().addListener((obs, oldv, newv)-> {
-            System.out.println(newv);
-            /*if((double)newv < 350 ){
-                Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 16);
-                label.setFont(font);
-            }else if((double)newv>700){
-                Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 42);
-                label.setFont(font);
-            }else{
-                Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 24);
-                label.setFont(font);
-            }*/
-            double temp = (16*(double)newv)/276;
-            
-            Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, temp);
-            label.setFont(font);
-            //279  -> 16
-            //466  -> 24
-            //841  -> 42
+           calcFontSize(aux.getWidth());
+           calcButtonSize(aux.getHeight(), aux.getWidth());
         });
+        aux.heightProperty().addListener((obs, oldv, newv)-> {
+           calcFontSize(aux.getWidth());
+           calcButtonSize(aux.getHeight(), aux.getWidth());
+        });
+        
     }
     public void initStage(Stage stage, User us)
     {
@@ -85,12 +77,51 @@ public class MainLogOutController implements Initializable {
         sidebarController.primaryStage = primaryStage;
         user = us;
         sidebarController.setUser(user);
+        
     }
     
     public void updateSidebar()
     {
         sidebarController.clearSidebar();
         sidebarController.boldLogOutButton();
+    }
+    
+    private void calcFontSize(double newv){
+        System.out.println(newv);
+        double temp = (16*(double)newv)/276;
+        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, temp);
+        label.setFont(font);
+    }
+    
+    private void calcButtonSize(double h, double w){
+        double maxSpacing = 35;
+        double minSpacing = 15;
+        double maxHeight = 650;
+        double minHeight = 375;
+        double maxWidth = 800;
+        double minWidth = 400;
+        double width = w;
+        double height = h;
+        if(width < minWidth || height < minHeight) {
+            Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 15);
+            confirmateLogOutButton.setFont(font);
+            aux.setSpacing(minSpacing);
+        }else if (width > maxWidth || height > maxHeight){
+            Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 30);
+            confirmateLogOutButton.setFont(font);
+            aux.setSpacing(maxSpacing);
+        }else{
+            double difSpacing = maxSpacing - minSpacing;
+            double difW = maxWidth-minWidth;
+            double difH = maxHeight-minHeight;
+            double temp = difW + difH;
+            double sizeAct = (maxWidth - width) + (maxHeight - height);
+            double per = 1- (sizeAct/temp);
+            double difTextSize = 30-15;
+            Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 15 + difTextSize*per);
+            confirmateLogOutButton.setFont(font);
+            aux.setSpacing(minSpacing + (difSpacing*per));
+        }    
     }
   
     @FXML

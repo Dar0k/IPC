@@ -17,7 +17,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.Navegacion;
 import model.Problem;
@@ -35,8 +39,6 @@ public class MainTestController implements Initializable {
     private String prevTitle;
     
     @FXML
-    private Button continueButton;
-    @FXML
     private Button randomButton;
     @FXML
     private Button listButton;
@@ -44,8 +46,13 @@ public class MainTestController implements Initializable {
     private VBox sidebar;
     @FXML
     private SidebarController sidebarController;
+    @FXML
+    private HBox aux;
+    @FXML
+    private VBox aux1;
     
-    User user;
+    User user;    
+    
 
     /**
      * Initializes the controller class.
@@ -54,8 +61,11 @@ public class MainTestController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sidebarController.initialize(url, rb);
-        updateSidebar();
+        updateSidebar();   
+        
+        calcSize(aux.getPrefHeight(), aux.getPrefWidth());
     }
+    
     
     public void initStage(Stage stage, User us)
     {
@@ -69,7 +79,13 @@ public class MainTestController implements Initializable {
         primaryStage.setMinHeight(375);
         primaryStage.setMinWidth(420);
         
+        aux.widthProperty().addListener((obs, oldv, newv) -> {
+            calcSize(aux.heightProperty().getValue(), (double)newv);          
+        });
         
+        aux.heightProperty().addListener((obs1, oldv, newv) -> {
+            calcSize((double)newv, aux.widthProperty().get());
+        });        
     }
     
     public void updateSidebar()
@@ -79,9 +95,6 @@ public class MainTestController implements Initializable {
     }
     
 
-    @FXML
-    private void handleContinue(ActionEvent event) {
-    }
 
     @FXML
     private void handleRandom(ActionEvent event) throws Exception {
@@ -107,7 +120,41 @@ public class MainTestController implements Initializable {
         TestListController mTCtrl = loader.<TestListController>getController();
         mTCtrl.initStage(primaryStage, user);
         primaryStage.getScene().setRoot(root);
-        primaryStage.show();
+        primaryStage.show();        
     }
     
+    private void calcSize(double h, double w){
+        double maxSpacing = 45;
+        double minSpacing = 25;
+        double maxHeight = 650;
+        double minHeight = 375;
+        double maxWidth = 800;
+        double minWidth = 400;
+        double width = w;
+        double height = h;
+        if(width < minWidth || height < minHeight) {
+            Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 30);
+            listButton.setFont(font);
+            randomButton.setFont(font);
+            aux1.setSpacing(minSpacing);
+        }else if (width > maxWidth || height > maxHeight){
+            Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 50);
+            listButton.setFont(font);
+            randomButton.setFont(font);
+            aux1.setSpacing(maxSpacing);
+        }else{
+            double difSpacing = maxSpacing - minSpacing;
+            double difW = maxWidth-minWidth;
+            double difH = maxHeight-minHeight;
+            double temp = difW + difH;
+            double sizeAct = (maxWidth - width) + (maxHeight - height);
+            double per = 1- (sizeAct/temp);
+            double difTextSize = 50-30;
+            Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 30 + difTextSize*per);
+            listButton.setFont(font);
+            randomButton.setFont(font);
+            aux1.setSpacing(minSpacing + (difSpacing*per));
+            System.out.println((difSpacing*per));
+        }        
+    }
 }
