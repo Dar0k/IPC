@@ -20,8 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
       <ToolBar prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
         <items>
@@ -184,8 +183,8 @@
                   </VBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="60.0" text="Go Back" />
-                        <Button mnemonicParsing="false" prefWidth="60.0" text="Send" />
+                        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#handleGoBackButton" prefWidth="60.0" text="Go Back" />
+                        <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleSendButton" prefWidth="60.0" text="Send" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" right="10.0" />

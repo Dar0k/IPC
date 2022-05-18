@@ -66,6 +66,8 @@ public class LogInDefController implements Initializable {
     public void initStage(Stage stage)
     {
         primaryStage = stage;
+        
+        
     }
     /**
      * Initializes the controller class.

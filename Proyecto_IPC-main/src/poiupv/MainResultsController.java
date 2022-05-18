@@ -76,7 +76,6 @@ public class MainResultsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sidebarController.initialize(url, rb);
-        updateSidebar();
         setupTable();
     }
     
@@ -102,12 +101,17 @@ public class MainResultsController implements Initializable {
             timestamp.setMinWidth((double)newv*0.6);           
             timestamp.setMaxWidth((double)newv*0.6);           
         });
+        
+        calcSideBar(primaryStage.getWidth());
+        primaryStage.widthProperty().addListener((obs, oldv, newv)->{
+            calcSideBar((double) newv);
+        });
     }
     
-    public void updateSidebar()
+    public void updateSidebar(double w)
     {
-        sidebarController.clearSidebar();
-        sidebarController.boldResultsButton();
+        sidebarController.clearSidebar(w);
+        sidebarController.boldResultsButton(w);
     }
     
     private void setupTable()
@@ -126,5 +130,19 @@ public class MainResultsController implements Initializable {
                 tableResults.getItems().add(sess);
             }
         }
-    }    
+    }  
+    
+    public void calcSideBar (double w) {
+        System.out.println("main: " + w);            
+        if(w < 1000){
+            sidebar.setMinWidth( w * 0.25 );
+            sidebar.setMaxWidth( w * 0.25 );
+            updateSidebar(w * 0.25);
+        }else{
+            sidebar.setMinWidth(250);
+            sidebar.setMaxWidth(250);
+            updateSidebar(250);
+        }     
+    }
+    
 }

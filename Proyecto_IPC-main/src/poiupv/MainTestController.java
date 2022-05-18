@@ -61,7 +61,6 @@ public class MainTestController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sidebarController.initialize(url, rb);
-        updateSidebar();   
         
         calcSize(aux.getPrefHeight(), aux.getPrefWidth());
     }
@@ -79,19 +78,25 @@ public class MainTestController implements Initializable {
         primaryStage.setMinHeight(375);
         primaryStage.setMinWidth(420);
         
+        calcSideBar(primaryStage.getWidth());
+        
         aux.widthProperty().addListener((obs, oldv, newv) -> {
             calcSize(aux.heightProperty().getValue(), (double)newv);          
         });
         
         aux.heightProperty().addListener((obs1, oldv, newv) -> {
             calcSize((double)newv, aux.widthProperty().get());
-        });        
+        }); 
+        
+        primaryStage.widthProperty().addListener((obs, oldv, newv)->{
+            calcSideBar((double) newv);
+        });
     }
     
-    public void updateSidebar()
+    public void updateSidebar(double w)
     {        
-        sidebarController.clearSidebar();
-        sidebarController.boldTestButton();
+        sidebarController.clearSidebar(w);
+        sidebarController.boldTestButton(w);
     }
     
 
@@ -105,9 +110,9 @@ public class MainTestController implements Initializable {
         int index = generator.nextInt(1000) % (problemas.size() -1);
         Problem p = problemas.get(index);
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Test.fxml"));        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Map.fxml"));        
         Parent root = (Parent) loader.load();
-        TestController controller = loader.<TestController>getController();
+        MapController controller = loader.<MapController>getController();
         System.out.println(user);
         controller.initStage(primaryStage, user, p, index+1);
         primaryStage.getScene().setRoot(root);
@@ -156,5 +161,18 @@ public class MainTestController implements Initializable {
             aux1.setSpacing(minSpacing + (difSpacing*per));
             System.out.println((difSpacing*per));
         }        
+    }
+    
+    public void calcSideBar (double w) {
+        System.out.println("main: " + w);            
+        if(w < 1000){
+            sidebar.setMinWidth( w * 0.25 );
+            sidebar.setMaxWidth( w * 0.25 );
+            updateSidebar(w * 0.25);
+        }else{
+            sidebar.setMinWidth(250);
+            sidebar.setMaxWidth(250);
+            updateSidebar(250);
+        }     
     }
 }

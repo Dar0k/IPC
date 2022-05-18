@@ -7,19 +7,25 @@ package poiupv;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -43,6 +49,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 import model.Answer;
 import model.Problem;
@@ -129,6 +136,10 @@ public class MapController implements Initializable {
     private Label questionNumber;
     @FXML
     private ImageView fullscreenImageView;
+    @FXML
+    private Button goBackButton;
+    @FXML
+    private Button sendButton;
 
     /**
      * Initializes the controller class.
@@ -182,6 +193,11 @@ public class MapController implements Initializable {
         colorPicker.setValue(Color.BLACK);
         
         
+        
+        rad.selectedToggleProperty().addListener((obs, oldv, newv) -> {
+            sendButton.setDisable(false);
+            
+        });
     }
     
     void zoomIn(ActionEvent event) {
@@ -516,6 +532,73 @@ public class MapController implements Initializable {
     @FXML
     private void handleCoordenadas(ActionEvent event) {
         buttonSelection = (buttonSelection.equals("coords")) ? "" : "coords";
+    }
+
+    @FXML
+    private void handleGoBackButton(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Go back");
+        alert.setHeaderText("Are you sure you want to leave the test?");
+        alert.setContentText("All your progress will be lost and you will not be able com back. Are you sure you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("OK");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+            Parent root = (Parent) loader.load();
+            MainTestController mTCtrl = loader.<MainTestController>getController();
+            mTCtrl.initStage(primaryStage, user);
+            primaryStage.getScene().setRoot(root);
+            primaryStage.show();
+        } else {
+            System.out.println("CANCEL");
+        }   
+    }
+
+    @FXML
+    private void handleSendButton(ActionEvent event) throws IOException {
+        System.out.println(rad.selectedToggleProperty().isNull().get());
+        if (rad.selectedToggleProperty().isNull().get()){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Send");
+            alert.setHeaderText("Are you sure you want to send your answere?");
+            alert.setContentText("You have not selected an answere and you will not be able com back. Are you sure you want to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                System.out.println("OK");
+                ////////////////////////////////////////////////
+                //////   guardar en la base de datos     ///////
+                ////////////////////////////////////////////////
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
+                Parent root = (Parent) loader.load();
+                MainResultsController mRCtrl = loader.<MainResultsController>getController();
+                mRCtrl.initStage(primaryStage, user);
+                primaryStage.getScene().setRoot(root);
+                primaryStage.show();
+            }else {
+                System.out.println("CANCEL");
+            }   
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Send");
+            alert.setHeaderText("Are you sure you want to send you answere?");
+            alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                System.out.println("OK");
+                ////////////////////////////////////////////////
+                //////   guardar en la base de datos     ///////
+                ////////////////////////////////////////////////
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
+                Parent root = (Parent) loader.load();
+                MainResultsController mRCtrl = loader.<MainResultsController>getController();
+                mRCtrl.initStage(primaryStage, user);
+                primaryStage.getScene().setRoot(root);
+                primaryStage.show();
+            }else {
+                System.out.println("CANCEL");
+            }   
+        }
+        
     }
     
 

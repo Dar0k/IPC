@@ -56,7 +56,6 @@ public class MainLogOutController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sidebarController.initialize(url, rb);
-        updateSidebar();
         
         calcFontSize(aux.getWidth());
         calcButtonSize(aux.getHeight(), aux.getWidth());
@@ -78,12 +77,16 @@ public class MainLogOutController implements Initializable {
         user = us;
         sidebarController.setUser(user);
         
+        calcSideBar(primaryStage.getWidth());
+        primaryStage.widthProperty().addListener((obs, oldv, newv)->{
+            calcSideBar((double) newv);
+        });
     }
     
-    public void updateSidebar()
+    public void updateSidebar(double w)
     {
-        sidebarController.clearSidebar();
-        sidebarController.boldLogOutButton();
+        sidebarController.clearSidebar(w);
+        sidebarController.boldLogOutButton(w);
     }
     
     private void calcFontSize(double newv){
@@ -131,6 +134,19 @@ public class MainLogOutController implements Initializable {
         LogInDefController mainTCtrl = loader.<LogInDefController>getController();
         mainTCtrl.initStage(primaryStage);
         primaryStage.getScene().setRoot(root);
+    }
+    
+    public void calcSideBar (double w) {
+        System.out.println("main: " + w);            
+        if(w < 1000){
+            sidebar.setMinWidth( w * 0.25 );
+            sidebar.setMaxWidth( w * 0.25 );
+            updateSidebar(w * 0.25);
+        }else{
+            sidebar.setMinWidth(250);
+            sidebar.setMaxWidth(250);
+            updateSidebar(250);
+        }     
     }
     
 }

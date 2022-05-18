@@ -116,8 +116,8 @@ public class TestController implements Initializable {
     
     public void updateSidebar()
     {
-        sidebarController.clearSidebar();
-        sidebarController.boldTestButton();
+        /*sidebarController.clearSidebar();
+        sidebarController.boldTestButton();*/
     }
     
     void initStage(Stage stage, User us, Problem prob, int number)

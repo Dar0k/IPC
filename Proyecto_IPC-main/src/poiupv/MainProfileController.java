@@ -102,9 +102,11 @@ public class MainProfileController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
-    private Button saveButton;
+    private Button saveButton;    
     @FXML
     private VBox aux;
+    @FXML
+    private VBox sidebar;
     @FXML
     private SidebarController sidebarController;
     
@@ -119,7 +121,6 @@ public class MainProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         sidebarController.initialize(url, rb);
-        updateSidebar();
         
         try {
             navegation = Navegacion.getSingletonNavegacion();
@@ -295,13 +296,18 @@ public class MainProfileController implements Initializable {
             calcSize((double)newv);
         });
         calcSize(primaryStage.getHeight());
+        
+        primaryStage.widthProperty().addListener((obs, oldv, newv)->{
+            calcSideBar((double) newv);
+        });
+        calcSideBar(primaryStage.getWidth());
 
     }
     
-    public void updateSidebar()
+    public void updateSidebar(double w)
     {
-        sidebarController.clearSidebar();
-        sidebarController.boldProfileButton();
+        sidebarController.clearSidebar(w);
+        sidebarController.boldProfileButton(w);
     }
 
     @FXML
@@ -414,5 +420,18 @@ public class MainProfileController implements Initializable {
             avaPrin.setRadius(50);
             aux.setSpacing(15.0);
         }
+    }
+    
+    public void calcSideBar (double w) {
+        System.out.println("main: " + w);            
+        if(w < 1000){
+            sidebar.setMinWidth( w * 0.25 );
+            sidebar.setMaxWidth( w * 0.25 );
+            updateSidebar(w * 0.25);
+        }else{
+            sidebar.setMinWidth(250);
+            sidebar.setMaxWidth(250);
+            updateSidebar(250);
+        }     
     }
 }

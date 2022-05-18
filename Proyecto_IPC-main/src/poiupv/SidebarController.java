@@ -48,6 +48,12 @@ public class SidebarController implements Initializable {
     private VBox sb;
     
     User user;
+    double minW = 105;
+    double maxW = 250;
+    double difW = maxW-minW;
+    double maxSize = 30;
+    double minSize = 15;
+    double difSize = maxSize-minSize;
 
     /**
      * Initializes the controller class.
@@ -56,37 +62,66 @@ public class SidebarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+   /* public void initStage(Stage stage, User us){
+        pri
+    }*/
     protected void setUser(User us){
         user = us;
     }
     
-    protected void clearSidebar() {
-        Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 15);
+    protected void clearSidebar(double w) {
+        double sizeAct = maxW - w;
+        double per = 1-(sizeAct/difW);
+        Font font = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, minSize + (difSize*per));
         testButton.setFont(font);
+        testButton.setMinWidth(w-(w*0.15));
+        testButton.setMaxWidth(w-(w*0.15));
         resultsButton.setFont(font);
+        resultsButton.setMinWidth(w-(w*0.15));
+        resultsButton.setMaxWidth(w-(w*0.15));
         profileButton.setFont(font);
+        profileButton.setMinWidth(w-(w*0.15));
+        profileButton.setMaxWidth(w-(w*0.15));
         logOutButton.setFont(font);
+        logOutButton.setMinWidth(w-(w*0.15));
+        logOutButton.setMaxWidth(w-(w*0.15));
+        
     }
     
-    protected void boldTestButton() {
-        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 15);
+    protected void boldTestButton(double w) {;
+        double sizeAct = maxW - w;
+        double per = 1-(sizeAct/difW);        
+        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, minSize + (difSize*per));
         testButton.setFont(font);
+        testButton.setMinWidth(w-(w*0.15));
+        testButton.setMaxWidth(w-(w*0.15));
     }
     
-    protected void boldResultsButton() {
-        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 15);
+    protected void boldResultsButton(double w) {
+        double sizeAct = maxW - w;
+        double per = 1-(sizeAct/difW);
+        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, minSize + (difSize*per));
         resultsButton.setFont(font);
+        resultsButton.setMinWidth(w-(w*0.15));
+        resultsButton.setMaxWidth(w-(w*0.15));
     }
     
-    protected void boldProfileButton() {
-        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 15);
+    protected void boldProfileButton(double w) {
+        double sizeAct = maxW - w;
+        double per = 1-(sizeAct/difW);
+        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, minSize + (difSize*per));
         profileButton.setFont(font);
+        profileButton.setMinWidth(w-(w*0.15));
+        profileButton.setMaxWidth(w-(w*0.15));
     }
     
-    protected void boldLogOutButton() {
-        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 15);
+    protected void boldLogOutButton(double w) {
+        double sizeAct = maxW - w;
+        double per = 1-(sizeAct/difW);
+        Font font = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, minSize + (difSize*per));
         logOutButton.setFont(font);
+        logOutButton.setMinWidth(w-(w*0.15));
+        logOutButton.setMaxWidth(w-(w*0.15));
     }
 
     @FXML

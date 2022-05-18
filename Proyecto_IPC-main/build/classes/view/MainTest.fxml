@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="420.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainTestController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="420.0" style="-fx-background-image: url('./resources/mountain.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainTestController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox fx:id="aux" alignment="CENTER" prefHeight="441.0" prefWidth="514.0" HBox.hgrow="ALWAYS">

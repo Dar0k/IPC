@@ -69,8 +69,6 @@ public class TestListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sidebarController.initialize(url, rb);
-        updateSidebar();
-        //SelectButton.disableProperty().bind(problemsList.getSelectionModel().selectionModeProperty().isNull());
         
     }
     
@@ -84,12 +82,16 @@ public class TestListController implements Initializable {
         user = us;
         sidebarController.setUser(user);
         loadProblems();
+        calcSideBar(primaryStage.getWidth());
+        primaryStage.widthProperty().addListener((obs, oldv, newv)->{
+            calcSideBar((double) newv);
+        });
     }
     
-    public void updateSidebar()
+    public void updateSidebar(double w)
     {        
-        sidebarController.clearSidebar();
-        sidebarController.boldTestButton();
+        sidebarController.clearSidebar(w);
+        sidebarController.boldTestButton(w);
     }
     
     public void loadProblems()
@@ -140,6 +142,19 @@ public class TestListController implements Initializable {
         mTCtrl.initStage(primaryStage, user, problemsArrayList.get(index), index+1);
         primaryStage.getScene().setRoot(root);
         primaryStage.show();
+    }
+    
+    public void calcSideBar (double w) {
+        System.out.println("main: " + w);            
+        if(w < 1000){
+            sidebar.setMinWidth( w * 0.25 );
+            sidebar.setMaxWidth( w * 0.25 );
+            updateSidebar(w * 0.25);
+        }else{
+            sidebar.setMinWidth(250);
+            sidebar.setMaxWidth(250);
+            updateSidebar(250);
+        }     
     }
 
 }
