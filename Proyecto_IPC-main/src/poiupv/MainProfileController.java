@@ -229,6 +229,12 @@ public class MainProfileController implements Initializable {
     {
         // open dialog box to confirm that wants to save
         Alert alert = new Alert(AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Save");
         alert.setHeaderText("Are you sure you want to save?");
         alert.setContentText("Your profile information will be updated but you can't undo the action. Are you sure you want to continue?");
@@ -262,6 +268,12 @@ public class MainProfileController implements Initializable {
         stage.setResizable(false);
         stage.show();*/
         Alert alert = new Alert(AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Cancelation");
         alert.setHeaderText("Are you sure you want to cancel?");
         alert.setContentText("All your modifications will be discarted. Are you sure you want to continue?");

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import model.Answer;
 import model.Problem;
 import model.User;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -28,12 +29,13 @@ public class PoiUPVApp extends Application {
         Parent root = loader.load();
                  
         Scene scene = new Scene(root);
-        
+        scene.getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
         LogInDefController logInCtrl = loader.<LogInDefController>getController();
         //MapController logInCtrl = loader.<MapController>getController();
         Problem problem = new Problem("Problem", new Answer("Answer1", false), new Answer("Answer2", false), new Answer("Answer3", false), new Answer("Answer4", true));
         
         //logInCtrl.initStage(stage,null, problem, 1);
+        stage.getIcons().add(new Image("file:src/resources/navegacion.png"));
         logInCtrl.initStage(stage);
         stage.setTitle("Log in");
         stage.setScene(scene);

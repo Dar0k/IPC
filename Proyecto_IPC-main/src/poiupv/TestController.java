@@ -33,6 +33,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -236,6 +237,12 @@ public class TestController implements Initializable {
     @FXML
     private void handleGoBackButton(ActionEvent event) throws Exception{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Go Back");
         alert.setHeaderText("Are you sure you want to exit?");
         alert.setContentText("The test will not be submitted and all progress will be lost");
@@ -255,6 +262,12 @@ public class TestController implements Initializable {
     @FXML
     private void handleSendButton(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Send");
         alert.setHeaderText("Are you sure you want to send");
         alert.setContentText("");
