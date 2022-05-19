@@ -15,11 +15,11 @@
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="546.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox alignment="CENTER" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
+            <VBox fx:id="aux" alignment="CENTER" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
                <children>
-                  <Label fx:id="titelLabel" text="SELECT PROBLEM">
+                  <Label fx:id="titleLabel" text="SELECT PROBLEM">
                      <VBox.margin>
-                        <Insets top="25.0" />
+                        <Insets />
                      </VBox.margin>
                      <font>
                         <Font name="System Bold" size="25.0" />
@@ -27,14 +27,10 @@
                   </Label>
                   <ListView fx:id="problemsList" prefHeight="103.0" prefWidth="405.0" stylesheets="@../resources/testList.css">
                      <VBox.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets left="50.0" right="25.0" />
                      </VBox.margin>
                   </ListView>
-                  <VBox alignment="CENTER" fillWidth="false" prefHeight="146.0" prefWidth="481.0">
-                     <children>
-                        <TextArea fx:id="problemDescription" styleClass="text-area" stylesheets="@textAreaStyleSheet.css" wrapText="true" />
-                     </children>
-                  </VBox>
+                  <TextArea fx:id="problemDescription" prefHeight="157.0" prefWidth="467.0" styleClass="text-area" stylesheets="@textAreaStyleSheet.css" wrapText="true" />
                   <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="419.0" spacing="25.0">
                      <children>
                         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">

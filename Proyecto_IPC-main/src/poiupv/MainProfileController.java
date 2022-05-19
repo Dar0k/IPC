@@ -313,8 +313,6 @@ public class MainProfileController implements Initializable {
         modified.setValue(Boolean.FALSE);       
         
         primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
-            System.out.println("prin: "+ newv);
-            System.out.println("aux: "+ aux.getHeight());
             calcSize((double)newv);
         });
         calcSize(primaryStage.getHeight());

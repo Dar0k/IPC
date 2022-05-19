@@ -31,6 +31,9 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 /**
  * FXML Controller class
@@ -51,17 +54,21 @@ public class TestListController implements Initializable {
     private ListView problemsList;
     @FXML
     public TextArea problemDescription;
-    
-    private ArrayList<Problem> problemsArrayList;
-    
-    User user;
-    Navegacion navegation;
-    
-    ObservableList problems;
     @FXML
     private Button cancelButton;
     @FXML
     private Button SelectButton;
+    @FXML
+    private Label titleLabel;
+    @FXML
+    private VBox aux;
+    
+    private ArrayList<Problem> problemsArrayList;    
+    User user;
+    Navegacion navegation;    
+    ObservableList problems;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -84,9 +91,17 @@ public class TestListController implements Initializable {
         sidebarController.setUser(user);
         loadProblems();
         calcSideBar(primaryStage.getWidth());
+        
         primaryStage.widthProperty().addListener((obs, oldv, newv)->{
             calcSideBar((double) newv);
         });
+        
+        primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
+            calcSize((double)newv);
+        });
+        calcSize(primaryStage.getHeight());
+        problemDescription.setPrefHeight(155);
+        problemsList.setPrefHeight(100);
     }
     
     public void updateSidebar(double w)
@@ -143,6 +158,66 @@ public class TestListController implements Initializable {
         mTCtrl.initStage(primaryStage, user, problemsArrayList.get(index), index+1);
         primaryStage.getScene().setRoot(root);
         primaryStage.show();
+    }
+    
+    public void calcSize(double newv){
+        if((double)newv < 400){
+            Font fontLa = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 25);
+            Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14);          
+            
+            //aux.setSpacing(15);
+            problemDescription.setPrefHeight(aux.getHeight()*0.25);
+            problemsList.setPrefHeight(aux.getHeight() *0.25 );/*
+            problemDescription.setMinHeight(aux.getHeight()*0.25);
+            problemDescription.setMaxHeight(aux.getHeight()*0.25);
+            problemsList.setMinHeight(aux.getHeight() * 0.25);
+            problemsList.setMaxHeight(aux.getHeight() * 0.25);*/
+            problemDescription.setFont(fontTe);
+            titleLabel.setFont(fontLa);
+            cancelButton.setFont(fontBu);
+            SelectButton.setFont(fontBu);
+        }  else if((double)newv >= 400 && (double)newv <530){
+            double act = 530-(double)newv;
+            int stageDif = 530-375;
+            double per = 1 - (act/stageDif);
+            int fontLaDif = 30 - 25;
+            int buDif = 18-14; 
+            int textDif = 16-12;
+            double desDif = (0.25 + ((0.45-0.25)*per));
+            double lisDif = (0.25 + ((0.3-0.25)*per));
+            
+            Font fontLa = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 25 + (fontLaDif*per));
+            Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (textDif*per));
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14 + (buDif*per));          
+            
+            problemDescription.setPrefHeight(aux.getHeight()*desDif);
+            problemsList.setPrefHeight(aux.getHeight() * lisDif);
+            /*problemDescription.setMinHeight(aux.getHeight()*desDif);
+            problemDescription.setMaxHeight(aux.getHeight()*desDif);
+            problemsList.setMinHeight(aux.getHeight() *lisDif );
+            problemsList.setMaxHeight(aux.getHeight() *lisDif);*/
+            problemDescription.setFont(fontTe);
+            titleLabel.setFont(fontLa);
+            cancelButton.setFont(fontBu);
+            SelectButton.setFont(fontBu);
+        }else{
+            Font fontLa = Font.font("System", FontWeight.BOLD, FontPosture.REGULAR, 30);
+            Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 18);
+            
+            //aux.setSpacing(25);
+            problemDescription.setPrefHeight(aux.getHeight()*.45);
+            problemsList.setPrefHeight(aux.getHeight() *.45 );/*
+            problemDescription.setMinHeight(aux.getHeight()*0.45);
+            problemDescription.setMaxHeight(aux.getHeight()*0.45);
+            problemsList.setMinHeight(aux.getHeight() * 0.3);
+            problemsList.setMaxHeight(aux.getHeight() * 0.3);*/
+            problemDescription.setFont(fontTe);
+            titleLabel.setFont(fontLa);
+            cancelButton.setFont(fontBu);
+            SelectButton.setFont(fontBu);
+        }
     }
     
     public void calcSideBar (double w) {
