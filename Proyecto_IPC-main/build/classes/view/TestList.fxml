@@ -15,9 +15,9 @@
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="546.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox alignment="CENTER" maxHeight="531.0" maxWidth="596.0" prefHeight="531.0" prefWidth="596.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
+            <VBox alignment="CENTER" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
                <children>
-                  <Label text="SELECT PROBLEM">
+                  <Label fx:id="titelLabel" text="SELECT PROBLEM">
                      <VBox.margin>
                         <Insets top="25.0" />
                      </VBox.margin>
@@ -25,7 +25,7 @@
                         <Font name="System Bold" size="25.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="problemsList" prefHeight="103.0" prefWidth="227.0" stylesheets="@../resources/testList.css">
+                  <ListView fx:id="problemsList" prefHeight="103.0" prefWidth="405.0" stylesheets="@../resources/testList.css">
                      <VBox.margin>
                         <Insets left="50.0" right="50.0" />
                      </VBox.margin>
@@ -35,9 +35,9 @@
                         <TextArea fx:id="problemDescription" styleClass="text-area" stylesheets="@textAreaStyleSheet.css" wrapText="true" />
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="419.0" spacing="25.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="419.0" spacing="25.0">
                      <children>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -45,7 +45,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="SelectButton" disable="true" mnemonicParsing="false" onAction="#handleSelectButton" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
+                        <Button fx:id="SelectButton" mnemonicParsing="false" onAction="#handleSelectButton" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -54,9 +54,6 @@
                            </cursor>
                         </Button>
                      </children>
-                     <padding>
-                        <Insets bottom="22.0" />
-                     </padding>
                   </HBox>
                </children>
                <HBox.margin>
