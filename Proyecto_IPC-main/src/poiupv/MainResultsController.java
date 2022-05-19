@@ -27,9 +27,13 @@ import javafx.scene.control.DatePicker;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 /**
  * FXML Controller class
@@ -44,12 +48,6 @@ public class MainResultsController implements Initializable {
     
     
     
-    @FXML
-    private Button continueButton;
-    @FXML
-    private Button randomButton;
-    @FXML
-    private Button listButton;
     @FXML
     private VBox sidebar;
     @FXML
@@ -68,6 +66,10 @@ public class MainResultsController implements Initializable {
     User user;
     Session session;
     Navegacion navegation;
+    @FXML
+    private Label birthLabel;
+    @FXML
+    private Label ageError;
     
     /**
      * Initializes the controller class.
@@ -102,6 +104,12 @@ public class MainResultsController implements Initializable {
             timestamp.setMaxWidth((double)newv*0.6);           
         });
         
+        primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
+            System.out.println("prin: "+ newv);;
+            calcSize((double)newv);
+        });
+        calcSize(primaryStage.getHeight());
+        
         calcSideBar(primaryStage.getWidth());
         primaryStage.widthProperty().addListener((obs, oldv, newv)->{
             calcSideBar((double) newv);
@@ -121,6 +129,7 @@ public class MainResultsController implements Initializable {
         timestamp.setCellValueFactory(new PropertyValueFactory<>("timeStamp"));
     }
     
+    @FXML
     public void loadResults()
     {
         tableResults.getItems().clear();
@@ -145,4 +154,30 @@ public class MainResultsController implements Initializable {
         }     
     }
     
+    private void calcSize (double newv){    
+        if((double)newv < 400){
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            birthLabel.setFont(fontLa);
+            datePicker.setStyle("-fx-font-size: "+(12));
+            ageError.setFont(fontEr);
+        }  else if((double)newv >= 400 && (double)newv <530){
+            double act = 530-(double)newv;
+            int stageDif = 530-375;
+            double per = 1 - (act/stageDif);
+            int fontLaDif = 16 - 12;
+            int fontErDif = 14 - 12;
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontLaDif*per));
+            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontErDif*per));
+            birthLabel.setFont(fontLa);
+            datePicker.setStyle("-fx-font-size: "+(12.0 + (fontLaDif*per)));
+            ageError.setFont(fontEr);
+        }else{
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14);            
+            birthLabel.setFont(fontLa);
+            datePicker.setStyle("-fx-font-size: "+ 16);
+            ageError.setFont(fontEr);      
+        }
+    }
 }

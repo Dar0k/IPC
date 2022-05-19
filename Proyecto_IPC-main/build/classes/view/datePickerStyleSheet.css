@@ -7,10 +7,14 @@ and open the template in the editor.
     Created on : May 12, 2022, 7:49:30 AM
     Author     : robyandy
 */
+
 .date-picker .text-field {
-        -fx-background-color: transparent
+        -fx-background-color: transparent;               
 }
 
+.date-picker {
+        -fx-background-color: transparent;
+}
 
 .date-picker .arrow-button {
 	-fx-background-color: black;
@@ -31,8 +35,7 @@ and open the template in the editor.
         -fx-text-fill: black;
 }
 .date-picker .cell:focused {
-	-fx-background-color: rgba(221, 221, 221, 1);
-        
+	-fx-background-color: rgba(221, 221, 221, 1);        
 }
 
 .date-picker .selected:focused {

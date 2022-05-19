@@ -7,8 +7,15 @@ and open the template in the editor.
     Created on : May 18, 2022, 11:14:27 AM
     Author     : robyandy
 */
-.button {
+.text-area{
+    -fx-background-color:transparent;
     
-    -fx-font-size: 3em;
+}
+.text-area .content {
+    -fx-background-color:  transparent;
+    -fx-border-color: transparent;
 }
 
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}

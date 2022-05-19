@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import javafx.beans.binding.Bindings;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -49,7 +50,7 @@ public class TestListController implements Initializable {
     @FXML
     private ListView problemsList;
     @FXML
-    public Label problemDescription;
+    public TextArea problemDescription;
     
     private ArrayList<Problem> problemsArrayList;
     

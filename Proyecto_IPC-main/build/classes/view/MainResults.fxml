@@ -16,25 +16,42 @@
             <Insets />
          </HBox.margin>
          <children>
-            <VBox alignment="CENTER" fillWidth="false" maxHeight="531.0" maxWidth="596.0" minHeight="306.0" minWidth="189.0" prefHeight="461.0" prefWidth="470.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
+            <VBox alignment="CENTER" fillWidth="false" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
                <children>
-                  <VBox alignment="CENTER" prefHeight="26.0" prefWidth="510.0" spacing="10.0">
+                  <VBox alignment="CENTER" fillWidth="false" prefHeight="26.0" prefWidth="510.0" spacing="10.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="73.0" text="Starting date:" textAlignment="CENTER" />
-                        <DatePicker fx:id="datePicker" onAction="#loadResults" prefHeight="23.0" prefWidth="174.0" promptText="Select Date" style="-fx-background-color: transparent; -fx-border-width: 0 0 1.25 0; -fx-border-color: black;" stylesheets="@datePickerStyleSheet.css" />
+                        <VBox prefHeight="65.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="birthLabel" text="Starting date:">
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="5.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                                 <children>
+                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@datePickerStyleSheet.css" />
+                                 </children>
+                              </HBox>
+                              <Label fx:id="ageError" alignment="TOP_LEFT" minHeight="21.0" prefHeight="21.0" prefWidth="174.0" style="-fx-text-fill: red;" text="Must be at least 12 years old" textFill="RED" visible="false" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </VBox>
-                  <TableView fx:id="tableResults" maxWidth="497.0" prefHeight="263.0" prefWidth="497.0" stylesheets="@../resources/tableView.css">
+                  <TableView fx:id="tableResults" prefHeight="1000.0" prefWidth="1000.0" stylesheets="@../resources/tableView.css">
                     <columns>
                       <TableColumn fx:id="hits" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER" text="Hits" />
                       <TableColumn fx:id="faults" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER" text="Faults" />
                         <TableColumn fx:id="timestamp" editable="false" maxWidth="215.0" minWidth="215.0" prefWidth="215.0" style="-fx-alignment: CENTER" text="Timestamp" />
                     </columns>
                      <VBox.margin>
-                        <Insets bottom="30.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -28,6 +28,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -35,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
@@ -42,6 +44,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -109,10 +114,26 @@ public class MainProfileController implements Initializable {
     private VBox sidebar;
     @FXML
     private SidebarController sidebarController;
+    @FXML
+    private Label birthLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label passwordLabel;
+    @FXML
+    private Label rePasswordLabel;
+    @FXML
+    private VBox fieldVb;
+    @FXML
+    private HBox avaHbox;
     
 
     Navegacion navegation;
     User user; 
+    
+    
+    
+    
     
     /**
      * Initializes the controller class.
@@ -120,7 +141,7 @@ public class MainProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        sidebarController.initialize(url, rb);
+        sidebarController.initialize(url, rb);     
         
         try {
             navegation = Navegacion.getSingletonNavegacion();
@@ -249,18 +270,6 @@ public class MainProfileController implements Initializable {
     
     private void cancelCheck() throws Exception
     {
-        //open dialog box to that wont saev anything
-        /*FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/CancelDialogBox.fxml"));
-        Pane root = (Pane) myLoader.load();
-        CancelDialogBoxController cancelDiaBox = myLoader.<CancelDialogBoxController>getController();
-        cancelDiaBox.initData(0);
-        Scene scene = new Scene (root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Cancel");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        stage.show();*/
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Cancelation");
         alert.setHeaderText("Are you sure you want to cancel?");
@@ -289,19 +298,21 @@ public class MainProfileController implements Initializable {
         reenterPasswordField.setText(us.getPassword());
         emailField.setText(us.getEmail());
         agePicker.setValue(us.getBirthdate());
-        modified.setValue(Boolean.FALSE);
-       
+        modified.setValue(Boolean.FALSE);       
         
         primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
+            System.out.println("prin: "+ newv);
+            System.out.println("aux: "+ aux.getHeight());
             calcSize((double)newv);
         });
         calcSize(primaryStage.getHeight());
         
         primaryStage.widthProperty().addListener((obs, oldv, newv)->{
+            System.out.println("prin: "+ newv);
+            System.out.println("aux: "+ aux.getWidth());
             calcSideBar((double) newv);
         });
         calcSideBar(primaryStage.getWidth());
-
     }
     
     public void updateSidebar(double w)
@@ -408,22 +419,110 @@ public class MainProfileController implements Initializable {
         }
     }    
     
-    private void calcSize (double newv){
-        if((double)newv >= 375 && (double)newv <460){double act = 460-(double)newv;
-            int stageDif = 460-375;
+    private void calcSize (double newv){    
+        if((double)newv < 400){
+            Font fontUs = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 30);
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14);
+            Font fontBuIm = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            
+            passwordLabel.setFont(fontLa);
+            rePasswordLabel.setFont(fontLa);
+            birthLabel.setFont(fontLa);
+            emailLabel.setFont(fontLa);
+            passwordField.setFont(fontLa);
+            passwordTextField.setFont(fontLa);
+            reenterPasswordField.setFont(fontLa);
+            reenterPasswordTextField.setFont(fontLa);
+            emailField.setFont(fontLa);
+            agePicker.setStyle("-fx-font-size: "+(12));
+            passwordError.setFont(fontEr);
+            reenterPasswordError.setFont(fontEr);
+            emailError.setFont(fontEr);
+            ageError.setFont(fontEr);
+            username.setFont(fontUs);
+            avaPrin.setRadius(30);
+            aux.setSpacing(5.0);            
+            cancelButton.setFont(fontBu);
+            saveButton.setFont(fontBu);
+            chooseImageButton.setFont(fontBu);
+            avaHbox.setSpacing(0);
+        }  else if((double)newv >= 400 && (double)newv <530){
+            double act = 530-(double)newv;
+            int stageDif = 530-375;
             double per = 1 - (act/stageDif);
-            int radDif = 50-30;
-            int spaceDif = 10-5;
-            avaPrin.setRadius(30+(radDif * per));
-            aux.setSpacing(10.0+ (spaceDif * per));
+            int radDif = 60-30;
+            int spaceDif = 12-5;
+            int fontUsDif = 50 - 30;
+            int fontLaDif = 16 - 12;
+            int fontErDif = 14 - 12;
+            int spaceLaDif = 10 - 0;
+            int buDif = 18-14;
+            int buImDif = 16-12;
+            int spaceAvDif = 15-0;   
+            
+            Font fontUs = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 30 + (fontUsDif*per));
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontLaDif*per));
+            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontErDif*per));
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14 + (buDif*per));
+            Font fontBuIm = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (buImDif*per));          
+            
+            fieldVb.setSpacing(0 + (spaceLaDif*per));
+            passwordLabel.setFont(fontLa);
+            rePasswordLabel.setFont(fontLa);
+            birthLabel.setFont(fontLa);
+            emailLabel.setFont(fontLa);
+            passwordField.setFont(fontLa);
+            passwordTextField.setFont(fontLa);
+            reenterPasswordField.setFont(fontLa);
+            reenterPasswordTextField.setFont(fontLa);
+            emailField.setFont(fontLa);
+            agePicker.setStyle("-fx-font-size: "+(12.0 + (fontLaDif*per)));
+            passwordError.setFont(fontEr);
+            reenterPasswordError.setFont(fontEr);
+            emailError.setFont(fontEr);
+            ageError.setFont(fontEr);          
+            username.setFont(fontUs);
+            avaPrin.setRadius(30 + (radDif * per));
+            aux.setSpacing(5 + (spaceDif * per));
+            cancelButton.setFont(fontBu);
+            saveButton.setFont(fontBu);
+            chooseImageButton.setFont(fontBuIm);
+            avaHbox.setSpacing(5 + (spaceAvDif*per));
         }else{
-            avaPrin.setRadius(50);
-            aux.setSpacing(15.0);
+            Font fontUs = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 50);
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 18);
+            Font fontBuIm = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+            
+            fieldVb.setSpacing(10);
+            passwordLabel.setFont(fontLa);
+            rePasswordLabel.setFont(fontLa);
+            birthLabel.setFont(fontLa);
+            emailLabel.setFont(fontLa);
+            passwordField.setFont(fontLa);
+            passwordTextField.setFont(fontLa);
+            reenterPasswordField.setFont(fontLa);
+            reenterPasswordTextField.setFont(fontLa);
+            emailField.setFont(fontLa);
+            agePicker.setStyle("-fx-font-size: "+ 16);
+            passwordError.setFont(fontEr);
+            reenterPasswordError.setFont(fontEr);
+            emailError.setFont(fontEr);
+            ageError.setFont(fontEr);            
+            username.setFont(fontUs);
+            avaPrin.setRadius(60);
+            aux.setSpacing(12);
+            cancelButton.setFont(fontBu);
+            saveButton.setFont(fontBu);
+            chooseImageButton.setFont(fontBuIm);
+            avaHbox.setSpacing(15);
         }
     }
     
-    public void calcSideBar (double w) {
-        System.out.println("main: " + w);            
+    public void calcSideBar (double w) {           
         if(w < 1000){
             sidebar.setMinWidth( w * 0.25 );
             sidebar.setMaxWidth( w * 0.25 );
@@ -433,5 +532,5 @@ public class MainProfileController implements Initializable {
             sidebar.setMaxWidth(250);
             updateSidebar(250);
         }     
-    }
+    }   
 }
