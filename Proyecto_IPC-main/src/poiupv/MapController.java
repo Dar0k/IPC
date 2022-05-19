@@ -537,6 +537,12 @@ public class MapController implements Initializable {
     @FXML
     private void handleGoBackButton(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Go back");
         alert.setHeaderText("Are you sure you want to leave the test?");
         alert.setContentText("All your progress will be lost and you will not be able com back. Are you sure you want to continue?");
@@ -559,7 +565,13 @@ public class MapController implements Initializable {
         System.out.println(rad.selectedToggleProperty().isNull().get());
         if (rad.selectedToggleProperty().isNull().get()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
             alert.setTitle("Send");
+            alert.getDialogPane().getStyleClass().add("customAlert");
             alert.setHeaderText("Are you sure you want to send your answere?");
             alert.setContentText("You have not selected an answere and you will not be able com back. Are you sure you want to continue?");
             Optional<ButtonType> result = alert.showAndWait();
@@ -579,6 +591,12 @@ public class MapController implements Initializable {
             }   
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alert.getDialogPane().getStyleClass().add("customAlert");
             alert.setTitle("Send");
             alert.setHeaderText("Are you sure you want to send you answere?");
             alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
