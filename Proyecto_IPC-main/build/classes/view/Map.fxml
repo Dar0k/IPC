@@ -22,7 +22,7 @@
 
 <BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
-      <ToolBar prefHeight="21.0" prefWidth="618.0" style="-fx-background-color: rgba(255, 193, 150, 0.9);" BorderPane.alignment="CENTER">
+      <ToolBar prefHeight="21.0" prefWidth="618.0" style="-fx-background-color: #f5ceb3; -fx-border-color: black; -fx-border-width: 0 0 2 0;" BorderPane.alignment="CENTER">
         <items>
             <ToggleButton fx:id="dot" mnemonicParsing="false" onAction="#handleDot" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;">
                <toggleGroup>
@@ -104,7 +104,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <Region fx:id="reg1" prefHeight="49.0" prefWidth="44.0" />
+            <Region fx:id="reg1" prefHeight="52.0" prefWidth="21.0" />
             <Button fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">

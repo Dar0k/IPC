@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="aux" prefHeight="438.0" prefWidth="591.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
+<HBox fx:id="aux" onKeyPressed="#handleKeyPressed" prefHeight="438.0" prefWidth="591.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
    <children>
       <VBox alignment="CENTER" maxWidth="350.0" prefHeight="371.0" prefWidth="235.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,.75);">
          <children>
@@ -63,15 +63,15 @@
                   </Label>
                </children>
             </VBox>
-            <Label fx:id="signUpLink" onMouseClicked="#handleSignUpClick" text="Sign Up" textFill="#2b00ff">
+            <Label fx:id="signUpLink" onMouseClicked="#handleSignUpClick" stylesheets="@buttonStyleSheet.css" text="Sign Up" textFill="#2b00ff">
                <font>
-                  <Font size="15.0" />
+                  <Font size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#handleEnterPressed" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="ENTER" textFill="WHITE">
+            <Button id="button1" fx:id="enterButton" mnemonicParsing="false" onAction="#handleEnterPressed" prefHeight="31.0" prefWidth="98.0" stylesheets="@buttonStyleSheet.css" text="ENTER" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
