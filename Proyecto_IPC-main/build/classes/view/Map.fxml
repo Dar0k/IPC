@@ -22,13 +22,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="427.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
 
       <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
 
         <items>
-            <ToggleButton id="button1" fx:id="dot" mnemonicParsing="false" onAction="#handleDot" prefHeight="52.0" prefWidth="65.0">
+            <ToggleButton id="button1" fx:id="dot" mnemonicParsing="false" onAction="#handleDot" prefHeight="53.0" prefWidth="65.0">
                <toggleGroup>
                   <ToggleGroup fx:id="group1" />
                </toggleGroup>
@@ -40,7 +40,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="button1" fx:id="line" mnemonicParsing="false" onAction="#handleLine" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="line" mnemonicParsing="false" onAction="#handleLine" prefHeight="53.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
                      <image>
@@ -49,7 +49,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="button1" fx:id="arc" mnemonicParsing="false" onAction="#handleArc" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="arc" mnemonicParsing="false" onAction="#handleArc" prefHeight="53.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="62.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +58,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="button1" fx:id="text" mnemonicParsing="false" onAction="#handleText" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="text" mnemonicParsing="false" onAction="#handleText" prefHeight="53.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="91.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,7 +67,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="button1" fx:id="eraser" mnemonicParsing="false" onAction="#handleEraser" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="eraser" mnemonicParsing="false" onAction="#handleEraser" prefHeight="53.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -76,7 +76,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="button1" mnemonicParsing="false" onAction="#handleCoordenadas" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="coordinates" mnemonicParsing="false" onAction="#handleCoordenadas" prefHeight="53.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -85,7 +85,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="button1" mnemonicParsing="false" onAction="#handleCambiarColor" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="bucket" mnemonicParsing="false" onAction="#handleCambiarColor" prefHeight="53.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -94,7 +94,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ColorPicker fx:id="colorPicker" onAction="#handleColorPick" prefHeight="25.0" prefWidth="50.0" stylesheets="@colorPickerStyleSheet.css" />
+            <ColorPicker fx:id="colorPicker" onAction="#handleColorPick" prefHeight="30.0" prefWidth="50.0" />
             <VBox alignment="TOP_CENTER" prefHeight="52.0" prefWidth="94.0">
                <children>
                   <Label text="Size">
@@ -108,8 +108,8 @@
                   <Insets top="1.0" />
                </padding>
             </VBox>
-            <Region fx:id="reg11" mouseTransparent="true" prefHeight="49.0" prefWidth="44.0" visible="false" />
-            <ToggleButton id="button1" mnemonicParsing="false" onAction="#handleTransportador" prefHeight="52.0" prefWidth="65.0">
+            <Region fx:id="reg11" mouseTransparent="true" prefHeight="52.0" prefWidth="65.0" visible="false" />
+            <ToggleButton id="button1" fx:id="protractor" mnemonicParsing="false" onAction="#handleTransportador" prefHeight="53.0" prefWidth="65.0">
                <toggleGroup>
                   <ToggleGroup fx:id="group1111" />
                </toggleGroup>
@@ -122,8 +122,8 @@
                </graphic>
             </ToggleButton>
 
-            <Region fx:id="reg1" mouseTransparent="true" prefHeight="49.0" prefWidth="44.0" visible="false" />
-            <Button id="button2" fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" prefHeight="52.0" prefWidth="65.0">
+            <Region fx:id="reg1" mouseTransparent="true" prefHeight="53.0" prefWidth="65.0" visible="false" />
+            <Button id="button1" fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" prefHeight="53.0" prefWidth="65.0">
 
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -137,11 +137,11 @@
       </ToolBar>
    </top>
    <center>
-      <SplitPane fx:id="splitPane" dividerPositions="0.95" BorderPane.alignment="CENTER">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.7924016282225237" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
          <items>
             <StackPane prefHeight="332.0" prefWidth="564.0">
                <children>
-                  <ScrollPane id="scrollbar" fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="350.0" prefWidth="581.0" stylesheets="@../resources/buttonToolbar.css" vbarPolicy="ALWAYS">
+                  <ScrollPane id="scrollbar" fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="350.0" prefWidth="581.0" vbarPolicy="ALWAYS">
                      <content>
                         <AnchorPane fx:id="anchorPane">
                            <children>
@@ -214,12 +214,12 @@
                   </VBox>
                </children>
             </StackPane>
-            <VBox fx:id="vboxQuest" minWidth="150.0" prefHeight="458.0" prefWidth="100.0" spacing="10.0">
+            <VBox id="quest" fx:id="vboxQuest" minWidth="150.0" spacing="10.0" stylesheets="@../resources/buttonToolbar.css">
                <children>
                   <Label fx:id="questionNumber" text="Label" />
-                  <TextArea fx:id="questionLabel" editable="false" prefHeight="135.0" prefWidth="135.0" stylesheets="@textAreaStyleSheet.css" text="Texto de ejemplo uhfduihsafuhdsufhiudsahfiuf" wrapText="true">
+                  <TextArea fx:id="questionLabel" editable="false" prefHeight="271.0" prefWidth="55.0" stylesheets="@textAreaStyleSheet.css" text="Texto de ejemplo uhfduihsafuhdsufhiudsahfiuf" wrapText="true">
                      <VBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </VBox.margin>
                      <font>
                         <Font size="16.0" />
@@ -243,18 +243,21 @@
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
                         <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#handleGoBackButton" prefWidth="60.0" text="Go Back" />
-                        <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleSendButton" prefWidth="60.0" text="Send" />
+                        <Button fx:id="sendButton" disable="true" mnemonicParsing="false" onAction="#handleSendButton" prefWidth="60.0" text="Send" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="20.0" right="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                </children>
                <padding>
-                  <Insets left="10.0" top="5.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
          </items>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
       </SplitPane>
    </center>
 </BorderPane>

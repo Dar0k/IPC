@@ -16,64 +16,64 @@ and open the template in the editor.
     -fx-border-radius:5;    
 }
 #button1:hover{
-    -fx-background-color:rgba(0,0,0,0.05);
+    -fx-background-color:#5a9dab;
+    -fx-background-radius: 5;
 }
 #button1:selected{
-    -fx-background-color:rgba(0,0,0,0.1);
-}
-#button2
-{
-    -fx-background-color:transparent;
-    -fx-border-color:black;
-    -fx-border-width:2;
-    -fx-border-radius:5;    
+    -fx-background-color: #387a87;
+    -fx-background-radius: 5;
 }
 #button3{
-    -fx-background-color:#ffefd5;
+    -fx-background-color:#7bc0ce;
+    -fx-background-radius: 5;
     -fx-border-color:black;
     -fx-border-width:2;
     -fx-border-radius:5;
 }
 #button3:hover{
-    -fx-background-color:rgb(234, 220, 197);
+    -fx-background-color:#5a9dab;
+    -fx-background-radius: 5;
 }
 #button3:pressed{
-    -fx-background-color:rgb(221, 207, 185);
+    -fx-background-color:#387a87;
+    -fx-background-radius: 5;
 }
 #buttonPlus {
-    -fx-background-color:  #ffefd5;
+    -fx-background-color:  #7bc0ce;
+    -fx-background-radius: 5;
     -fx-border-color:black;
     -fx-border-width:2 2 1 2;
     -fx-border-radius: 5 5 0 0;
 }
 #buttonMinus{
-    -fx-background-color:  #ffefd5;
+    -fx-background-color:  #7bc0ce;
+    -fx-background-radius: 5;
     -fx-border-color:black;
     -fx-border-width:1 2 2 2;
     -fx-border-radius: 0 0 5 5;
 }
 #buttonPlus:hover,
 #buttonMinus:hover{
-    -fx-background-color:rgb(234, 220, 197);
+    -fx-background-color:#5a9dab;
+    -fx-background-radius: 5;
 }
 #buttonPlus:pressed,
 #buttonMinus:pressed{
-    -fx-background-color:rgb(221, 207, 185);
+    -fx-background-color:#387a87;
+    -fx-background-radius: 5;
 }
 #toolbar
 {
-    -fx-background-color:  #ffefd5;
+    -fx-background-color:  #7bc0ce;
     -fx-border-color: black;
-    -fx-border-width: 0 0 1 0;
+    -fx-border-width: 0 0 2 0;
 }
 #toolbar .context-menu
  {
-     -fx-background-color: #ffefd5;
+     -fx-background-color:  #7bc0ce;
  }
  
- .scroll-pane{
-     -fx-background-color:  #ffefd5;
- }
+ 
  .scroll-pane .corner{
      -fx-background-color: black;
      -fx-border-color:  black;
@@ -81,50 +81,78 @@ and open the template in the editor.
  .scroll-bar:horizontal,
  .scroll-bar:vertical{
      -fx-border-color:  black;
- }
- 
- .scroll-bar:horizontal .track,
- .scroll-bar:vertical .track{
-     -fx-background-color:  #ffefd5;
+     -fx-background-color:  #7bc0ce;
  }
  
  .scroll-bar:horizontal .thumb,
  .scroll-bar:vertical .thumb{
-      -fx-background-color:  #ffd38d;
+      -fx-background-color:  #5a9dab;
  }
  
  .scroll-bar:horizontal .thumb:hover,
  .scroll-bar:vertical .thumb:hover {
-     -fx-background-color:  #ffc568;
+     -fx-background-color:  #387a87;
  }
  .scroll-bar:horizontal .thumb:pressed,
  .scroll-bar:vertical .thumb:pressed{
-      -fx-background-color:  #ffba4a;
+      -fx-background-color:  #16525e;
  }
  
 .scroll-bar:vertical .increment-button,
 .scroll-bar:vertical .decrement-button,
 .scroll-bar:horizontal .increment-button,
 .scroll-bar:horizontal .decrement-button{
-    -fx-background-color:  #ffefd5;
-    -fx-border-color: #ffefd5
+    -fx-background-color:#7bc0ce;
+    
 }
 .scroll-bar:vertical *.increment-button:hover, 
 .scroll-bar:vertical *.decrement-button:hover,
 .scroll-bar:horizontal *.increment-button:hover, 
 .scroll-bar:horizontal *.decrement-button:hover{
-    -fx-background-color:  #ffc568;
+    -fx-background-color:  #387a87;
+    
 }
 .scroll-bar:vertical *.increment-button:pressed, 
 .scroll-bar:vertical *.decrement-button:pressed,
 .scroll-bar:horizontal *.increment-button:pressed, 
 .scroll-bar:horizontal *.decrement-button:pressed{
-    -fx-background-color:  #ffba4a;
+    -fx-background-color:  #16525e;    
 }
 
 .scroll-bar:vertical *.increment-arrow, 
 .scroll-bar:vertical *.decrement-arrow,
 .scroll-bar:horizontal *.increment-arrow, 
 .scroll-bar:horizontal *.decrement-arrow{
-    -fx-background-color:  black;
+    -fx-background-color:  black;    
 }
+
+#quest {
+    -fx-background-color: #b6c6c3
+}
+
+#splitPane > .split-pane-divider {
+    -fx-background-color:#09353e;
+    -fx-background-radius: 50
+}
+.slider .thumb {
+    -fx-background-color:black;
+}
+.slider .track {
+    -fx-background-color:grey;
+}
+
+.color-picker { 
+        -fx-color-label-visible: false;
+        -fx-background-color: transparent;
+        -fx-border-color:black;
+        -fx-border-width:2;
+        -fx-border-radius:5;  
+}
+.color-picker .picker-color-rect { 
+        -fx-stroke: black; 
+        -fx-stroke-width: 2; 
+        -fx-font-size: 50;
+} 
+.color-palette .hyperlink {  
+        visibility: hidden; 
+} 

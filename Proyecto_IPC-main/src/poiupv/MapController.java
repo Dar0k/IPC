@@ -38,6 +38,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -56,6 +57,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 import model.Answer;
 import model.Problem;
 import model.User;
@@ -154,6 +156,12 @@ public class MapController implements Initializable {
     private int selection;
     private int [] selectionArr;
     private boolean controlKeyDown;
+    @FXML
+    private ToggleButton coordinates;
+    @FXML
+    private ToggleButton bucket;
+    @FXML
+    private ToggleButton protractor;
 
     /**
      * Initializes the controller class.
@@ -215,9 +223,10 @@ public class MapController implements Initializable {
         
         
         rad.selectedToggleProperty().addListener((obs, oldv, newv) -> {
-            sendButton.setDisable(false);
-            
+            sendButton.setDisable(false);            
         });
+        
+        toolTip();
     }
     
     void zoomIn(ActionEvent event) {
@@ -569,77 +578,77 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleSendButton(ActionEvent event) throws IOException {
-        System.out.println(rad.selectedToggleProperty().isNull().get());
-        if (rad.selectedToggleProperty().isNull().get()){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
-            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
-            alert.setTitle("Send");
-            alert.getDialogPane().getStyleClass().add("customAlert");
-            alert.setHeaderText("Are you sure you want to send your answer?");
-            alert.setContentText("You have not selected an answer and you will not be able to come back. Are you sure you want to continue?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK){
-                System.out.println("OK");
-                ////////////////////////////////////////////////
-                //////   guardar en la base de datos     ///////
-                ////////////////////////////////////////////////
-                
-                
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
-                Parent root = (Parent) loader.load();
-                MainResultsController mRCtrl = loader.<MainResultsController>getController();
-                mRCtrl.initStage(primaryStage, user);
-                primaryStage.getScene().setRoot(root);
-                primaryStage.show();
-            }else {
-                System.out.println("CANCEL");
-            }   
-        } else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
-            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
-            alert.getDialogPane().getStyleClass().add("customAlert");
-            alert.setTitle("Send");
-            alert.setHeaderText("Are you sure you want to send you answere?");
-            alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK){
-                System.out.println("OK");
-                ////////////////////////////////////////////////
-                //////   guardar en la base de datos     ///////
-                ////////////////////////////////////////////////
-                if(radioButtonA.isSelected()) selection = 0;
-                else if(radioButtonB.isSelected()) selection = 1;
-                else if(radioButtonC.isSelected()) selection = 2;
-                else if(radioButtonD.isSelected()) selection = 3;
-                boolean correct = problem.getAnswers().get(selectionArr[selection]).getValidity();
-                
-                if(correct) MainLogOutController.hits++;
-                    else { MainLogOutController.faults++;}
-               
-                
-                //user.addSession();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
-                Parent root = (Parent) loader.load();
-                MainResultsController mRCtrl = loader.<MainResultsController>getController();
-                mRCtrl.initStage(primaryStage, user);
-                primaryStage.getScene().setRoot(root);
-                primaryStage.show();
-            }else {
-                System.out.println("CANCEL");
-            }   
-        }
-        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("customAlert");
+        alert.setTitle("Send");
+        alert.setHeaderText("Are you sure you want to send you answere?");
+        alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("OK");
+            ////////////////////////////////////////////////
+            //////   guardar en la base de datos     ///////
+            ////////////////////////////////////////////////
+            if(radioButtonA.isSelected()) selection = 0;
+            else if(radioButtonB.isSelected()) selection = 1;
+            else if(radioButtonC.isSelected()) selection = 2;
+            else if(radioButtonD.isSelected()) selection = 3;
+            boolean correct = problem.getAnswers().get(selectionArr[selection]).getValidity();
+
+            if(correct) MainLogOutController.hits++;
+                else { MainLogOutController.faults++;}
+
+
+            //user.addSession();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
+            Parent root = (Parent) loader.load();
+            MainResultsController mRCtrl = loader.<MainResultsController>getController();
+            mRCtrl.initStage(primaryStage, user);
+            primaryStage.getScene().setRoot(root);
+            primaryStage.show();
+        }else {
+            System.out.println("CANCEL");
+        }           
     }
    
-    
+    private void toolTip(){
+        Tooltip dotTip = new Tooltip("dot");
+        dotTip.setShowDelay(Duration.millis(500));
+        Tooltip lineTip = new Tooltip("line");
+        lineTip.setShowDelay(Duration.millis(500));
+        Tooltip arcTip = new Tooltip("arc");
+        arcTip.setShowDelay(Duration.millis(500));
+        Tooltip textTip = new Tooltip("text");
+        textTip.setShowDelay(Duration.millis(500));
+        Tooltip eraserTip = new Tooltip("eraser");
+        eraserTip.setShowDelay(Duration.millis(500));
+        Tooltip coordTip = new Tooltip("coordinates");
+        coordTip.setShowDelay(Duration.millis(500));
+        Tooltip bucketTip = new Tooltip("fill color");
+        bucketTip.setShowDelay(Duration.millis(500));
+        Tooltip colorTip = new Tooltip("color picker");
+        colorTip.setShowDelay(Duration.millis(500));
+        Tooltip protractorTip = new Tooltip("protractor");
+        protractorTip.setShowDelay(Duration.millis(500));
+        Tooltip trashTip = new Tooltip("clear everything");
+        trashTip.setShowDelay(Duration.millis(500));
+        
+        dot.setTooltip(dotTip);
+        line.setTooltip(lineTip);
+        arc.setTooltip(arcTip);
+        text.setTooltip(textTip);
+        eraser.setTooltip(eraserTip);
+        coordinates.setTooltip(coordTip);
+        bucket.setTooltip(bucketTip);
+        colorPicker.setTooltip(colorTip);
+        protractor.setTooltip(protractorTip);
+        trash.setTooltip(trashTip);
+    }
 
     
     
