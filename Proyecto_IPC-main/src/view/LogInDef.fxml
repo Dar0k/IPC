@@ -63,15 +63,15 @@
                   </Label>
                </children>
             </VBox>
-            <Label fx:id="signUpLink" onMouseClicked="#handleSignUpClick" text="Sign Up" textFill="#2b00ff">
+            <Label fx:id="signUpLink" onMouseClicked="#handleSignUpClick" stylesheets="@buttonStyleSheet.css" text="Sign Up" textFill="#2b00ff">
                <font>
-                  <Font size="15.0" />
+                  <Font size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#handleEnterPressed" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="ENTER" textFill="WHITE">
+            <Button id="button1" fx:id="enterButton" mnemonicParsing="false" onAction="#handleEnterPressed" prefHeight="31.0" prefWidth="98.0" stylesheets="@buttonStyleSheet.css" text="ENTER" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>

@@ -490,7 +490,7 @@ public class MapController implements Initializable {
             }
         }
     }
-
+// rgba(132, 81, 43, 0.75)
     @FXML
     private void handleTransportador(ActionEvent event) {
         transportador.setTranslateX(map_scrollpane.getHvalue()*8960);

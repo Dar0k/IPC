@@ -19,7 +19,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="confirmateLogOutButton" mnemonicParsing="false" onAction="#handleConfirmateLogOut" style="-fx-background-color: black; -fx-background-radius: 10;" text="       Yes       " textFill="WHITE">
+                  <Button id="button1" fx:id="confirmateLogOutButton" mnemonicParsing="false" onAction="#handleConfirmateLogOut" stylesheets="@buttonStyleSheet.css" text="       Yes       " textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>

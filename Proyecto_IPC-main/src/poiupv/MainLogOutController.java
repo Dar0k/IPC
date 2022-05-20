@@ -45,7 +45,8 @@ public class MainLogOutController implements Initializable {
     private Label label;
     @FXML
     private VBox aux;
-    
+    protected static int hits = 0;
+    protected static int faults = 0;
     User user;
     
 
@@ -148,5 +149,11 @@ public class MainLogOutController implements Initializable {
             updateSidebar(250);
         }     
     }
+    public static void initCountSession()
+    {
+        hits = 0; 
+        faults = 0;
+    }
+    
     
 }

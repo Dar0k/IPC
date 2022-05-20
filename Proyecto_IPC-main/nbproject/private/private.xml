@@ -5,9 +5,13 @@
         <group name="IPC"/>
         <group>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MainTestController.java</file>
+            <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MainResultsController.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/TestListController.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/PoiUPVApp.java</file>
+            <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MainLogOutController.java</file>
+            <file>file:/W:/Patata/Proyecto_IPC-main/src/resources/buttonToolbar.css</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/FXMLDocumentController.java</file>
+            <file>file:/W:/Patata/Proyecto_IPC-main/src/view/Map.fxml</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/SidebarController.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MapController.java</file>
             <file>file:/W:/Patata/Proyecto_IPC-main/src/poiupv/MainProfileController.java</file>

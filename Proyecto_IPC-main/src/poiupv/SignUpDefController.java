@@ -7,6 +7,8 @@ package poiupv;
 
 import DBAccess.NavegacionDAOException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -134,17 +136,21 @@ public class SignUpDefController implements Initializable {
             Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
         }           
         sel = ava1;
-        Image im1 = new Image("https://th.bing.com/th/id/OIP.EQBqKixnFE0c6UryfIgS-AHaGQ?pid=ImgDet&rs=1");
-        Image im2 = new Image("https://th.bing.com/th/id/OIP.AaMb_876cSr06RW4AJ3XyAHaGk?pid=ImgDet&w=500&h=444&rs=1");
-        Image im3 = new Image("https://th.bing.com/th/id/OIP.XnD-Oh_qsK18OPXdbLWh7gHaFw?pid=ImgDet&rs=1");
-        Image im4 = new Image("https://th.bing.com/th/id/OIP.ErgU0tyLu4W4Mv5t6nbdbAHaGV?pid=ImgDet&w=741&h=634&rs=1");
-        Image im5 = new Image("https://thumbs.dreamstime.com/b/american-eagle-isolated-close-up-portrait-36632728.jpg");
-        avaPrin.setFill(new ImagePattern(im1));          
-        ava1.setFill(new ImagePattern(im1));
-        ava2.setFill(new ImagePattern(im2));
-        ava3.setFill(new ImagePattern(im3));
-        ava4.setFill(new ImagePattern(im4));
-        ava5.setFill(new ImagePattern(im5));     
+        try {
+            Image im2 = new Image (new FileInputStream ("." + File.separator + "src" + File.separator + "resources" + File.separator + "ava1.jpg"));
+            Image im1 = new Image (new FileInputStream ("." + File.separator + "src" + File.separator + "resources" + File.separator + "ava2.jpg"));
+            Image im3 = new Image (new FileInputStream ("." + File.separator + "src" + File.separator + "resources" + File.separator + "ava3.jpg"));
+            Image im4 = new Image (new FileInputStream ("." + File.separator + "src" + File.separator + "resources" + File.separator + "ava4.jpg"));
+            Image im5 = new Image (new FileInputStream ("." + File.separator + "src" + File.separator + "resources" + File.separator + "ava5.jpg"));
+            avaPrin.setFill(new ImagePattern(im1));          
+            ava1.setFill(new ImagePattern(im1));
+            ava2.setFill(new ImagePattern(im2));
+            ava3.setFill(new ImagePattern(im3));
+            ava4.setFill(new ImagePattern(im4));
+            ava5.setFill(new ImagePattern(im5)); 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
+        }    
         
         
         validUsername = new SimpleBooleanProperty();

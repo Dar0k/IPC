@@ -1,0 +1,41 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20 may. 2022, 11:22:52
+    Author     : DROCPER
+*/
+
+#button1
+{
+    -fx-background-color:transparent;
+    -fx-border-color:black;
+    -fx-border-width:2;
+    -fx-border-radius:5;
+    
+}
+#button1:hover{
+    -fx-background-color:rgba(0,0,0,0.05);
+}
+#button1:selected{
+    -fx-background-color:rgba(0,0,0,0.1);
+}
+#button2
+{
+    -fx-background-color:transparent;
+    -fx-border-color:black;
+    -fx-border-width:2;
+    -fx-border-radius:5;    
+}
+#toolbar
+{
+    -fx-background-color:  #ffefd5;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1 0;
+}
+#toolbar .context-menu
+ {
+     -fx-background-color: #ffefd5;
+}

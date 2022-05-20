@@ -33,7 +33,7 @@
                   <TextArea fx:id="problemDescription" prefHeight="157.0" prefWidth="467.0" styleClass="text-area" stylesheets="@textAreaStyleSheet.css" wrapText="true" />
                   <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="419.0" spacing="25.0">
                      <children>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="CANCEL" textFill="WHITE">
+                        <Button id="button1" fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="100.0" stylesheets="@buttonStyleSheet.css" text="CANCEL" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -41,7 +41,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="SelectButton" mnemonicParsing="false" onAction="#handleSelectButton" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="SELECT" textFill="WHITE">
+                        <Button id="button1" fx:id="SelectButton" mnemonicParsing="false" onAction="#handleSelectButton" prefHeight="30.0" prefWidth="100.0" stylesheets="@buttonStyleSheet.css" text="SELECT" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>

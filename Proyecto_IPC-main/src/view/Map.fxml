@@ -23,7 +23,9 @@
 
 <BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
+
       <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
+
         <items>
             <ToggleButton id="button1" fx:id="dot" mnemonicParsing="false" onAction="#handleDot" prefHeight="52.0" prefWidth="65.0">
                <toggleGroup>
@@ -118,8 +120,10 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
+
             <Region fx:id="reg1" mouseTransparent="true" prefHeight="49.0" prefWidth="44.0" visible="false" />
             <Button id="button2" fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" prefHeight="52.0" prefWidth="65.0">
+
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
