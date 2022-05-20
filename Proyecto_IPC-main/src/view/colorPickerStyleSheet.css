@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 12, 2022, 7:49:30 AM
+    Author     : robyandy
+*/
+
+.color-picker { 
+        -fx-color-label-visible: false;
+        -fx-background-color: transparent;
+} 
+
+.color-picker .picker-color .picker-color-rect { 
+        -fx-stroke: black; 
+        -fx-stroke-width: 2; 
+        -fx-font-size: 25;
+} 
+
+.color-palette .hyperlink {  
+        visibility: hidden; 
+} 
