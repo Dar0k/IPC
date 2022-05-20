@@ -68,6 +68,7 @@ public class MainTestController implements Initializable {
     
     public void initStage(Stage stage, User us)
     {
+        stage.setResizable(true);
         primaryStage = stage;
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();

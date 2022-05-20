@@ -34,12 +34,16 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -67,7 +71,7 @@ public class MapController implements Initializable {
     @FXML
     private ToggleGroup group1;
     @FXML
-    private Label questionLabel;
+    private TextArea questionLabel;
     @FXML
     private RadioButton radioButtonA;
     @FXML
@@ -149,6 +153,7 @@ public class MapController implements Initializable {
     private ToggleGroup group1111;
     private int selection;
     private int [] selectionArr;
+    private boolean controlKeyDown;
 
     /**
      * Initializes the controller class.
@@ -615,8 +620,10 @@ public class MapController implements Initializable {
                 else if(radioButtonC.isSelected()) selection = 2;
                 else if(radioButtonD.isSelected()) selection = 3;
                 boolean correct = problem.getAnswers().get(selectionArr[selection]).getValidity();
+                
                 if(correct) MainLogOutController.hits++;
-                    else {MainLogOutController.faults++;}
+                    else { MainLogOutController.faults++;}
+               
                 
                 //user.addSession();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
@@ -631,6 +638,7 @@ public class MapController implements Initializable {
         }
         
     }
+   
     
 
     

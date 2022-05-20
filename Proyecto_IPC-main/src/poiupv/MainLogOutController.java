@@ -6,6 +6,7 @@
 package poiupv;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import model.Session;
 import model.User;
 
 /**
@@ -45,10 +47,9 @@ public class MainLogOutController implements Initializable {
     private Label label;
     @FXML
     private VBox aux;
-    protected static int hits = 0;
-    protected static int faults = 0;
     User user;
-    
+    protected static int hits;
+    protected static int faults;
 
     /**
      * Initializes the controller class.
@@ -135,6 +136,7 @@ public class MainLogOutController implements Initializable {
         LogInDefController mainTCtrl = loader.<LogInDefController>getController();
         mainTCtrl.initStage(primaryStage);
         primaryStage.getScene().setRoot(root);
+        user.addSession(new Session(LocalDateTime.now(), hits, faults ));
     }
     
     public void calcSideBar (double w) {
@@ -149,11 +151,7 @@ public class MainLogOutController implements Initializable {
             updateSidebar(250);
         }     
     }
-    public static void initCountSession()
-    {
-        hits = 0; 
-        faults = 0;
-    }
+    
     
     
 }

@@ -7,8 +7,11 @@ package poiupv;
 
 import DBAccess.NavegacionDAOException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import javafx.scene.text.Font;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,15 +22,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Navegacion;
@@ -66,6 +76,7 @@ public class LogInDefController implements Initializable {
 
     public void initStage(Stage stage)
     {
+        stage.setResizable(false);
         primaryStage = stage;
         
         
@@ -119,23 +130,63 @@ public class LogInDefController implements Initializable {
         }
         else
         {
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
-            Parent root = (Parent) myLoader.load();
-            MainTestController mtCtrl = myLoader.<MainTestController>getController();
-            mtCtrl.initStage(primaryStage, user);
-            primaryStage.getScene().setRoot(root);    
-            /*FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTestList.fxml"));
-            Parent root = (Parent) myLoader.load();
-            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-            MainTestListController mtCtrl = myLoader.<MainTestListController>getController();
-            mtCtrl.initStage(primaryStage, user);
-            primaryStage.setScene(scene);*/
+            try{
+                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+                Parent root = (Parent) myLoader.load();
+                MainTestController mtCtrl = myLoader.<MainTestController>getController();
+                mtCtrl.initStage(primaryStage, user);
+                primaryStage.getScene().setRoot(root);
+                throw new Exception("error");
+            }
+            catch(Exception e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                
+                
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+                
+                 Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+                alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStyleClass().add("customAlert");
+                alert.setTitle("Exception Dialog");
+                alert.setHeaderText("An error has occurred");
+                alert.setContentText("An error has occurred");
+                
+                
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+                
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
+                
+                alert.getDialogPane().setExpandableContent(expContent);
+                alert.showAndWait();
+            }
+            
         }
 
     }    
 
     @FXML
     private void handleKeyPressed(KeyEvent event) {
+        KeyCode keyPressed = event.getCode();
+        try{
+        if(keyPressed == KeyCode.ENTER) handleEnterPressed(new ActionEvent());
+        }
+        catch(Exception e) {}
     }
 
     

@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="aux" alignment="CENTER" prefHeight="480.0" prefWidth="646.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.SignUpDefController">
+<VBox fx:id="aux" alignment="CENTER" onKeyPressed="#handleKeyPressed" prefHeight="480.0" prefWidth="646.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.SignUpDefController">
    <children>
       <VBox alignment="CENTER" prefHeight="501.0" prefWidth="646.0" spacing="20.0" style="-fx-background-color: rgba(255,255,255,.65);">
          <children>

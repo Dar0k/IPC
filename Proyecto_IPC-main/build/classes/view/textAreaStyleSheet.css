@@ -19,3 +19,7 @@ and open the template in the editor.
 .text-area .scroll-pane .viewport{
     -fx-background-color: transparent;
 }
+/*For text in map question*/
+.text-area *.text{
+    -fx-text-alignment: justify;
+}

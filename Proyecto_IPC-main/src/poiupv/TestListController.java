@@ -150,11 +150,10 @@ public class TestListController implements Initializable {
 
     @FXML
     private void handleSelectButton(ActionEvent event) throws Exception {
-        System.out.println("test");
         int index = problemsList.getSelectionModel().getSelectedIndex();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Test.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Map.fxml"));
         Parent root = (Parent) loader.load();
-        TestController mTCtrl = loader.<TestController>getController();
+        MapController mTCtrl = loader.<MapController>getController();
         mTCtrl.initStage(primaryStage, user, problemsArrayList.get(index), index+1);
         primaryStage.getScene().setRoot(root);
         primaryStage.show();

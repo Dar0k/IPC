@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -27,16 +29,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -211,15 +220,9 @@ public class SignUpDefController implements Initializable {
         BooleanBinding validFields = Bindings.and(validUsername, validPassword).and(validReenterPassword).and(validEmail).and(validAge);
         
         signUpButton.disableProperty().bind(Bindings.not(validFields));        
-        signUpButton.setOnAction( (event)->{  
-            try {
-                signUpCheck();
-            } catch (IOException ex) {
-                System.out.println("error");
-            }
-        });  
+        signUpButton.setOnAction( (event)->{  signUpCheck();});  
     }
-    private void signUpCheck() throws IOException
+    private void signUpCheck() 
     {        
         //                  REGISTER
         try {        
@@ -227,12 +230,66 @@ public class SignUpDefController implements Initializable {
             Image image = imPa.getImage();
             User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
-            Parent root = (Parent) myLoader.load();
-            MainTestController mtCtrl = myLoader.<MainTestController>getController();
-            mtCtrl.initStage(primaryStage, result);
-            primaryStage.getScene().setRoot(root);
-        } catch (NavegacionDAOException ex) {
-            Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
+            try{
+                Parent root = (Parent) myLoader.load();
+                MainTestController mtCtrl = myLoader.<MainTestController>getController();
+                mtCtrl.initStage(primaryStage, result);
+                primaryStage.getScene().setRoot(root);
+                
+            }
+            catch(IOException e)
+            {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Exception Dialog");
+                alert.setHeaderText("");
+                alert.setContentText("An error has ocurred");
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+                
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
+                
+                alert.getDialogPane().setExpandableContent(expContent);
+                alert.showAndWait();
+            }
+        } catch (NavegacionDAOException e) {
+            Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, e);
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Exception Dialog");
+                alert.setHeaderText("");
+                alert.setContentText("An error has ocurred");
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+                
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
+                
+                alert.getDialogPane().setExpandableContent(expContent);
+                alert.showAndWait();
         }        
     }
     
@@ -386,5 +443,15 @@ public class SignUpDefController implements Initializable {
             validAge.setValue(Boolean.TRUE); 
         }
     }
+
+    @FXML
+    private void handleKeyPressed(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code == KeyCode.ENTER && !signUpButton.isDisable())
+        {
+            signUpCheck();
+        }
+    }
+    
    
 }
