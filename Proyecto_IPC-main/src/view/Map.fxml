@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
 
       <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
@@ -139,9 +139,9 @@
    <center>
       <SplitPane fx:id="splitPane" dividerPositions="0.95" BorderPane.alignment="CENTER">
          <items>
-            <StackPane prefHeight="336.0" prefWidth="530.0">
+            <StackPane prefHeight="332.0" prefWidth="564.0">
                <children>
-                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="ALWAYS">
+                  <ScrollPane id="scrollbar" fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="350.0" prefWidth="581.0" stylesheets="@../resources/buttonToolbar.css" vbarPolicy="ALWAYS">
                      <content>
                         <AnchorPane fx:id="anchorPane">
                            <children>
@@ -159,11 +159,11 @@
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="105.0" prefWidth="34.0" spacing="25.0" StackPane.alignment="BOTTOM_RIGHT">
+                  <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="327.0" prefWidth="565.0" spacing="25.0" StackPane.alignment="BOTTOM_RIGHT">
                      <children>
-                        <VBox alignment="BOTTOM_RIGHT">
+                        <VBox alignment="BOTTOM_RIGHT" prefHeight="51.0" prefWidth="538.0">
                            <children>
-                              <Button fx:id="zoomInButton" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="20.0" prefWidth="20.0">
+                              <Button id="buttonPlus" fx:id="zoomInButton" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="24.0" prefWidth="25.0" stylesheets="@../resources/buttonToolbar.css">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -171,8 +171,11 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <VBox.margin>
+                                    <Insets right="4.0" />
+                                 </VBox.margin>
                               </Button>
-                              <Button fx:id="zoomOutButton" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="27.0" prefWidth="30.0">
+                              <Button id="buttonMinus" fx:id="zoomOutButton" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="27.0" prefWidth="30.0" stylesheets="@../resources/buttonToolbar.css">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -180,13 +183,16 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <VBox.margin>
+                                    <Insets right="4.0" />
+                                 </VBox.margin>
                               </Button>
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </VBox>
-                        <Button fx:id="fullscreen" alignment="CENTER" mnemonicParsing="false" onAction="#handleQuest">
+                        <Button id="button3" fx:id="fullscreen" alignment="CENTER" mnemonicParsing="false" onAction="#handleQuest" stylesheets="@../resources/buttonToolbar.css">
                            <graphic>
                               <ImageView fx:id="fullscreenImageView" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -194,6 +200,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <VBox.margin>
+                              <Insets bottom="4.0" right="4.0" />
+                           </VBox.margin>
                         </Button>
                      </children>
                      <padding>
