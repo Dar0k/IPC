@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -20,11 +21,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="397.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
-      <ToolBar prefHeight="21.0" prefWidth="618.0" style="-fx-background-color: #ffefd5; -fx-border-color: black; -fx-border-width: 0 0 3 0;" BorderPane.alignment="CENTER">
+      <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
         <items>
-            <ToggleButton fx:id="dot" mnemonicParsing="false" onAction="#handleDot" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;">
+            <ToggleButton id="button1" fx:id="dot" mnemonicParsing="false" onAction="#handleDot" prefHeight="52.0" prefWidth="65.0">
                <toggleGroup>
                   <ToggleGroup fx:id="group1" />
                </toggleGroup>
@@ -36,7 +37,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="line" mnemonicParsing="false" onAction="#handleLine" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="line" mnemonicParsing="false" onAction="#handleLine" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
                      <image>
@@ -45,7 +46,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="arc" mnemonicParsing="false" onAction="#handleArc" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="arc" mnemonicParsing="false" onAction="#handleArc" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="62.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -54,7 +55,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="text" mnemonicParsing="false" onAction="#handleText" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="text" mnemonicParsing="false" onAction="#handleText" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="91.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,7 +64,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="eraser" mnemonicParsing="false" onAction="#handleEraser" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;" toggleGroup="$group1">
+            <ToggleButton id="button1" fx:id="eraser" mnemonicParsing="false" onAction="#handleEraser" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -72,7 +73,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton mnemonicParsing="false" onAction="#handleCoordenadas" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;" toggleGroup="$group1">
+            <ToggleButton id="button1" mnemonicParsing="false" onAction="#handleCoordenadas" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -81,7 +82,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton mnemonicParsing="false" onAction="#handleCambiarColor" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;" toggleGroup="$group1">
+            <ToggleButton id="button1" mnemonicParsing="false" onAction="#handleCambiarColor" prefHeight="52.0" prefWidth="65.0" toggleGroup="$group1">
                <graphic>
                   <ImageView fitHeight="83.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -91,8 +92,21 @@
                </graphic>
             </ToggleButton>
             <ColorPicker fx:id="colorPicker" onAction="#handleColorPick" prefHeight="25.0" prefWidth="50.0" stylesheets="@colorPickerStyleSheet.css" />
-            <Region fx:id="reg11" prefHeight="49.0" prefWidth="44.0" />
-            <ToggleButton mnemonicParsing="false" onAction="#handleTransportador" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;">
+            <VBox alignment="TOP_CENTER" prefHeight="52.0" prefWidth="94.0">
+               <children>
+                  <Label text="Size">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Slider fx:id="sizeSlider" prefHeight="14.0" prefWidth="69.0" />
+               </children>
+               <padding>
+                  <Insets top="1.0" />
+               </padding>
+            </VBox>
+            <Region fx:id="reg11" mouseTransparent="true" prefHeight="49.0" prefWidth="44.0" visible="false" />
+            <ToggleButton id="button1" mnemonicParsing="false" onAction="#handleTransportador" prefHeight="52.0" prefWidth="65.0">
                <toggleGroup>
                   <ToggleGroup fx:id="group1111" />
                </toggleGroup>
@@ -104,8 +118,8 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <Region fx:id="reg1" prefHeight="49.0" prefWidth="44.0" />
-            <Button fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" prefHeight="52.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5;">
+            <Region fx:id="reg1" mouseTransparent="true" prefHeight="49.0" prefWidth="44.0" visible="false" />
+            <Button id="button2" fx:id="trash" mnemonicParsing="false" onAction="#handleTrash" prefHeight="52.0" prefWidth="65.0">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -122,7 +136,7 @@
          <items>
             <StackPane prefHeight="336.0" prefWidth="530.0">
                <children>
-                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="NEVER" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="322.0" prefWidth="744.0" vbarPolicy="ALWAYS">
                      <content>
                         <AnchorPane fx:id="anchorPane">
                            <children>
@@ -178,7 +192,7 @@
                         </Button>
                      </children>
                      <padding>
-                        <Insets right="5.0" />
+                        <Insets bottom="10.0" right="15.0" />
                      </padding>
                      <StackPane.margin>
                         <Insets bottom="5.0" />

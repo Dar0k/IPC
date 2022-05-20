@@ -32,6 +32,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -140,6 +141,14 @@ public class MapController implements Initializable {
     private Button goBackButton;
     @FXML
     private Button sendButton;
+    @FXML
+    private Slider sizeSlider;
+    @FXML
+    private Region reg11;
+    @FXML
+    private ToggleGroup group1111;
+    private int selection;
+    private int [] selectionArr;
 
     /**
      * Initializes the controller class.
@@ -159,13 +168,18 @@ public class MapController implements Initializable {
         pool.add(2);
         pool.add(3);
         Random generator = new Random();
-        
+        int temp;
+        selectionArr = new int [4];
         for(int i = 4; i > 1; i--)
         {
             int random = generator.nextInt(1000);
-            buttons[i-1].setText(list.get(pool.remove(random % i)).getText());
+            temp = pool.remove(random % i);
+            buttons[i-1].setText(list.get(temp).getText());
+            selectionArr[i-1] = temp;
         }
-        buttons[0].setText(list.get(pool.get(0)).getText());
+        temp = pool.get(0);
+        selectionArr[0] = temp;
+        buttons[0].setText(list.get(temp).getText());
         
         questionNumber.setText("Problem " + number);
         
@@ -180,6 +194,7 @@ public class MapController implements Initializable {
             buttons[i].selectedProperty().bind(map.getRad(i).selectedProperty());
             
         }*/
+        
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -191,7 +206,7 @@ public class MapController implements Initializable {
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
         colorPicker.setValue(Color.BLACK);
-        
+        sizeSlider.setMin(5);
         
         
         rad.selectedToggleProperty().addListener((obs, oldv, newv) -> {
@@ -228,24 +243,6 @@ public class MapController implements Initializable {
         map_scrollpane.setHvalue(scrollH);
         map_scrollpane.setVvalue(scrollV);
     }
-    protected RadioButton getRad(int select)
-    {
-        switch(select)
-        {
-            case 0:
-                return radioButtonA;
-            case 1:
-                return radioButtonB;
-            case 2:
-                return radioButtonC;
-            case 3:
-                return radioButtonD;
-            default:
-                return null;
-        }
-        
-    }
-
 
 
     @FXML
@@ -262,6 +259,7 @@ public class MapController implements Initializable {
     @FXML
     private void handleDot(ActionEvent event) {
         buttonSelection = (buttonSelection.equals("dot")) ? "" : "dot"; 
+        
     }
 
     @FXML
@@ -375,16 +373,17 @@ public class MapController implements Initializable {
         switch(buttonSelection)
         {
             case "dot":
-                Circle dot = new Circle(event.getX(), event.getY(), 10);
+                Circle dot = new Circle(event.getX(), event.getY(), sizeSlider.getValue());
                 dot.setStroke(colorPicker.getValue());
                 dot.setFill(colorPicker.getValue());
                 zoomGroup.getChildren().add(dot);
-                dot.setOnMousePressed(c -> removeElement(dot));
+                dot.setOnMousePressed(c -> {removeElement(dot); map_scrollpane.setPannable(false);});
+                dot.setOnMouseExited(c -> {map_scrollpane.setPannable(true);});
                 dot.setOnMouseEntered(c -> { if(buttonSelection.equals("coords"))map_scrollpane.getScene().setCursor(Cursor.HAND);} );
                 dot.setOnMouseExited(c -> {if(buttonSelection.equals("coords"))map_scrollpane.getScene().setCursor(Cursor.DEFAULT);});
                 break;
             case "arc":
-                circle = new Circle(event.getX(), event.getY(), 10);
+                circle = new Circle(event.getX(), event.getY(), sizeSlider.getValue());
                 circle.setStroke(colorPicker.getValue());
                 circle.setFill(Color.TRANSPARENT);
                 startXArc = event.getX();
@@ -393,12 +392,13 @@ public class MapController implements Initializable {
                 break;
             case "line":
                 linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
-                linePainting.setStrokeWidth(10);
+                linePainting.setStrokeWidth(sizeSlider.getValue());
                 linePainting.setFill(colorPicker.getValue());
                 linePainting.setStroke(colorPicker.getValue());
                 zoomGroup.getChildren().add(linePainting);
                 Line temp = linePainting;
-                linePainting.setOnMousePressed(c -> removeElement(temp));
+                linePainting.setOnMousePressed(c -> {removeElement(temp);map_scrollpane.setPannable(false);});
+                linePainting.setOnMouseExited(c -> {map_scrollpane.setPannable(true);});
                 linePainting.setOnContextMenuRequested(eventContext -> {
                     ContextMenu menuContext = new ContextMenu();
                     MenuItem deleteItem = new MenuItem("Delete");
@@ -421,12 +421,12 @@ public class MapController implements Initializable {
                     textField.setLayoutX(event.getX());
                     textField.setLayoutY(event.getY());
                     textField.requestFocus();
-                    //textField.setOnMousePressed(c -> removeElement(textField));
+                    textField.setOnMousePressed(c -> removeElement(textField));
                     textField.setOnAction(eventC ->{
                         Text label = new Text(textField.getText());
                         label.setX(textField.getLayoutX());
                         label.setY(textField.getLayoutY());
-                        label.setStyle("-fx-font-familly:Gafatar; -fx-font-size:40;");
+                        label.setStyle("-fx-font-familly:Gafatar; -fx-font-size:" + sizeSlider.getValue() + ";");
                         label.setStroke(colorPicker.getValue());
                         label.setFill(colorPicker.getValue());
                         zoomGroup.getChildren().add(label);
@@ -452,7 +452,7 @@ public class MapController implements Initializable {
                 break;
                 
         }
-        System.out.println(buttonSelection);
+        System.out.println(sizeSlider.getValue());
         
         
 
@@ -493,6 +493,8 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleTransportador(ActionEvent event) {
+        transportador.setTranslateX(map_scrollpane.getHvalue()*8960);
+        transportador.setTranslateY(map_scrollpane.getVvalue()*5760);
         transportador.setVisible(!transportador.isVisible());
     }
 
@@ -508,8 +510,8 @@ public class MapController implements Initializable {
         map_scrollpane.setPannable(false);
         double despX = event.getSceneX() - startTransX;
         double despY = event.getSceneY() - startTransY;
-        transportador.setTranslateX(baseX + despX);
-        transportador.setTranslateY(baseY + despY);
+        transportador.setTranslateX(baseX + despX *(1/zoomVal));
+        transportador.setTranslateY(baseY + despY * (1/zoomVal));
     }
 
     @FXML
@@ -572,14 +574,16 @@ public class MapController implements Initializable {
             alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
             alert.setTitle("Send");
             alert.getDialogPane().getStyleClass().add("customAlert");
-            alert.setHeaderText("Are you sure you want to send your answere?");
-            alert.setContentText("You have not selected an answere and you will not be able com back. Are you sure you want to continue?");
+            alert.setHeaderText("Are you sure you want to send your answer?");
+            alert.setContentText("You have not selected an answer and you will not be able to come back. Are you sure you want to continue?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK){
                 System.out.println("OK");
                 ////////////////////////////////////////////////
                 //////   guardar en la base de datos     ///////
                 ////////////////////////////////////////////////
+                
+                
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
                 Parent root = (Parent) loader.load();
                 MainResultsController mRCtrl = loader.<MainResultsController>getController();
@@ -606,6 +610,15 @@ public class MapController implements Initializable {
                 ////////////////////////////////////////////////
                 //////   guardar en la base de datos     ///////
                 ////////////////////////////////////////////////
+                if(radioButtonA.isSelected()) selection = 0;
+                else if(radioButtonB.isSelected()) selection = 1;
+                else if(radioButtonC.isSelected()) selection = 2;
+                else if(radioButtonD.isSelected()) selection = 3;
+                boolean correct = problem.getAnswers().get(selectionArr[selection]).getValidity();
+                if(correct) MainLogOutController.hits++;
+                    else {MainLogOutController.faults++;}
+                
+                //user.addSession();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
                 Parent root = (Parent) loader.load();
                 MainResultsController mRCtrl = loader.<MainResultsController>getController();
