@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21 may. 2022, 18:14:29
+    Author     : DROCPER
+*/
+.root{
+    -fx-background-image: url('../resources/fondo2.jpg');
+    -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;
+}
+#vbox1{
+    -fx-background-color: rgba(255,255,255,0.7); 
+    -fx-background-radius: 25;
+}
+#datepickHbox{
+    -fx-border-color: black; 
+    -fx-border-width: 0 0 1.25 0;
+}
+
+

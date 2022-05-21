@@ -7,6 +7,9 @@ package poiupv;
 
 import DBAccess.NavegacionDAOException;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -32,12 +35,15 @@ import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.layout.VBox;
@@ -246,7 +252,7 @@ public class MainProfileController implements Initializable {
         });
     }
     
-    private void saveCheck() throws Exception
+    private void saveCheck() 
     {
         // open dialog box to confirm that wants to save
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -264,17 +270,60 @@ public class MainProfileController implements Initializable {
             System.out.println("OK");
             ImagePattern imPa = (ImagePattern) avaPrin.getFill();
             Image image = imPa.getImage();
-            user.setAvatar(image);
-            user.setBirthdate(agePicker.getValue());
-            user.setEmail(emailField.getText());
-            user.setPassword(passwordField.getText());
-            initStage(primaryStage, user);
+            try{
+                user.setAvatar(image);
+                user.setBirthdate(agePicker.getValue());
+                user.setEmail(emailField.getText());
+                user.setPassword(passwordField.getText());
+                initStage(primaryStage, user);
+
+            }
+            catch(NavegacionDAOException e)
+            {
+                Alert alertErr = new Alert(Alert.AlertType.ERROR);
+                //CAMBIAR TIPO DE DIALOGO?
+                ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+                Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+                alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alertErr.getDialogPane().getStyleClass().add("customAlert");
+                alertErr.setTitle("Exception Dialog");
+                alertErr.setHeaderText("An error has occurred");
+                alertErr.setContentText("An unexcpected error has occurred when trying to save the new changes into the database. Please try again");
+
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
+
+                alertErr.getDialogPane().setExpandableContent(expContent);
+                alertErr.showAndWait();
+                
+            }
+            
+            
+            
         } else {
             System.out.println("CANCEL");
         }   
     }
     
-    private void cancelCheck() throws Exception
+    private void cancelCheck() 
     {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
@@ -332,7 +381,7 @@ public class MainProfileController implements Initializable {
     }
 
     @FXML
-    private void handleChooseImage(ActionEvent event) throws Exception{
+    private void handleChooseImage(ActionEvent event) {
         FileChooser fileChoose = new FileChooser();
         File recordsDir = new File(System.getProperty("user.Desktop"), "src/resources");
         System.out.println(recordsDir);
@@ -347,10 +396,50 @@ public class MainProfileController implements Initializable {
         fileChoose.getExtensionFilters().add(fileExtensions);
         fileChoose.setTitle("Open File");  
         File file = fileChoose.showOpenDialog(primaryStage);
-        System.out.print(file);
-        String imageUrl = file.toURI().toURL().toExternalForm();
-        Image image = new Image(imageUrl);
-        avaPrin.setFill(new ImagePattern(image));   
+        
+        try{
+            if(file != null)
+            {
+                String imageUrl = file.toURI().toURL().toExternalForm();
+                Image image = new Image(imageUrl);
+                avaPrin.setFill(new ImagePattern(image));
+            }
+        }
+        catch(MalformedURLException e){
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStyleClass().add("customAlert");
+            alertErr.setTitle("Exception Dialog");
+            alertErr.setHeaderText("An error has occurred");
+            alertErr.setContentText("The image selected could not be opened. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alertErr.getDialogPane().setExpandableContent(expContent);
+            alertErr.showAndWait();
+        }
     }   
 
     @FXML

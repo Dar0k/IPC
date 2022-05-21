@@ -14,31 +14,31 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="aux" onKeyPressed="#handleKeyPressed" prefHeight="438.0" prefWidth="591.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
+<HBox fx:id="aux" onKeyPressed="#handleKeyPressed" prefHeight="438.0" prefWidth="591.0"  stylesheets="@logInStyleSheet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
    <children>
-      <VBox fx:id="side" alignment="CENTER" maxWidth="350.0" prefHeight="371.0" prefWidth="235.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,.75);">
+      <VBox id="vbox1" fx:id="side" alignment="CENTER" maxWidth="350.0" prefHeight="371.0" prefWidth="235.0" spacing="25.0" >
          <children>
             <Label fx:id="logInLabel" alignment="BOTTOM_CENTER" text="LOG IN">
                <font>
                   <Font name="Serif Regular" size="43.0" />
                </font>
             </Label>
-            <VBox fillWidth="false" maxWidth="200.0" prefHeight="64.0" prefWidth="180.0" style="-fx-background-color: transparemt;">
+            <VBox fillWidth="false" maxWidth="200.0" prefHeight="64.0" prefWidth="180.0" >
                <children>
                   <Label text="Username: " />
-                  <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="238.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1.25 0; -fx-border-color: black;" />
+                  <TextField id="textField" fx:id="usernameField" prefHeight="26.0" prefWidth="238.0"  />
                   <Label fx:id="usernameError" prefHeight="17.0" prefWidth="180.0" text="Incorrect username" textFill="RED" visible="false" />
                </children>
             </VBox>
             <VBox fillWidth="false" maxWidth="200.0" prefHeight="68.0" prefWidth="198.0">
                <children>
                   <Label text="Password:" />
-                  <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="225.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                  <HBox id="passField" alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="225.0" >
                      <children>
                         <StackPane prefHeight="25.0" prefWidth="163.0">
                            <children>
-                              <TextField fx:id="passwordTextField" maxWidth="162.5" prefHeight="26.0" prefWidth="162.5" style="-fx-background-color: transparent;" visible="false" />
-                              <PasswordField fx:id="passwordField" maxWidth="162.5" prefHeight="26.0" prefWidth="162.5" style="-fx-background-color: transparent;" />
+                              <TextField fx:id="passwordTextField" maxWidth="162.5" prefHeight="26.0" prefWidth="162.5"  visible="false" />
+                              <PasswordField fx:id="passwordField" maxWidth="162.5" prefHeight="26.0" prefWidth="162.5"  />
                            </children>
                         </StackPane>
                         <StackPane onMouseClicked="#handleEyeCicked">

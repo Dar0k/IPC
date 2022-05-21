@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0"  stylesheets="@resultsStyleSheet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="532.0" HBox.hgrow="ALWAYS">
@@ -17,7 +17,7 @@
             <Insets />
          </HBox.margin>
          <children>
-            <VBox alignment="CENTER" fillWidth="false" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
+            <VBox id="vbox1" alignment="CENTER" fillWidth="false" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="25.0" >
                <children>
                   <VBox alignment="CENTER" fillWidth="false" prefHeight="26.0" prefWidth="510.0" spacing="10.0">
                      <children>
@@ -28,12 +28,12 @@
                                     <Insets bottom="3.0" />
                                  </VBox.margin>
                               </Label>
-                              <HBox prefHeight="5.0" prefWidth="150.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                              <HBox id="datepickHbox" prefHeight="5.0" prefWidth="150.0" >
                                  <children>
-                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" style="-fx-background-color: transparent;" stylesheets="@datePickerStyleSheet.css" />
+                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0"  stylesheets="@datePickerStyleSheet.css" />
                                  </children>
                               </HBox>
-                              <Label fx:id="ageError" alignment="TOP_LEFT" minHeight="21.0" prefHeight="21.0" prefWidth="174.0" style="-fx-text-fill: red;" text="Must be at least 12 years old" textFill="RED" visible="false" wrapText="true">
+                              <Label fx:id="ageError" alignment="TOP_LEFT" minHeight="21.0" prefHeight="21.0" prefWidth="174.0"  text="Must be at least 12 years old" textFill="RED" visible="false" wrapText="true">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
@@ -50,11 +50,11 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tableResults" prefHeight="253.0" prefWidth="450.0" stylesheets="@../resources/tableView.css">
+                  <TableView fx:id="tableResults" prefHeight="253.0" prefWidth="450.0" stylesheets="@tableView.css">
                     <columns>
-                      <TableColumn fx:id="hits" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER" text="Hits" />
-                      <TableColumn fx:id="faults" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER" text="Faults" />
-                        <TableColumn fx:id="timestamp" editable="false" maxWidth="215.0" minWidth="215.0" prefWidth="215.0" style="-fx-alignment: CENTER" text="Timestamp" />
+                      <TableColumn fx:id="hits" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0"  text="Hits" />
+                      <TableColumn fx:id="faults" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0"  text="Faults" />
+                        <TableColumn fx:id="timestamp" editable="false" maxWidth="215.0" minWidth="215.0" prefWidth="215.0"  text="Timestamp" />
                     </columns>
                      <VBox.margin>
                         <Insets bottom="10.0" />

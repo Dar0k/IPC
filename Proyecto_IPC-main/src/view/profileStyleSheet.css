@@ -1,0 +1,37 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21 may. 2022, 18:21:53
+    Author     : DROCPER
+*/
+
+.root{
+    -fx-background-image: url('../resources/fondo2.jpg');
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#aux{
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 25;
+}
+#fieldVb{
+    -fx-border-color: black;
+    -fx-border-width: 1 0 0 0;
+}
+#agePickerHbox{
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1.25 0;
+}
+#emailField, #hboxPassword, #agePickerHbox{
+    -fx-background-color: transparent;
+    -fx-border-color: black; 
+    -fx-border-width: 0 0 1.25 0;
+}
+ 
+#passwordField, #passwordTextField, #reenterPasswordField, #reenterPasswordTextField
+{
+    -fx-background-color: transparent;
+}

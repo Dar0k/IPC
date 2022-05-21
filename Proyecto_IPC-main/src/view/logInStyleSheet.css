@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21 may. 2022, 17:30:20
+    Author     : DROCPER
+*/
+.root{
+    -fx-background-image: url("../resources/fondo1.jpg"); 
+    -fx-background-size: 100% 100%; 
+    -fx-background-repeat: no-repeat;
+}
+#vbox1{
+    -fx-background-color: rgba(255,255,255,.75);
+}
+
+#textField{
+    -fx-background-color: transparent; 
+    -fx-border-width: 0 0 1.25 0; 
+    -fx-border-color: black;
+}
+
+#passField{
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1.25 0;  
+}
+#passwordTextField, #passwordField{
+    -fx-background-color: transparent;
+    
+}

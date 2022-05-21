@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainProfileController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" stylesheets="@profileStyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainProfileController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="546.0" HBox.hgrow="ALWAYS">
@@ -24,7 +24,7 @@
             <Insets />
          </HBox.margin>
          <children>
-            <VBox fx:id="aux" alignment="CENTER" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
+            <VBox fx:id="aux" alignment="CENTER" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="15.0" >
                <children>
                   <Label fx:id="username" text="USERNAME">
                      <font>
@@ -61,7 +61,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <VBox fx:id="fieldVb" prefWidth="450.0" spacing="10.0" style="-fx-border-color: black; -fx-border-width: 1 0 0 0;">
+                  <VBox fx:id="fieldVb" prefWidth="450.0" spacing="10.0" >
                      <children>
                         <HBox alignment="CENTER" prefHeight="91.0" prefWidth="450.0" spacing="20.0">
                            <children>
@@ -72,12 +72,12 @@
                                           <Insets bottom="3.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <HBox prefHeight="5.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                                    <HBox id="agePickerHbox" prefHeight="5.0" prefWidth="200.0" >
                                        <children>
-                                          <DatePicker fx:id="agePicker" focusTraversable="false" prefHeight="16.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@datePickerStyleSheet.css" />
+                                          <DatePicker fx:id="agePicker" focusTraversable="false" prefHeight="16.0" prefWidth="200.0"  stylesheets="@datePickerStyleSheet.css" />
                                        </children>
                                     </HBox>
-                                    <Label fx:id="ageError" alignment="TOP_LEFT" minHeight="21.0" prefHeight="21.0" prefWidth="174.0" style="-fx-text-fill: red;" text="Must be at least 12 years old" textFill="RED" visible="false" wrapText="true">
+                                    <Label fx:id="ageError" alignment="TOP_LEFT" minHeight="21.0" prefHeight="21.0" prefWidth="174.0"  text="Must be at least 12 years old" textFill="RED" visible="false" wrapText="true">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -87,8 +87,8 @@
                               <VBox prefHeight="85.0" prefWidth="200.0">
                                  <children>
                                     <Label fx:id="emailLabel" text="Email:" />
-                                    <TextField fx:id="emailField" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1.25 0;" />
-                                    <Label fx:id="emailError" alignment="TOP_LEFT" prefHeight="36.0" prefWidth="200.0" style="-fx-text-fill: red;" textFill="RED" wrapText="true">
+                                    <TextField fx:id="emailField" prefHeight="30.0" prefWidth="200.0" />
+                                    <Label fx:id="emailError" alignment="TOP_LEFT" prefHeight="36.0" prefWidth="200.0"  textFill="RED" wrapText="true">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -105,12 +105,12 @@
                               <VBox fillWidth="false" maxWidth="200.0" prefHeight="95.0" prefWidth="200.0">
                                  <children>
                                     <Label fx:id="passwordLabel" text="Password:" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="300.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                                    <HBox id="hboxPassword" alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="300.0" >
                                        <children>
                                           <StackPane prefHeight="25.0" prefWidth="206.0">
                                              <children>
-                                                <TextField fx:id="passwordTextField" maxWidth="218.0" prefHeight="25.0" prefWidth="218.0" style="-fx-background-color: transparent;" visible="false" />
-                                                <PasswordField fx:id="passwordField" maxWidth="238.0" prefHeight="25.0" prefWidth="238.0" style="-fx-background-color: transparent;" />
+                                                <TextField fx:id="passwordTextField" maxWidth="218.0" prefHeight="25.0" prefWidth="218.0"  visible="false" />
+                                                <PasswordField fx:id="passwordField" maxWidth="238.0" prefHeight="25.0" prefWidth="238.0"  />
                                              </children>
                                           </StackPane>
                                           <StackPane fx:id="passwordEye" onMouseClicked="#handleEyeCicked">
@@ -138,12 +138,12 @@
                               <VBox fillWidth="false" maxWidth="200.0" prefHeight="101.0" prefWidth="200.0">
                                  <children>
                                     <Label fx:id="rePasswordLabel" text="Reenter Password:" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="300.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.25 0;">
+                                    <HBox id="hboxPassword" alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="300.0" >
                                        <children>
                                           <StackPane prefHeight="25.0" prefWidth="232.0">
                                              <children>
-                                                <TextField fx:id="reenterPasswordTextField" maxWidth="216.0" prefHeight="25.0" prefWidth="216.0" style="-fx-background-color: transparent;" visible="false" />
-                                                <PasswordField fx:id="reenterPasswordField" maxWidth="239.0" prefHeight="25.0" prefWidth="239.0" style="-fx-background-color: transparent;" />
+                                                <TextField fx:id="reenterPasswordTextField" maxWidth="216.0" prefHeight="25.0" prefWidth="216.0"  visible="false" />
+                                                <PasswordField fx:id="reenterPasswordField" maxWidth="239.0" prefHeight="25.0" prefWidth="239.0"  />
                                              </children>
                                           </StackPane>
                                           <StackPane fx:id="reenterPasswordEye" onMouseClicked="#handleEyeCicked">

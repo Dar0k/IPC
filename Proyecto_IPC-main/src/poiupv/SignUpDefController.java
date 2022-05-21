@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -253,10 +254,20 @@ public class SignUpDefController implements Initializable {
             }
             catch(IOException e)
             {
-                Alert alert = new Alert(AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                
+                
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+                
+                Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+                alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
-                alert.setHeaderText("");
-                alert.setContentText("An error has ocurred");
+                alert.setHeaderText("An error has occurred");
+                alert.setContentText("There has been an error loading the scene");
+                
+                
                 StringWriter sw = new StringWriter();
                 PrintWriter pw = new PrintWriter(sw);
                 e.printStackTrace(pw);
@@ -279,11 +290,21 @@ public class SignUpDefController implements Initializable {
                 alert.showAndWait();
             }
         } catch (NavegacionDAOException e) {
-            Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, e);
-                Alert alert = new Alert(AlertType.ERROR);
+                Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, e);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                
+                
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+                
+                Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+                alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
-                alert.setHeaderText("");
-                alert.setContentText("An error has ocurred");
+                alert.setHeaderText("An error has occurred");
+                alert.setContentText("An unexcpected error has occurred when registering the user. Please try again");
+                
+                
                 StringWriter sw = new StringWriter();
                 PrintWriter pw = new PrintWriter(sw);
                 e.printStackTrace(pw);
@@ -317,7 +338,7 @@ public class SignUpDefController implements Initializable {
     }
 
     @FXML
-    private void handleChooseImage(ActionEvent event) throws Exception {
+    private void handleChooseImage(ActionEvent event) {
         FileChooser fileChoose = new FileChooser();
         File recordsDir = new File(System.getProperty("user.Desktop"), "src/resources");
         System.out.println(recordsDir);
@@ -332,10 +353,55 @@ public class SignUpDefController implements Initializable {
         fileChoose.getExtensionFilters().add(fileExtensions);
         fileChoose.setTitle("Open File");  
         File file = fileChoose.showOpenDialog(primaryStage);
-        System.out.print(file);
-        String imageUrl = file.toURI().toURL().toExternalForm();
-        Image image = new Image(imageUrl);
-        avaPrin.setFill(new ImagePattern(image));
+        
+        try{
+            
+            if(file != null)
+            {
+                String imageUrl = file.toURI().toURL().toExternalForm();
+                Image image = new Image(imageUrl);
+                avaPrin.setFill(new ImagePattern(image));
+            }
+
+
+        }
+        catch(MalformedURLException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                
+                
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+                
+                Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+                alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStyleClass().add("customAlert");
+                alert.setTitle("Exception Dialog");
+                alert.setHeaderText("An error has occurred");
+                alert.setContentText("The image selected could not be opened. Please try again");
+                
+                
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+                
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
+                
+                alert.getDialogPane().setExpandableContent(expContent);
+                alert.showAndWait();
+            
+        }
         sel.setStroke(Color.TRANSPARENT);
     }   
     

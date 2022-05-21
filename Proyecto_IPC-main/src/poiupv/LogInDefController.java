@@ -126,15 +126,55 @@ public class LogInDefController implements Initializable {
     }
 
     @FXML
-    private void handleSignUpClick(MouseEvent event) throws IOException {
+    private void handleSignUpClick(MouseEvent event) {
         FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/SignUpDef.fxml"));
-        Parent root = (Parent) myLoader.load();
-        SignUpDefController signUpContr = myLoader.<SignUpDefController>getController();
-        signUpContr.initStage(primaryStage);
-        primaryStage.getScene().setRoot(root);    }
+        try{
+            Parent root = (Parent) myLoader.load();
+            SignUpDefController signUpContr = myLoader.<SignUpDefController>getController();
+            signUpContr.initStage(primaryStage);
+            primaryStage.getScene().setRoot(root);
+        }
+        catch(IOException e )
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                
+                
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alert.getDialogPane().getStyleClass().add("customAlert");
+            alert.setTitle("Exception Dialog");
+            alert.setHeaderText("An error has occurred");
+            alert.setContentText("An unexcpected error has occurred when loading the sign up scene. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+            alert.showAndWait();
+        }
+    }
 
     @FXML
-    private void handleEnterPressed(ActionEvent event) throws Exception {           
+    private void handleEnterPressed(ActionEvent event)  {           
             
         if (!navegation.exitsNickName(usernameField.getText())){
            usernameError.setVisible(true);
@@ -153,9 +193,9 @@ public class LogInDefController implements Initializable {
                 MainTestController mtCtrl = myLoader.<MainTestController>getController();
                 mtCtrl.initStage(primaryStage, user);
                 primaryStage.getScene().setRoot(root);
-                throw new Exception("error");
+                
             }
-            catch(Exception e)
+            catch(IOException e)
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 
@@ -168,7 +208,7 @@ public class LogInDefController implements Initializable {
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
                 alert.setHeaderText("An error has occurred");
-                alert.setContentText("An error has occurred");
+                alert.setContentText("There has been an error loading the scene");
                 
                 
                 StringWriter sw = new StringWriter();
@@ -200,10 +240,10 @@ public class LogInDefController implements Initializable {
     @FXML
     private void handleKeyPressed(KeyEvent event) {
         KeyCode keyPressed = event.getCode();
-        try{
+        
         if(keyPressed == KeyCode.ENTER) handleEnterPressed(new ActionEvent());
-        }
-        catch(Exception e) {}
+        
+        
     }
 
     private void setSide(double w, double h)

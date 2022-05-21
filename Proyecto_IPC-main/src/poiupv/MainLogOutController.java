@@ -5,6 +5,10 @@
  */
 package poiupv;
 
+import DBAccess.NavegacionDAOException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -14,10 +18,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -130,13 +140,91 @@ public class MainLogOutController implements Initializable {
     }
   
     @FXML
-    private void handleConfirmateLogOut(ActionEvent event) throws Exception{
+    private void handleConfirmateLogOut(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogInDef.fxml"));
-        Parent root = (Parent) loader.load();
-        LogInDefController mainTCtrl = loader.<LogInDefController>getController();
-        mainTCtrl.initStage(primaryStage);
-        primaryStage.getScene().setRoot(root);
-        user.addSession(new Session(LocalDateTime.now(), hits, faults ));
+        try{
+            Parent root = (Parent) loader.load();
+            LogInDefController mainTCtrl = loader.<LogInDefController>getController();
+            try{
+                user.addSession(new Session(LocalDateTime.now(), hits, faults ));
+            }
+            catch(NavegacionDAOException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                //CAMBIAR TIPO DE DIALOGO?
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+                Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+                alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStyleClass().add("customAlert");
+                alert.setTitle("Exception Dialog");
+                alert.setHeaderText("An error has occurred");
+                alert.setContentText("An unexcpected error has occurred when trying to save the session into the database. Please try again");
+
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
+
+                alert.getDialogPane().setExpandableContent(expContent);
+                alert.showAndWait();
+                
+            }
+            mainTCtrl.initStage(primaryStage);
+            primaryStage.getScene().setRoot(root);
+            
+        }
+        catch(IOException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                
+                
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alert.getDialogPane().getStyleClass().add("customAlert");
+            alert.setTitle("Exception Dialog");
+            alert.setHeaderText("An error has occurred");
+            alert.setContentText("An unexcpected error has occurred when loading the log in scene. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+            alert.showAndWait();
+        }
+        
     }
     
     public void calcSideBar (double w) {

@@ -5,6 +5,9 @@
  */
 package poiupv;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -15,10 +18,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
@@ -125,48 +135,200 @@ public class SidebarController implements Initializable {
     }
 
     @FXML
-    private void handleTest(ActionEvent event) throws Exception {
+    private void handleTest(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
-        Parent root = (Parent) loader.load();
-        MainTestController mTCtrl = loader.<MainTestController>getController();
-        mTCtrl.initStage(primaryStage, user);
-        primaryStage.getScene().setRoot(root);
-        primaryStage.show();
-        System.out.println(user.getNickName());
+        try{
+            Parent root = (Parent) loader.load();
+            MainTestController mTCtrl = loader.<MainTestController>getController();
+            mTCtrl.initStage(primaryStage, user);
+            primaryStage.getScene().setRoot(root);
+            primaryStage.show();
+        }
+        catch(IOException e)
+        {
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStyleClass().add("customAlert");
+            alertErr.setTitle("Exception Dialog");
+            alertErr.setHeaderText("An error has occurred");
+            alertErr.setContentText("An unexpected error occurred trying to load the main test scene. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alertErr.getDialogPane().setExpandableContent(expContent);
+            alertErr.showAndWait();
+        }
     }
 
     @FXML
     //TO COMPLETE
-    private void handleResult(ActionEvent event) throws Exception {
+    private void handleResult(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
-        Parent root = (Parent) loader.load();
-        MainResultsController mRCtrl = loader.<MainResultsController>getController();
-        mRCtrl.initStage(primaryStage, user);
-        primaryStage.getScene().setRoot(root);
-        primaryStage.show();
-        System.out.println(user.getNickName());
+        try{
+            Parent root = (Parent) loader.load();
+            MainResultsController mRCtrl = loader.<MainResultsController>getController();
+            mRCtrl.initStage(primaryStage, user);
+            primaryStage.getScene().setRoot(root);
+            primaryStage.show();
+            
+        }
+        catch(IOException e)
+        {
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStyleClass().add("customAlert");
+            alertErr.setTitle("Exception Dialog");
+            alertErr.setHeaderText("An error has occurred");
+            alertErr.setContentText("An unexpected error occurred trying to load the results. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alertErr.getDialogPane().setExpandableContent(expContent);
+            alertErr.showAndWait();
+        }
     }
 
     @FXML
-    private void handleProfile(ActionEvent event) throws Exception {
+    private void handleProfile(ActionEvent event)  {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainProfile.fxml"));
-        Parent root = (Parent) loader.load();
-        MainProfileController mPCtrl = loader.<MainProfileController>getController();
-        mPCtrl.initStage(primaryStage, user);
-        primaryStage.getScene().setRoot(root);
-        primaryStage.show();
-        System.out.println(user.getNickName());
+        try{
+            Parent root = (Parent) loader.load();
+            MainProfileController mPCtrl = loader.<MainProfileController>getController();
+            mPCtrl.initStage(primaryStage, user);
+            primaryStage.getScene().setRoot(root);
+            primaryStage.show();
+        }
+        catch(IOException e)
+        {
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStyleClass().add("customAlert");
+            alertErr.setTitle("Exception Dialog");
+            alertErr.setHeaderText("An error has occurred");
+            alertErr.setContentText("An unexpected error occurred trying to load the profile. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alertErr.getDialogPane().setExpandableContent(expContent);
+            alertErr.showAndWait();
+        }
+        
     }
 
     @FXML
-    private void handleLogOut(ActionEvent event) throws Exception {
+    private void handleLogOut(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainLogOut.fxml"));
-        Parent root = (Parent) loader.load();
-        MainLogOutController mLCtrl = loader.<MainLogOutController>getController();
-        mLCtrl.initStage(primaryStage, user);
-        primaryStage.getScene().setRoot(root);
-        primaryStage.show();
-        System.out.println(user.getNickName());
+        try{
+            Parent root = (Parent) loader.load();
+            MainLogOutController mLCtrl = loader.<MainLogOutController>getController();
+            mLCtrl.initStage(primaryStage, user);
+            primaryStage.getScene().setRoot(root);
+            primaryStage.show();
+        }
+        catch(IOException e)
+        {
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStyleClass().add("customAlert");
+            alertErr.setTitle("Exception Dialog");
+            alertErr.setHeaderText("An error has occurred");
+            alertErr.setContentText("An unexpected error occurred trying to load the log out scene. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alertErr.getDialogPane().setExpandableContent(expContent);
+            alertErr.showAndWait();
+            
+        }
+        
     }
 
     @FXML

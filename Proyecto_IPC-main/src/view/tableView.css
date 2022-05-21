@@ -56,3 +56,6 @@
     -fx-padding: 7px;
     -fx-text-alignment: center;
 }
+#hits, #faults, #timestamp{
+    -fx-alignment: CENTER;
+}

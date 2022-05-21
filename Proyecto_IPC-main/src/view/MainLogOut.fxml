@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" stylesheets="@logOutStyleSheet.css"  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainLogOutController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
          <children>
             <VBox fx:id="aux" alignment="CENTER" prefHeight="441.0" prefWidth="841.0" spacing="15.0">
                <children>
-                  <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" style="-fx-text-fill: black;" text="Are you sure you want to log out?" textAlignment="CENTER" textFill="#0a0a0a" wrapText="true">
+                  <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" text="Are you sure you want to log out?" textAlignment="CENTER" textFill="#0a0a0a" wrapText="true">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
