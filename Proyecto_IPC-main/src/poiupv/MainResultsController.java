@@ -29,6 +29,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.DateCell;
@@ -41,6 +43,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -79,11 +82,11 @@ public class MainResultsController implements Initializable {
     @FXML
     private TableColumn<Session, String> timestamp;
     @FXML
-    private TableColumn<?, ?> hits;
+    private TableColumn<Session, String> hits;
     @FXML
-    private TableColumn<?, ?> faults;
+    private TableColumn<Session, String> faults;
     @FXML
-    private TableColumn<?, ?> dateT;
+    private TableColumn<Session, String> dateT;
     
     /**
      * Initializes the controller class.
@@ -109,7 +112,6 @@ public class MainResultsController implements Initializable {
         sidebarController.setUser(user);
         l = new ArrayList<Session>();
         data = FXCollections.observableArrayList(l);;
-        listView.setCellFactory((c)->{return new SessionListCell();});
         loadResults();
         currentSessionLabel.setText("Current session:\t" + MainLogOutController.hits + " hits\t" + 
                                       MainLogOutController.faults + " faults");
@@ -124,16 +126,16 @@ public class MainResultsController implements Initializable {
                 } 
             };
         });
-        /*
-        tableResults.widthProperty().addListener((obs, oldv, newv) -> {            
+        tableView.widthProperty().addListener((obs, oldv, newv) -> {            
             hits.setMinWidth((double)newv*0.2);
             hits.setMaxWidth((double)newv*0.2);
             faults.setMinWidth((double)newv*0.2);            
             faults.setMaxWidth((double)newv*0.2);
-            timestamp.setMinWidth((double)newv*0.6);           
-            timestamp.setMaxWidth((double)newv*0.6);           
+            dateT.setMinWidth((double)newv*0.2);           
+            dateT.setMaxWidth((double)newv*0.2);  
+            timestamp.setMinWidth((double)newv*0.4);           
+            timestamp.setMaxWidth((double)newv*0.4);           
         });
-        */
         primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
             System.out.println("prin: "+ newv);;
             calcSize((double)newv);
@@ -145,19 +147,6 @@ public class MainResultsController implements Initializable {
             calcSideBar((double) newv);
         });
     }
-    
-    class SessionListCell extends ListCell<Session> {
-        @Override
-        protected void updateItem(Session item, boolean empty){
-            super.updateItem(item, empty);
-            if(item==null || empty)
-                setText(null);
-            else
-                setText("Fautls: "+item.getFaults()+ "\tHits :" + item.getHits() + "\tDate: " + item.getLocalDate() + "\tTime: " + item.getTimeStamp());
-            
-        }
-    }
-    
     public void updateSidebar(double w)
     {
         sidebarController.clearSidebar(w);
@@ -166,10 +155,10 @@ public class MainResultsController implements Initializable {
     
     private void setupTable()
     {
-        hits.setCellValueFactory(new PropertyValueFactory<>("hits"));
-        faults.setCellValueFactory(new PropertyValueFactory<>("faults"));
-        timestamp.setCellValueFactory(new PropertyValueFactory<>("timeStamp"));
-        dateT.setCellValueFactory(new PropertyValueFactory<>("date"));
+        hits.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHits() + ""));
+        faults.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFaults()+ ""));
+        timestamp.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTimeStamp().getHour() + ":" + param.getValue().getTimeStamp().getMinute() + ":" + param.getValue().getTimeStamp().getSecond()));
+        dateT.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getLocalDate()+ ""));
     }
     
     
@@ -185,7 +174,6 @@ public class MainResultsController implements Initializable {
                     data.add(sess);
                 }
             }
-            listView.setItems(data);
             tableView.setItems(data);
         }
         catch(NullPointerException e)

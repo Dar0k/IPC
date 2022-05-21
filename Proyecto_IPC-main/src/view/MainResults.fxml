@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
@@ -31,7 +30,7 @@
                               </Label>
                               <HBox id="datepickHbox" prefHeight="5.0" prefWidth="150.0">
                                  <children>
-                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" promptText="choose a date" stylesheets="@datePickerStyleSheet.css" />
+                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" promptText="Choose a date" stylesheets="@datePickerStyleSheet.css" />
                                  </children>
                               </HBox>
                            </children>
@@ -46,13 +45,12 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listView" prefHeight="102.0" prefWidth="450.0" stylesheets="@testList.css" />
-                  <TableView fx:id="tableView" prefHeight="89.0" prefWidth="450.0">
+                  <TableView fx:id="tableView" prefHeight="1000.0" prefWidth="450.0">
                     <columns>
-                      <TableColumn fx:id="dateT" prefWidth="120.0" text="Date" />
-                      <TableColumn fx:id="hits" prefWidth="85.0" text="Hits" />
-                        <TableColumn fx:id="faults" prefWidth="85.0" text="Faults" />
-                        <TableColumn fx:id="timestamp" prefWidth="167.0" text="TimeStamp" />
+                      <TableColumn id="date" fx:id="dateT" prefWidth="120.0" text="Date" />
+                      <TableColumn id="hits" fx:id="hits" prefWidth="85.0" text="Hits" />
+                        <TableColumn id="faults" fx:id="faults" prefWidth="85.0" text="Faults" />
+                        <TableColumn id="timestamp" fx:id="timestamp" prefWidth="167.0" text="TimeStamp" />
                     </columns>
                   </TableView>
                </children>

@@ -19,5 +19,86 @@ and open the template in the editor.
     -fx-border-color: black; 
     -fx-border-width: 0 0 1.25 0;
 }
+.list-cell {
+    -fx-padding-left: 10px;
+}
 
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#404040 0%, #303030 25%, #202020 75%, #101010 100%);
+    -fx-text-fill: white;
+}
+
+.list-cell:even {
+    -fx-background-color: white
+}
+
+.list-cell:odd {
+    -fx-background-color: #efefef;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: linear-gradient(#b0b0b0 0%, #a0a0a0 25%, #909090 75%, #808080 100%);;
+    -fx-text-fill: white;
+}
+.table-view {
+    -fx-border: none;
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-text-background-color: black;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, #585858, #808080);
+    -fx-background-radius: 15px;
+    -fx-padding: 7px;
+    -fx-text-background-color: white;
+}
+.table-view .table-cell{
+    -fx-border-color: transparent;
+}
+.table-row-cell:hover {
+    -fx-background-color: #707070;
+}
+.table-row-cell:odd{
+    -fx-background-color: #E8E8E8;
+}
+.table-row-cell:even{
+    -fx-background-color: #FFF;
+}
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #585858, #808080);
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, #585858, #808080);
+}
+.table-view .table-cell {
+    -fx-padding: 7px;
+    -fx-text-alignment: center;
+}
+#hits, #faults, #timestamp, #date{
+    -fx-alignment: CENTER;
+}
 
