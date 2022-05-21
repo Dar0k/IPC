@@ -177,6 +177,11 @@ public class MapController implements Initializable {
     private ScrollBar scrollBarv;
     @FXML
     private Circle sizeProf;
+    private Line lineX;
+    private Line lineY;
+    private ArrayList<Line> lineXArr;
+    private ArrayList<Line> lineYArr;
+
     /**
      * Initializes the controller class.
      */
@@ -211,7 +216,10 @@ public class MapController implements Initializable {
         questionNumber.setText("Problem " + number);
         
         cList = new ArrayList<Circle>();
-        tList = new ArrayList<Tooltip>();  
+        tList = new ArrayList<Tooltip>();
+        
+        lineXArr = new ArrayList<Line>();
+        lineYArr = new ArrayList<Line>();
         
         scrollBarv = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
         
@@ -395,7 +403,7 @@ public class MapController implements Initializable {
                 dot.setFill(colorPicker.getValue());
                 zoomGroup.getChildren().add(dot);
                 dot.setOnMousePressed(c -> {removeElement(dot); map_scrollpane.setPannable(false);});
-                dot.setOnMouseExited(c -> {
+                /*dot.setOnMouseExited(c -> {
                     if(buttonSelection.equals("coords")) { 
                         map_scrollpane.getScene().setCursor(Cursor.DEFAULT);
                         dotTooltip(dot, false);
@@ -407,7 +415,7 @@ public class MapController implements Initializable {
                         map_scrollpane.getScene().setCursor(Cursor.HAND);                        
                         dotTooltip(dot, true);                  
                     }
-                });
+                });*/
                 break;
             case "arc":
                 circle = new Circle(event.getX(), event.getY(), sizeSlider.getValue());
@@ -473,6 +481,25 @@ public class MapController implements Initializable {
             case "cubo":
                 break;
             
+            case "coords":
+                Line lineY = new Line(event.getX(), 0, event.getX(), 5760);
+                lineY.setStrokeWidth(3);
+                lineY.setFill(colorPicker.getValue());
+                lineY.setStroke(colorPicker.getValue());
+                Line lineX = new Line(0, event.getY(), 8960, event.getY());
+                lineX.setStrokeWidth(3);
+                lineX.setFill(colorPicker.getValue());
+                lineX.setStroke(colorPicker.getValue());
+                zoomGroup.getChildren().add(lineX);
+                zoomGroup.getChildren().add(lineY);
+                lineXArr.add(lineX);
+                lineYArr.add(lineY);
+                
+                lineX.setOnMouseClicked(c -> removeLine(lineX, true));
+                lineY.setOnMouseClicked(c -> removeLine(lineY, false));
+
+                break;
+                
                 
             default:
                 map_scrollpane.setPannable(true);
@@ -499,12 +526,30 @@ public class MapController implements Initializable {
                 s.setStroke(colorPicker.getValue());
                 s.setFill(colorPicker.getValue());
                 zoomGroup.getChildren().set(index, s);
-            }
-            
-            
+            }                        
         }
     }
 // rgba(132, 81, 43, 0.75)
+    private void removeLine(Line line, boolean isX)
+    {
+        if(buttonSelection.equals("eraser"))
+        {
+            int index;
+            if(isX)
+            {
+                index = lineXArr.indexOf(line);
+                zoomGroup.getChildren().remove(line);
+                zoomGroup.getChildren().remove(lineYArr.get(index));
+            }
+            else{
+                index = lineYArr.indexOf(line);
+                zoomGroup.getChildren().remove(line);
+                zoomGroup.getChildren().remove(lineXArr.get(index));
+            }
+        }
+        
+        
+    }
     @FXML
     private void handleTransportador(ActionEvent event) {
         transportador.setTranslateX(map_scrollpane.getHvalue()*8960);
