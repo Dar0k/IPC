@@ -849,23 +849,23 @@ public class MapController implements Initializable {
         System.out.println("vbox H: " + newv);
         System.out.println("row: " + questionLabel.getPrefRowCount());
         checkScrollBar();
-        if((double)newv < 270){
+        if((double)newv < 250){
             goBackButton.setPrefWidth(newv*0.4);
             sendButton.setPrefWidth(newv*0.4);
             hbButton.setSpacing(10);
-        }  else if((double)newv >= 270 && (double)newv <380){
-            double act = 270-(double)newv;
-            int stageDif = 380-270;
+        }  else if((double)newv >= 250 && (double)newv <380){
+            double act = 380-(double)newv;
+            int stageDif = 380-250;
             double per = 1 - (act/stageDif);
-            double spacDif = 25-10;
+            double spacDif = 35-10;
             
             hbButton.setSpacing(10+spacDif*per);
-            goBackButton.setPrefWidth(108);
-            sendButton.setPrefWidth(108);
+            goBackButton.setPrefWidth(100);
+            sendButton.setPrefWidth(100);
         }else{
-            hbButton.setSpacing(25);
-            goBackButton.setPrefWidth(108);
-            sendButton.setPrefWidth(108);
+            hbButton.setSpacing(35);
+            goBackButton.setPrefWidth(100);
+            sendButton.setPrefWidth(100);
         }
     }
     

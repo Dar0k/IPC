@@ -4,6 +4,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -44,7 +46,15 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listView" prefHeight="269.0" prefWidth="488.0" stylesheets="@testList.css" />
+                  <ListView fx:id="listView" prefHeight="102.0" prefWidth="450.0" stylesheets="@testList.css" />
+                  <TableView fx:id="tableView" prefHeight="89.0" prefWidth="450.0">
+                    <columns>
+                      <TableColumn fx:id="dateT" prefWidth="120.0" text="Date" />
+                      <TableColumn fx:id="hits" prefWidth="85.0" text="Hits" />
+                        <TableColumn fx:id="faults" prefWidth="85.0" text="Faults" />
+                        <TableColumn fx:id="timestamp" prefWidth="167.0" text="TimeStamp" />
+                    </columns>
+                  </TableView>
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
