@@ -7,6 +7,7 @@ package poiupv;
 
 import DBAccess.NavegacionDAOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,9 +29,13 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
@@ -38,6 +43,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -67,11 +73,20 @@ public class MainResultsController implements Initializable {
     @FXML
     private Label birthLabel;
     @FXML
-    private Label ageError;
-    @FXML
     private Label currentSessionLabel;
     @FXML
     private ListView<Session> listView;
+    @FXML
+    private TableView<Session> tableView;
+    private TableColumn<Session, String> date;
+    @FXML
+    private TableColumn<Session, String> timestamp;
+    @FXML
+    private TableColumn<Session, String> hits;
+    @FXML
+    private TableColumn<Session, String> faults;
+    @FXML
+    private TableColumn<Session, String> dateT;
     
     /**
      * Initializes the controller class.
@@ -80,9 +95,9 @@ public class MainResultsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sidebarController.initialize(url, rb);
-        //setupTable();
+        setupTable();
     }
-    
+        
     public void initStage(Stage stage, User us)
     {
         try {            
@@ -96,22 +111,31 @@ public class MainResultsController implements Initializable {
         user = us;
         sidebarController.setUser(user);
         l = new ArrayList<Session>();
-        data = FXCollections.observableArrayList(l);
+        data = FXCollections.observableArrayList(l);;
         loadResults();
         currentSessionLabel.setText("Current session:\t" + MainLogOutController.hits + " hits\t" + 
                                       MainLogOutController.faults + " faults");
         
-        
-        /*
-        tableResults.widthProperty().addListener((obs, oldv, newv) -> {            
+        datePicker.setDayCellFactory((DatePicker picker) -> {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    LocalDate today = LocalDate.now();
+                    setDisable(empty || date.compareTo(today) > 0 );
+                } 
+            };
+        });
+        tableView.widthProperty().addListener((obs, oldv, newv) -> {            
             hits.setMinWidth((double)newv*0.2);
             hits.setMaxWidth((double)newv*0.2);
             faults.setMinWidth((double)newv*0.2);            
             faults.setMaxWidth((double)newv*0.2);
-            timestamp.setMinWidth((double)newv*0.6);           
-            timestamp.setMaxWidth((double)newv*0.6);           
+            dateT.setMinWidth((double)newv*0.2);           
+            dateT.setMaxWidth((double)newv*0.2);  
+            timestamp.setMinWidth((double)newv*0.4);           
+            timestamp.setMaxWidth((double)newv*0.4);           
         });
-        */
         primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
             System.out.println("prin: "+ newv);;
             calcSize((double)newv);
@@ -123,20 +147,20 @@ public class MainResultsController implements Initializable {
             calcSideBar((double) newv);
         });
     }
-    
     public void updateSidebar(double w)
     {
         sidebarController.clearSidebar(w);
         sidebarController.boldResultsButton(w);
     }
-    /*
+    
     private void setupTable()
     {
-        hits.setCellValueFactory(new PropertyValueFactory<>("hits"));
-        faults.setCellValueFactory(new PropertyValueFactory<>("faults"));
-        timestamp.setCellValueFactory(new PropertyValueFactory<>("timeStamp"));
+        hits.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHits() + ""));
+        faults.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFaults()+ ""));
+        timestamp.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTimeStamp().getHour() + ":" + param.getValue().getTimeStamp().getMinute() + ":" + param.getValue().getTimeStamp().getSecond()));
+        dateT.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getLocalDate()+ ""));
     }
-    */
+    
     
     @FXML
     public void loadResults()
@@ -150,7 +174,7 @@ public class MainResultsController implements Initializable {
                     data.add(sess);
                 }
             }
-            listView.setItems(data);
+            tableView.setItems(data);
         }
         catch(NullPointerException e)
         {}
@@ -172,27 +196,20 @@ public class MainResultsController implements Initializable {
     private void calcSize (double newv){    
         if((double)newv < 400){
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
-            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             birthLabel.setFont(fontLa);
             datePicker.setStyle("-fx-font-size: "+(12));
-            ageError.setFont(fontEr);
         }  else if((double)newv >= 400 && (double)newv <530){
             double act = 530-(double)newv;
             int stageDif = 530-375;
             double per = 1 - (act/stageDif);
             int fontLaDif = 16 - 12;
-            int fontErDif = 14 - 12;
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontLaDif*per));
-            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontErDif*per));
             birthLabel.setFont(fontLa);
             datePicker.setStyle("-fx-font-size: "+(12.0 + (fontLaDif*per)));
-            ageError.setFont(fontEr);
         }else{
-            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
-            Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14);            
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);            
             birthLabel.setFont(fontLa);
-            datePicker.setStyle("-fx-font-size: "+ 16);
-            ageError.setFont(fontEr);      
+            datePicker.setStyle("-fx-font-size: "+ 16);      
         }
     }
 

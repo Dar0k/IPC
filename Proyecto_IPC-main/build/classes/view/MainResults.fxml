@@ -3,12 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" stylesheets="@resultsStyleSheet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" stylesheets="@resultsStyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="532.0" HBox.hgrow="ALWAYS">
@@ -29,14 +30,9 @@
                               </Label>
                               <HBox id="datepickHbox" prefHeight="5.0" prefWidth="150.0">
                                  <children>
-                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" stylesheets="@datePickerStyleSheet.css" />
+                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" promptText="Choose a date" stylesheets="@datePickerStyleSheet.css" />
                                  </children>
                               </HBox>
-                              <Label fx:id="ageError" alignment="TOP_LEFT" minHeight="21.0" prefHeight="21.0" prefWidth="174.0" text="Must be at least 12 years old" textFill="RED" visible="false" wrapText="true">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Label>
                            </children>
                         </VBox>
                      </children>
@@ -49,10 +45,17 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listView" prefHeight="214.0" prefWidth="393.0" stylesheets="@../resources/testList.css" />
+                  <TableView fx:id="tableView" prefHeight="1000.0" prefWidth="450.0">
+                    <columns>
+                      <TableColumn id="date" fx:id="dateT" prefWidth="120.0" text="Date" />
+                      <TableColumn id="hits" fx:id="hits" prefWidth="85.0" text="Hits" />
+                        <TableColumn id="faults" fx:id="faults" prefWidth="85.0" text="Faults" />
+                        <TableColumn id="timestamp" fx:id="timestamp" prefWidth="167.0" text="TimeStamp" />
+                    </columns>
+                  </TableView>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
                </padding>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

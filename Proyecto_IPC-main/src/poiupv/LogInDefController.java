@@ -90,7 +90,7 @@ public class LogInDefController implements Initializable {
         
         });
         
-        primaryStage.setMinHeight(400);
+        primaryStage.setMinHeight(410);
         primaryStage.setMinWidth(420);
     }
     /**
@@ -139,7 +139,7 @@ public class LogInDefController implements Initializable {
 
             Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
             alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
             alert.getDialogPane().getStyleClass().add("customAlert");
             alert.setTitle("Exception Dialog");
             alert.setHeaderText("An error has occurred");
@@ -200,7 +200,7 @@ public class LogInDefController implements Initializable {
                 
                  Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
                 alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
                 alert.setHeaderText("An error has occurred");

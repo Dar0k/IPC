@@ -247,17 +247,17 @@ public class MainProfileController implements Initializable {
     {
         // open dialog box to confirm that wants to save
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Cancel");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Accept");
         Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
         alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
         alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Save");
         alert.setHeaderText("Are you sure you want to save?");
         alert.setContentText("Your profile information will be updated but you can't undo the action. Are you sure you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK){
+        if (result.isPresent() && result.get() == ButtonType.CANCEL){
             System.out.println("OK");
             ImagePattern imPa = (ImagePattern) avaPrin.getFill();
             Image image = imPa.getImage();
@@ -277,7 +277,7 @@ public class MainProfileController implements Initializable {
 
                 Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
                 alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
-                alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
                 alertErr.getDialogPane().getStyleClass().add("customAlert");
                 alertErr.setTitle("Exception Dialog");
                 alertErr.setHeaderText("An error has occurred");
@@ -303,12 +303,8 @@ public class MainProfileController implements Initializable {
                 expContent.add(textArea, 0, 1);
 
                 alertErr.getDialogPane().setExpandableContent(expContent);
-                alertErr.showAndWait();
-                
-            }
-            
-            
-            
+                alertErr.showAndWait();               
+            }           
         } else {
             System.out.println("CANCEL");
         }   
@@ -317,17 +313,17 @@ public class MainProfileController implements Initializable {
     private void cancelCheck() 
     {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Accept");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Cancel");
         Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
         alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
         alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Cancelation");
         alert.setHeaderText("Are you sure you want to cancel?");
         alert.setContentText("All your modifications will be discarted. Are you sure you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK){
+        if (result.isPresent() && result.get() == ButtonType.CANCEL){
             System.out.println("OK");
             initStage(primaryStage, user);
         } else {
@@ -403,7 +399,7 @@ public class MainProfileController implements Initializable {
 
             Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
             alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
-            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");
