@@ -96,7 +96,8 @@ public class LogInDefController implements Initializable {
         
         });
         
-        
+        primaryStage.setMinHeight(400);
+        primaryStage.setMinWidth(420);
     }
     /**
      * Initializes the controller class.
@@ -114,6 +115,7 @@ public class LogInDefController implements Initializable {
         passwordTextField.textProperty().addListener((obs, oldVal, newVal) -> {
             passwordField.setText(newVal);
         });
+        
     }
     @FXML
     private void handleEyeCicked(MouseEvent event) {
@@ -223,10 +225,10 @@ public class LogInDefController implements Initializable {
         if(h > 500)
         {
             System.out.println(25+ h*0.05);
-            side.setSpacing(25+ h*0.04);
+            side.setSpacing(15+ h*0.045);
         }
         else{
-            side.setSpacing(25);
+            side.setSpacing(15);
             
         }
         }

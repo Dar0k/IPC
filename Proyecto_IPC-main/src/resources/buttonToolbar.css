@@ -71,8 +71,7 @@ and open the template in the editor.
 #toolbar .context-menu
  {
      -fx-background-color:  #7bc0ce;
- }
- 
+ } 
  
  .scroll-pane .corner{
      -fx-background-color: black;
@@ -156,3 +155,37 @@ and open the template in the editor.
 .color-palette .hyperlink {  
         visibility: hidden; 
 } 
+
+.text-area{
+    -fx-background-color:transparent;
+    
+}
+.text-area .content {
+    -fx-background-color:  transparent;
+    -fx-border-color: transparent;
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.text-area *.text{
+    -fx-text-alignment: justify;
+}
+
+#button4 {
+    -fx-background-color: black;
+    -fx-background-radius: 10;
+}
+#button4:hover {
+    -fx-background-color: rgba(0,0,0,0.75);
+}
+#button4:pressed {
+    -fx-background-color: rgba(0,0,0,0.5);
+}
+
+.radio-button .radio {
+    -fx-background-color: white;
+    -fx-background-image: null;    
+}
+.radio-button{
+    -fx-padding: 3
+}

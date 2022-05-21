@@ -141,7 +141,7 @@ public class MainResultsController implements Initializable {
         try{
             List<Session> sessions = user.getSessions();
             for (Session sess: sessions) {
-                if ((datePicker.getValue() != null && sess.getLocalDate().isAfter(datePicker.getValue())) || datePicker.getValue() == null) {
+                if ((datePicker.getValue() != null && (sess.getLocalDate().isAfter(datePicker.getValue()) ||sess.getLocalDate().isEqual(datePicker.getValue()) )) || datePicker.getValue() == null) {
                     tableResults.getItems().add(sess);
                 }
             }
