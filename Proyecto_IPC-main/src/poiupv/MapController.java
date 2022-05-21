@@ -50,6 +50,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -177,6 +178,8 @@ public class MapController implements Initializable {
     private ScrollBar scrollBarv;
     @FXML
     private Circle sizeProf;
+    @FXML
+    private HBox hbButton;
     /**
      * Initializes the controller class.
      */
@@ -223,12 +226,6 @@ public class MapController implements Initializable {
             calcWSize((double)newv);
         });
         calcWSize(170);
-        questionLabel.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                 questionLabel.setPrefHeight(questionLabel.getPrefHeight()+10); 
-            }
-        });
         
         
         
@@ -245,6 +242,7 @@ public class MapController implements Initializable {
         map_scrollpane.setContent(contentGroup);
         colorPicker.setValue(Color.BLACK);
         sizeSlider.setMin(5);
+        sizeSlider.setValue(25);
         sizeProf.radiusProperty().bind(Bindings.divide(sizeSlider.valueProperty(), 4));        
         
         rad.selectedToggleProperty().addListener((obs, oldv, newv) -> {
@@ -552,19 +550,68 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleGoBackButton(ActionEvent event)  {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
-        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
-        alert.getDialogPane().getStyleClass().add("customAlert");
-        alert.setTitle("Go back");
-        alert.setHeaderText("Are you sure you want to leave the test?");
-        alert.setContentText("All your progress will be lost and you will not be able com back. Are you sure you want to continue?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK){
-            System.out.println("OK");
+        if(goBackButton.getText().equals("Back")){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Cancel");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Accept");
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
+            alert.getDialogPane().getStyleClass().add("customAlert");
+            alert.setTitle("Go back");
+            alert.setHeaderText("Are you sure you want to leave the test?");
+            alert.setContentText("All your progress will be lost and you will not be able com back. Are you sure you want to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.CANCEL){
+                System.out.println("OK");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+                try{
+                    Parent root = (Parent) loader.load();
+                    MainTestController mTCtrl = loader.<MainTestController>getController();
+                    mTCtrl.initStage(primaryStage, user);
+                    primaryStage.getScene().setRoot(root);
+                    primaryStage.show();
+                }
+                catch(IOException e)
+                {
+                Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+                ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+                Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+                alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
+                alertErr.getDialogPane().getStyleClass().add("customAlert");
+                alertErr.setTitle("Exception Dialog");
+                alertErr.setHeaderText("An error has occurred");
+                alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
+
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
+
+                alertErr.getDialogPane().setExpandableContent(expContent);
+                alertErr.showAndWait();
+                }
+            } else {
+                System.out.println("CANCEL");
+            } 
+        }else{                
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
             try{
                 Parent root = (Parent) loader.load();
@@ -574,84 +621,90 @@ public class MapController implements Initializable {
                 primaryStage.show();
             }
             catch(IOException e)
-        {
-            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+            {
+                Alert alertErr = new Alert(Alert.AlertType.ERROR);
 
-            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+                ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
 
-            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
-            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
-            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
-            alertErr.getDialogPane().getStyleClass().add("customAlert");
-            alertErr.setTitle("Exception Dialog");
-            alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
+                Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+                alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
+                alertErr.getDialogPane().getStyleClass().add("customAlert");
+                alertErr.setTitle("Exception Dialog");
+                alertErr.setHeaderText("An error has occurred");
+                alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            String exceptionText = sw.toString();
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
 
-            Label label = new Label("Exception:");
-            TextArea textArea = new TextArea(exceptionText);
-            textArea.setEditable(false);
-            textArea.setWrapText(true);
-            textArea.setMaxWidth(Double.MAX_VALUE);
-            textArea.setMaxHeight(Double.MAX_VALUE);
-            GridPane.setVgrow(textArea, Priority.ALWAYS);
-            GridPane.setHgrow(textArea, Priority.ALWAYS);
-            GridPane expContent = new GridPane();
-            expContent.setMaxWidth(Double.MAX_VALUE);
-            expContent.add(label,0,0);
-            expContent.add(textArea, 0, 1);
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
 
-            alertErr.getDialogPane().setExpandableContent(expContent);
-            alertErr.showAndWait();
-        }
-            
-        } else {
-            System.out.println("CANCEL");
-        }   
+                alertErr.getDialogPane().setExpandableContent(expContent);
+                alertErr.showAndWait();
+            }        
+        }          
     }
 
     @FXML
     private void handleSendButton(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
-        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-        alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
-        alert.getDialogPane().getStyleClass().add("customAlert");
-        alert.setTitle("Send");
-        alert.setHeaderText("Are you sure you want to send you answere?");
-        alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK){
-            boolean tempB = false; int i;            
-            for(i = 0; i<4 && !tempB; i++){
-                if (problem.getAnswers().get(selectionArr[i]).getValidity()) {
-                    i--; tempB =true;
-                };
-            }            
-            RadioButton temp = radioButtonA; 
-            if(radioButtonA.isSelected()) {selection = 0; temp = radioButtonA;}
-            else if(radioButtonB.isSelected()) {selection = 1; temp = radioButtonB;}
-            else if(radioButtonC.isSelected()) {selection = 2; temp = radioButtonC;}
-            else if(radioButtonD.isSelected()) {selection = 3; temp = radioButtonD;}
-            boolean correct = problem.getAnswers().get(selectionArr[selection]).getValidity();
-            System.out.println(correct);
-            if(correct) {
-                MainLogOutController.hits++;
-                temp.setStyle("-fx-border-color: green; -fx-border-width: 0 0 2 0; -fx-padding: 3");
-            }
-            else { 
-                MainLogOutController.faults++;
-                temp.setStyle("-fx-border-color: red; -fx-border-width: 0 0 2 0; -fx-padding: 3");
-                //buttonsT.get(i).setStyle("-fx-border-color: green; -fx-border-width: 0 0 1 0; -fx-padding: 3");
-            }
-            /*
+        if(sendButton.getText().equals("Send")){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Cancel");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Accept");
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
+            alert.getDialogPane().getStyleClass().add("customAlert");
+            alert.setTitle("Send");
+            alert.setHeaderText("Are you sure you want to send you answere?");
+            alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.CANCEL){
+                boolean tempB = false; int i;            
+                for(i = 0; i<4 && !tempB; i++){
+                    if (problem.getAnswers().get(selectionArr[i]).getValidity()) {
+                        i--; tempB =true;
+                    };
+                }            
+                RadioButton temp = radioButtonA; 
+                if(radioButtonA.isSelected()) {selection = 0; temp = radioButtonA;}
+                else if(radioButtonB.isSelected()) {selection = 1; temp = radioButtonB;}
+                else if(radioButtonC.isSelected()) {selection = 2; temp = radioButtonC;}
+                else if(radioButtonD.isSelected()) {selection = 3; temp = radioButtonD;}
+                boolean correct = problem.getAnswers().get(selectionArr[selection]).getValidity();
+                System.out.println(correct);
+                if(correct) {
+                    MainLogOutController.hits++;
+                    temp.setStyle("-fx-border-color: green; -fx-border-width: 0 0 2 0; -fx-padding: 3");
+                }
+                else { 
+                    MainLogOutController.faults++;
+                    temp.setStyle("-fx-border-color: red; -fx-border-width: 0 0 2 0; -fx-padding: 3");
+                    buttonsT.get(i).setStyle("-fx-border-color: green; -fx-border-width: 0 0 2 0; -fx-padding: 3");
+                }
+                for(i = 0; i<4 && !tempB; i++){
+                    buttonsT.get(i).setDisable(true);
+                }
+                sendButton.setText("Stats");
+                goBackButton.setText("Tests");                
+            }else {
+                System.out.println("CANCEL");
+            }     
+        }else{            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
             try{
                 Parent root = (Parent) loader.load();
@@ -661,46 +714,42 @@ public class MapController implements Initializable {
                 primaryStage.show();
             }
             catch(IOException e)
-        {
-            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+            {
+                Alert alertErr = new Alert(Alert.AlertType.ERROR);
 
-            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+                ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
 
-            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
-            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
-            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
-            alertErr.getDialogPane().getStyleClass().add("customAlert");
-            alertErr.setTitle("Exception Dialog");
-            alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
+                Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+                alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
+                alertErr.getDialogPane().getStyleClass().add("customAlert");
+                alertErr.setTitle("Exception Dialog");
+                alertErr.setHeaderText("An error has occurred");
+                alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            String exceptionText = sw.toString();
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
 
-            Label label = new Label("Exception:");
-            TextArea textArea = new TextArea(exceptionText);
-            textArea.setEditable(false);
-            textArea.setWrapText(true);
-            textArea.setMaxWidth(Double.MAX_VALUE);
-            textArea.setMaxHeight(Double.MAX_VALUE);
-            GridPane.setVgrow(textArea, Priority.ALWAYS);
-            GridPane.setHgrow(textArea, Priority.ALWAYS);
-            GridPane expContent = new GridPane();
-            expContent.setMaxWidth(Double.MAX_VALUE);
-            expContent.add(label,0,0);
-            expContent.add(textArea, 0, 1);
+                Label label = new Label("Exception:");
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label,0,0);
+                expContent.add(textArea, 0, 1);
 
-            alertErr.getDialogPane().setExpandableContent(expContent);
-            alertErr.showAndWait();
-        }
-            
-            */
-        }else {
-            System.out.println("CANCEL");
-        }           
+                alertErr.getDialogPane().setExpandableContent(expContent);
+                alertErr.showAndWait();
+            }                
+        }              
     }
    
     private void toolTip(){
@@ -741,24 +790,25 @@ public class MapController implements Initializable {
         double temp = primaryStage.getHeight();
         System.out.println("stage: " + temp);
         System.out.println("vbox: " + newv);
+        System.out.println("row: " + questionLabel.getPrefRowCount());
         checkScrollBar();
-        if((double)newv < 300){
+        if((double)newv < 350){
             Font fontRa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12); 
             
             questionNumber.setFont(fontLa);
-            //questionLabel.setFont(fontTe);
+            questionLabel.setFont(fontTe);
             radioButtonA.setFont(fontRa);
             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
             sendButton.setFont(fontBu);           
-        }  else if((double)newv >= 300 && (double)newv <450){
+        }  else if((double)newv >= 350 && (double)newv <450){
             double act = 450-(double)newv;
-            int stageDif = 530-375;
+            int stageDif = 450-350;
             double per = 1 - (act/stageDif);
             double raDif = 16-12;
             double laDif = 16-12;
@@ -771,7 +821,7 @@ public class MapController implements Initializable {
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (buDif*per)); 
             
             questionNumber.setFont(fontLa);
-            //questionLabel.setFont(fontTe);
+            questionLabel.setFont(fontTe);
             radioButtonA.setFont(fontRa);
             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
@@ -785,7 +835,7 @@ public class MapController implements Initializable {
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16); 
             
             questionNumber.setFont(fontLa);
-            //questionLabel.setFont(fontTe);
+            questionLabel.setFont(fontTe);
             radioButtonA.setFont(fontRa);
             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
@@ -797,17 +847,25 @@ public class MapController implements Initializable {
     
     private void calcWSize(double newv){
         System.out.println("vbox H: " + newv);
-        goBackButton.setPrefWidth(newv*0.35);
-        sendButton.setPrefWidth(newv*0.35);
+        System.out.println("row: " + questionLabel.getPrefRowCount());
         checkScrollBar();
-        if((double)newv < 345){
-            goBackButton.setPrefWidth(newv*0.35);
-            sendButton.setPrefWidth(newv*0.35);
-        }  else if((double)newv >= 345 && (double)newv <450){
-            goBackButton.setPrefWidth(120);
-            sendButton.setPrefWidth(120);
-        }else{
+        if((double)newv < 270){
+            goBackButton.setPrefWidth(newv*0.4);
+            sendButton.setPrefWidth(newv*0.4);
+            hbButton.setSpacing(10);
+        }  else if((double)newv >= 270 && (double)newv <380){
+            double act = 270-(double)newv;
+            int stageDif = 380-270;
+            double per = 1 - (act/stageDif);
+            double spacDif = 25-10;
             
+            hbButton.setSpacing(10+spacDif*per);
+            goBackButton.setPrefWidth(108);
+            sendButton.setPrefWidth(108);
+        }else{
+            hbButton.setSpacing(25);
+            goBackButton.setPrefWidth(108);
+            sendButton.setPrefWidth(108);
         }
     }
     

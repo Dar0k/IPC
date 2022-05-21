@@ -23,7 +23,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="427.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="427.0" prefWidth="812.0" stylesheets="@mapToolbar.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
 
       <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
@@ -220,7 +220,7 @@
                   </VBox>
                </children>
             </StackPane>
-            <VBox id="quest" fx:id="vboxQuest" minWidth="150.0" spacing="10.0" stylesheets="@../resources/buttonToolbar.css">
+            <VBox id="quest" fx:id="vboxQuest" maxWidth="380.0" minWidth="150.0" spacing="10.0" stylesheets="@../resources/buttonToolbar.css">
                <children>
                   <Label fx:id="questionNumber" text="Label" />
                   <TextArea fx:id="questionLabel" editable="false" maxHeight="640.0" prefHeight="640.0" prefWidth="152.0" text="Texto de ejemplo uhfduihsafuhdsufhiudsahfiuf ddsjsfld asfv;sdavdscwae" wrapText="true">
@@ -243,12 +243,12 @@
                         <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </VBox>
-                  <HBox alignment="BOTTOM_CENTER" spacing="10.0">
+                  <HBox fx:id="hbButton" alignment="BOTTOM_CENTER" spacing="10.0">
                      <children>
-                        <Button id="button4" fx:id="goBackButton" mnemonicParsing="false" onAction="#handleGoBackButton" prefWidth="60.0" text="Go Back" textFill="WHITE" />
+                        <Button id="button4" fx:id="goBackButton" mnemonicParsing="false" onAction="#handleGoBackButton" prefWidth="60.0" text="Back" textFill="WHITE" />
                         <Button id="button4" fx:id="sendButton" disable="true" mnemonicParsing="false" onAction="#handleSendButton" text="Send" textFill="WHITE" />
                      </children>
                      <VBox.margin>

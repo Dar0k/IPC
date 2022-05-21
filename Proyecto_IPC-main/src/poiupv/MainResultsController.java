@@ -7,6 +7,7 @@ package poiupv;
 
 import DBAccess.NavegacionDAOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
@@ -101,7 +103,16 @@ public class MainResultsController implements Initializable {
         currentSessionLabel.setText("Current session:\t" + MainLogOutController.hits + " hits\t" + 
                                       MainLogOutController.faults + " faults");
         
-        
+        datePicker.setDayCellFactory((DatePicker picker) -> {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    LocalDate today = LocalDate.now();
+                    setDisable(empty || date.compareTo(today) > 0 );
+                } 
+            };
+        });
         /*
         tableResults.widthProperty().addListener((obs, oldv, newv) -> {            
             hits.setMinWidth((double)newv*0.2);

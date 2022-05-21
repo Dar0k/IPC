@@ -239,7 +239,7 @@ public class SignUpDefController implements Initializable {
                 
                 Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
                 alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Sign up");
                 alert.setHeaderText("");
@@ -257,7 +257,7 @@ public class SignUpDefController implements Initializable {
                 
                 Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
                 alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
                 alert.setHeaderText("An error has occurred");
@@ -294,7 +294,7 @@ public class SignUpDefController implements Initializable {
                 
                 Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
                 alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
                 alert.setHeaderText("An error has occurred");
@@ -369,7 +369,7 @@ public class SignUpDefController implements Initializable {
                 
                 Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
                 alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
-                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
                 alert.setHeaderText("An error has occurred");

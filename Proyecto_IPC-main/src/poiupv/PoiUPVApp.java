@@ -60,7 +60,7 @@ public class PoiUPVApp extends Application {
 
             Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
             alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
-            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" stylesheets="@resultsStyleSheet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" stylesheets="@resultsStyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="532.0" HBox.hgrow="ALWAYS">
@@ -29,7 +29,7 @@
                               </Label>
                               <HBox id="datepickHbox" prefHeight="5.0" prefWidth="150.0">
                                  <children>
-                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" stylesheets="@datePickerStyleSheet.css" />
+                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" promptText="choose a date" stylesheets="@datePickerStyleSheet.css" />
                                  </children>
                               </HBox>
                               <Label fx:id="ageError" alignment="TOP_LEFT" minHeight="21.0" prefHeight="21.0" prefWidth="174.0" text="Must be at least 12 years old" textFill="RED" visible="false" wrapText="true">
