@@ -249,13 +249,8 @@ public class TestListController implements Initializable {
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 14);          
             
-            //aux.setSpacing(15);
             problemDescription.setPrefHeight(aux.getHeight()*0.25);
-            problemsList.setPrefHeight(aux.getHeight() *0.25 );/*
-            problemDescription.setMinHeight(aux.getHeight()*0.25);
-            problemDescription.setMaxHeight(aux.getHeight()*0.25);
-            problemsList.setMinHeight(aux.getHeight() * 0.25);
-            problemsList.setMaxHeight(aux.getHeight() * 0.25);*/
+            problemsList.setPrefHeight(aux.getHeight() *0.25 );
             problemDescription.setFont(fontTe);
             titleLabel.setFont(fontLa);
             cancelButton.setFont(fontBu);
@@ -276,10 +271,6 @@ public class TestListController implements Initializable {
             
             problemDescription.setPrefHeight(aux.getHeight()*desDif);
             problemsList.setPrefHeight(aux.getHeight() * lisDif);
-            /*problemDescription.setMinHeight(aux.getHeight()*desDif);
-            problemDescription.setMaxHeight(aux.getHeight()*desDif);
-            problemsList.setMinHeight(aux.getHeight() *lisDif );
-            problemsList.setMaxHeight(aux.getHeight() *lisDif);*/
             problemDescription.setFont(fontTe);
             titleLabel.setFont(fontLa);
             cancelButton.setFont(fontBu);
@@ -289,13 +280,8 @@ public class TestListController implements Initializable {
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 18);
             
-            //aux.setSpacing(25);
             problemDescription.setPrefHeight(aux.getHeight()*.45);
-            problemsList.setPrefHeight(aux.getHeight() *.45 );/*
-            problemDescription.setMinHeight(aux.getHeight()*0.45);
-            problemDescription.setMaxHeight(aux.getHeight()*0.45);
-            problemsList.setMinHeight(aux.getHeight() * 0.3);
-            problemsList.setMaxHeight(aux.getHeight() * 0.3);*/
+            problemsList.setPrefHeight(aux.getHeight() *.45 );
             problemDescription.setFont(fontTe);
             titleLabel.setFont(fontLa);
             cancelButton.setFont(fontBu);

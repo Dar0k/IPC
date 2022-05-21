@@ -15,11 +15,9 @@ and open the template in the editor.
     -fx-background-color:  transparent;
     -fx-border-color: transparent;
 }
-
 .text-area .scroll-pane .viewport{
     -fx-background-color: transparent;
 }
-/*For text in map question*/
 .text-area *.text{
     -fx-text-alignment: justify;
 }

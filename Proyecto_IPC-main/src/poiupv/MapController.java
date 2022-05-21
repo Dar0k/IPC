@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +33,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
@@ -57,6 +60,10 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.PopupWindow;
 import javafx.util.Duration;
 import model.Answer;
 import model.Problem;
@@ -162,7 +169,15 @@ public class MapController implements Initializable {
     private ToggleButton bucket;
     @FXML
     private ToggleButton protractor;
-
+    private ArrayList<RadioButton> buttonsT;
+    private static final String SQUARE_BUBBLE =
+            "M24 1h-24v16.981h4v5.019l7-5.019h13z";
+    
+    private ArrayList <Circle> cList;
+    private ArrayList <Tooltip>tList;
+    private ScrollBar scrollBarv;
+    @FXML
+    private Circle sizeProf;
     /**
      * Initializes the controller class.
      */
@@ -175,6 +190,7 @@ public class MapController implements Initializable {
         questionLabel.setText(problem.getText());
         List<Answer> list = problem.getAnswers();
         RadioButton [] buttons = {radioButtonA, radioButtonB, radioButtonC, radioButtonD};
+        buttonsT = new ArrayList<RadioButton>(); buttonsT.add(radioButtonA); buttonsT.add(radioButtonB); buttonsT.add(radioButtonC); buttonsT.add(radioButtonD);
         List<Integer> pool = new ArrayList<Integer>();
         pool.add(0);
         pool.add(1);
@@ -193,22 +209,32 @@ public class MapController implements Initializable {
         temp = pool.get(0);
         selectionArr[0] = temp;
         buttons[0].setText(list.get(temp).getText());
-        
         questionNumber.setText("Problem " + number);
         
-        /*for(int i = 0; i < 4; i++)
-        {
-            buttons[i].textProperty().bind(map.getRad(i).textProperty());
-            
-        }
+        cList = new ArrayList<Circle>();
+        tList = new ArrayList<Tooltip>();  
         
-        for(int i = 0; i < 4; i++)
-        {
-            buttons[i].selectedProperty().bind(map.getRad(i).selectedProperty());
-            
-        }*/
+        scrollBarv = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
+        
+        vboxQuest.heightProperty().addListener((obs, oldv, newv)-> {
+            calcHSize((double)newv);
+        });
+        calcHSize(360);
+        vboxQuest.widthProperty().addListener((obs, oldv, newv)-> {
+            calcWSize((double)newv);
+        });
+        calcWSize(170);
+        questionLabel.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                 questionLabel.setPrefHeight(questionLabel.getPrefHeight()+10); 
+            }
+        });
+        
+        
         
     }
+     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -220,26 +246,13 @@ public class MapController implements Initializable {
         map_scrollpane.setContent(contentGroup);
         colorPicker.setValue(Color.BLACK);
         sizeSlider.setMin(5);
-        
+        sizeProf.radiusProperty().bind(Bindings.divide(sizeSlider.valueProperty(), 4));        
         
         rad.selectedToggleProperty().addListener((obs, oldv, newv) -> {
             sendButton.setDisable(false);            
         });
         
-        toolTip();
-    }
-    
-    void zoomIn(ActionEvent event) {
-        //================================================
-        // el incremento del zoom dependerá de los parametros del 
-        // slider y del resultado esperado
-        /*double sliderVal = zoom_slider.getValue();
-        zoom_slider.setValue(sliderVal += 0.1);*/
-    }
-
-    void zoomOut(ActionEvent event) {
-        /*double sliderVal = zoom_slider.getValue();
-        zoom_slider.setValue(sliderVal + -0.1);*/
+        toolTip();      
     }
     
     // esta funcion es invocada al cambiar el value del slider zoom_slider
@@ -272,8 +285,7 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleDot(ActionEvent event) {
-        buttonSelection = (buttonSelection.equals("dot")) ? "" : "dot"; 
-        
+        buttonSelection = (buttonSelection.equals("dot")) ? "" : "dot";         
     }
 
     @FXML
@@ -284,13 +296,11 @@ public class MapController implements Initializable {
     @FXML
     private void handleArc(ActionEvent event) {
         buttonSelection = (buttonSelection.equals("arc")) ? "" : "arc"; 
-
     }
 
     @FXML
     private void handleText(ActionEvent event) {
         buttonSelection = (buttonSelection.equals("text")) ? "" : "text"; 
-
     }
 
     @FXML
@@ -300,7 +310,7 @@ public class MapController implements Initializable {
 
     @FXML
     private void handleColorPick(ActionEvent event) {
-        
+        sizeProf.setFill(colorPicker.getValue());
     }
 
     @FXML
@@ -309,8 +319,7 @@ public class MapController implements Initializable {
     }
 
     @FXML
-    private void handleZoomInButton(ActionEvent event) {
-        
+    private void handleZoomInButton(ActionEvent event) {        
         if(zoomVal < 2.5)
         {
             zoomVal +=0.1;
@@ -319,16 +328,13 @@ public class MapController implements Initializable {
     }
 
     @FXML
-    private void handleZoomOutButton(ActionEvent event) {
-        
+    private void handleZoomOutButton(ActionEvent event) {        
         if(zoomVal > 0.2)
         {
             zoomVal -= 0.1;
             zoom(zoomVal);
-        }
-        
+        }        
     }
-
    
     @FXML
     private void handleQuest(ActionEvent event) throws Exception {
@@ -338,7 +344,7 @@ public class MapController implements Initializable {
             nodeQuest = splitPane.getItems().get(1);
             splitPane.getItems().remove(nodeQuest);
             questActive = false;
-            String url = "." + File.separator + "src" + File.separator + "resources" + File.separator + "fullscreen.png";
+            String url = "." + File.separator + "src" + File.separator + "resources" + File.separator + "shortscreen.png";
             fullscreenImageView.setImage(new Image(new FileInputStream(url)));
         }
         else
@@ -346,10 +352,8 @@ public class MapController implements Initializable {
             splitPane.getItems().add(nodeQuest);
             questActive = true;
             splitPane.setDividerPositions(dividerPos);
-            String url = "." + File.separator + "src" + File.separator + "resources" + File.separator + "shortscreen.png";    
-            fullscreenImageView.setImage(new Image(new FileInputStream(url)));
-
-            
+            String url = "." + File.separator + "src" + File.separator + "resources" + File.separator + "fullscreen.png";    
+            fullscreenImageView.setImage(new Image(new FileInputStream(url)));           
         }
     }
 
@@ -392,12 +396,23 @@ public class MapController implements Initializable {
                 dot.setFill(colorPicker.getValue());
                 zoomGroup.getChildren().add(dot);
                 dot.setOnMousePressed(c -> {removeElement(dot); map_scrollpane.setPannable(false);});
-                dot.setOnMouseExited(c -> {map_scrollpane.setPannable(true);});
-                dot.setOnMouseEntered(c -> { if(buttonSelection.equals("coords"))map_scrollpane.getScene().setCursor(Cursor.HAND);} );
-                dot.setOnMouseExited(c -> {if(buttonSelection.equals("coords"))map_scrollpane.getScene().setCursor(Cursor.DEFAULT);});
+                dot.setOnMouseExited(c -> {
+                    if(buttonSelection.equals("coords")) { 
+                        map_scrollpane.getScene().setCursor(Cursor.DEFAULT);
+                        dotTooltip(dot, false);
+                    }
+                    map_scrollpane.setPannable(true);                   
+                });
+                dot.setOnMouseEntered(c -> {
+                    if(buttonSelection.equals("coords")) {
+                        map_scrollpane.getScene().setCursor(Cursor.HAND);                        
+                        dotTooltip(dot, true);                  
+                    }
+                });
                 break;
             case "arc":
                 circle = new Circle(event.getX(), event.getY(), sizeSlider.getValue());
+                circle.setStrokeWidth(sizeSlider.getValue());
                 circle.setStroke(colorPicker.getValue());
                 circle.setFill(Color.TRANSPARENT);
                 startXArc = event.getX();
@@ -463,14 +478,9 @@ public class MapController implements Initializable {
             default:
                 map_scrollpane.setPannable(true);
                 map_scrollpane.getScene().setCursor(Cursor.MOVE);
-                break;
-                
+                break;                
         }
         System.out.println(sizeSlider.getValue());
-        
-        
-
-
     }
     
     private void removeElement(Object node)
@@ -493,15 +503,6 @@ public class MapController implements Initializable {
             }
             
             
-        }
-        if(buttonSelection.equals("coords"))
-        {
-            if(node instanceof Circle)
-            {
-                Circle c = (Circle) node;
-                System.out.println(c.getCenterX());
-                System.out.println(c.getCenterY());
-            }
         }
     }
 // rgba(132, 81, 43, 0.75)
@@ -590,27 +591,35 @@ public class MapController implements Initializable {
         alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
-            System.out.println("OK");
-            ////////////////////////////////////////////////
-            //////   guardar en la base de datos     ///////
-            ////////////////////////////////////////////////
-            if(radioButtonA.isSelected()) selection = 0;
-            else if(radioButtonB.isSelected()) selection = 1;
-            else if(radioButtonC.isSelected()) selection = 2;
-            else if(radioButtonD.isSelected()) selection = 3;
+            boolean tempB = false; int i;            
+            for(i = 0; i<4 && !tempB; i++){
+                if (problem.getAnswers().get(selectionArr[i]).getValidity()) {
+                    i--; tempB =true;
+                };
+            }            
+            RadioButton temp = radioButtonA; 
+            if(radioButtonA.isSelected()) {selection = 0; temp = radioButtonA;}
+            else if(radioButtonB.isSelected()) {selection = 1; temp = radioButtonB;}
+            else if(radioButtonC.isSelected()) {selection = 2; temp = radioButtonC;}
+            else if(radioButtonD.isSelected()) {selection = 3; temp = radioButtonD;}
             boolean correct = problem.getAnswers().get(selectionArr[selection]).getValidity();
-
-            if(correct) MainLogOutController.hits++;
-                else { MainLogOutController.faults++;}
-
-
-            //user.addSession();
+            System.out.println(correct);
+            if(correct) {
+                MainLogOutController.hits++;
+                temp.setStyle("-fx-border-color: green; -fx-border-width: 0 0 2 0; -fx-padding: 3");
+            }
+            else { 
+                MainLogOutController.faults++;
+                temp.setStyle("-fx-border-color: red; -fx-border-width: 0 0 2 0; -fx-padding: 3");
+                //buttonsT.get(i).setStyle("-fx-border-color: green; -fx-border-width: 0 0 1 0; -fx-padding: 3");
+            }
+            /*
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
             Parent root = (Parent) loader.load();
             MainResultsController mRCtrl = loader.<MainResultsController>getController();
             mRCtrl.initStage(primaryStage, user);
             primaryStage.getScene().setRoot(root);
-            primaryStage.show();
+            primaryStage.show();*/
         }else {
             System.out.println("CANCEL");
         }           
@@ -650,6 +659,120 @@ public class MapController implements Initializable {
         trash.setTooltip(trashTip);
     }
 
+    private void calcHSize(double newv){
+        double temp = primaryStage.getHeight();
+        System.out.println("stage: " + temp);
+        System.out.println("vbox: " + newv);
+        checkScrollBar();
+        if((double)newv < 300){
+            Font fontRa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12); 
+            
+            questionNumber.setFont(fontLa);
+            //questionLabel.setFont(fontTe);
+            radioButtonA.setFont(fontRa);
+            radioButtonB.setFont(fontRa);
+            radioButtonC.setFont(fontRa);
+            radioButtonD.setFont(fontRa);
+            goBackButton.setFont(fontBu);
+            sendButton.setFont(fontBu);           
+        }  else if((double)newv >= 300 && (double)newv <450){
+            double act = 450-(double)newv;
+            int stageDif = 530-375;
+            double per = 1 - (act/stageDif);
+            double raDif = 16-12;
+            double laDif = 16-12;
+            double teDif = 18-12;
+            double buDif = 16-12;
+            
+            Font fontRa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (raDif*per));
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (laDif*per));
+            Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (teDif*per));
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (buDif*per)); 
+            
+            questionNumber.setFont(fontLa);
+            //questionLabel.setFont(fontTe);
+            radioButtonA.setFont(fontRa);
+            radioButtonB.setFont(fontRa);
+            radioButtonC.setFont(fontRa);
+            radioButtonD.setFont(fontRa);
+            goBackButton.setFont(fontBu);
+            sendButton.setFont(fontBu);           
+        }else{
+            Font fontRa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+            Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+            Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 18);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16); 
+            
+            questionNumber.setFont(fontLa);
+            //questionLabel.setFont(fontTe);
+            radioButtonA.setFont(fontRa);
+            radioButtonB.setFont(fontRa);
+            radioButtonC.setFont(fontRa);
+            radioButtonD.setFont(fontRa);
+            goBackButton.setFont(fontBu);
+            sendButton.setFont(fontBu);              
+        }
+    }
     
+    private void calcWSize(double newv){
+        System.out.println("vbox H: " + newv);
+        goBackButton.setPrefWidth(newv*0.35);
+        sendButton.setPrefWidth(newv*0.35);
+        checkScrollBar();
+        if((double)newv < 345){
+            goBackButton.setPrefWidth(newv*0.35);
+            sendButton.setPrefWidth(newv*0.35);
+        }  else if((double)newv >= 345 && (double)newv <450){
+            goBackButton.setPrefWidth(120);
+            sendButton.setPrefWidth(120);
+        }else{
+            
+        }
+    }
     
+    private void dotTooltip (Circle c, boolean entered) {
+        if(entered)
+        {  
+            Tooltip tool = new Tooltip("x: " + c.getCenterX() + "\ty:" + c.getCenterY());
+            Tooltip.install(c, makeBubble(tool));
+            cList.add(c);
+            tList.add(tool);
+        }else {
+            int index = cList.indexOf(c);            
+            Tooltip.uninstall(c, tList.remove(index));
+            cList.remove(c);
+        }
+    }
+    
+    private Tooltip makeBubble(Tooltip tooltip) {
+        tooltip.setStyle("-fx-font-size: 16px; -fx-shape: \"" + SQUARE_BUBBLE + "\";");
+        tooltip.setAnchorLocation(PopupWindow.AnchorLocation.WINDOW_BOTTOM_LEFT);
+        tooltip.setShowDelay(Duration.millis(100)); 
+        return tooltip;
+    }
+    
+    private void checkScrollBar() {  
+        /*ScrollBar sb = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
+        double difVT = vboxQuest.getWidth() - questionLabel.getWidth();
+        System.out.println("scrollBar: " +difVT );
+        /*questionLabel.setScrollTop(1);
+        
+        double help = questionLabel.getScrollTop();
+        boolean temp = help == 0.0;
+        System.out.println("boolean: " + temp );*/
+
+        /*if (!scrollBarv.isVisible()){
+            while (!scrollBarv.isVisible()) {
+                questionLabel.setPrefHeight(questionLabel.getPrefHeight() - 10);
+            }
+            questionLabel.setPrefHeight(questionLabel.getPrefHeight() + 10);
+        }else if (scrollBarv.isVisible()){
+            while (!scrollBarv.isVisible() && questionLabel.getPrefHeight()< questionLabel.getMaxHeight()) {
+                questionLabel.setPrefHeight(questionLabel.getPrefHeight() + 10);
+            }
+        };*/
+    }
 }
