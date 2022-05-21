@@ -7,8 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="635.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainResultsController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="532.0" HBox.hgrow="ALWAYS">
@@ -20,7 +21,7 @@
                <children>
                   <VBox alignment="CENTER" fillWidth="false" prefHeight="26.0" prefWidth="510.0" spacing="10.0">
                      <children>
-                        <VBox prefHeight="65.0" prefWidth="150.0">
+                        <VBox alignment="CENTER" prefHeight="65.0" prefWidth="150.0">
                            <children>
                               <Label fx:id="birthLabel" text="Starting date:">
                                  <VBox.margin>
@@ -44,7 +45,12 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </VBox>
-                  <TableView fx:id="tableResults" prefHeight="1000.0" prefWidth="1000.0" stylesheets="@../resources/tableView.css">
+                  <Label fx:id="currentSessionLabel" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tableResults" prefHeight="253.0" prefWidth="450.0" stylesheets="@../resources/tableView.css">
                     <columns>
                       <TableColumn fx:id="hits" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER" text="Hits" />
                       <TableColumn fx:id="faults" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER" text="Faults" />

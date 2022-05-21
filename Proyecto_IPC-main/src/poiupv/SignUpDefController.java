@@ -32,6 +32,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -143,7 +144,9 @@ public class SignUpDefController implements Initializable {
             navegation = Navegacion.getSingletonNavegacion();
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(SignUpDefController.class.getName()).log(Level.SEVERE, null, ex);
-        }           
+        }
+        
+        
         sel = ava1;
         try {
             Image im2 = new Image (new FileInputStream ("." + File.separator + "src" + File.separator + "resources" + File.separator + "ava1.jpg"));
@@ -228,12 +231,23 @@ public class SignUpDefController implements Initializable {
         try {        
             ImagePattern imPa = (ImagePattern) avaPrin.getFill();
             Image image = imPa.getImage();
-            User result = navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
+            navegation.registerUser(usernameField.getText(), emailField.getText(), passwordField.getText(), image, agePicker.getValue());
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/LogInDef.fxml"));
             try{
                 Parent root = (Parent) myLoader.load();
-                MainTestController mtCtrl = myLoader.<MainTestController>getController();
-                mtCtrl.initStage(primaryStage, result);
+                LogInDefController mtCtrl = myLoader.<LogInDefController>getController();
+                mtCtrl.initStage(primaryStage);
+                Alert alert = new Alert(AlertType.INFORMATION);
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+                
+                Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+                alertStage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+                alert.getDialogPane().getStyleClass().add("customAlert");
+                alert.setTitle("Sign up");
+                alert.setHeaderText("");
+                alert.setContentText("Your user has been registered correctly");
+                alert.showAndWait();
                 primaryStage.getScene().setRoot(root);
                 
             }
@@ -452,6 +466,7 @@ public class SignUpDefController implements Initializable {
             signUpCheck();
         }
     }
+    
     
    
 }

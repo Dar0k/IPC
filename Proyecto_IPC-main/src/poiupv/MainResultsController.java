@@ -70,6 +70,8 @@ public class MainResultsController implements Initializable {
     private Label birthLabel;
     @FXML
     private Label ageError;
+    @FXML
+    private Label currentSessionLabel;
     
     /**
      * Initializes the controller class.
@@ -94,6 +96,9 @@ public class MainResultsController implements Initializable {
         user = us;
         sidebarController.setUser(user);
         loadResults();
+        currentSessionLabel.setText("Current session:\t" + MainLogOutController.hits + " hits\t" + 
+                                      MainLogOutController.faults + " faults");
+        
         
         tableResults.widthProperty().addListener((obs, oldv, newv) -> {            
             hits.setMinWidth((double)newv*0.2);

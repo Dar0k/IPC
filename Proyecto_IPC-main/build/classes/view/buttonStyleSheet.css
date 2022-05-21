@@ -18,6 +18,9 @@ and open the template in the editor.
 #button1:pressed {
     -fx-background-color: rgba(0,0,0,0.5);
 }
+#button1:focused{
+    -fx-border-color: blue;
+}
 
 .label {
      -fx-text-fill: rgba(43, 0, 255);    
@@ -42,6 +45,11 @@ and open the template in the editor.
 #button2:pressed {
     -fx-border-color: rgba(0,0,0,0.5);  
     fx-text-fill: rgba(0,0,0,0.5); 
+}
+#button2:focused{
+    -fx-border-color:blue;
+    
+    
 }
 
 #button3 {

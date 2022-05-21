@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,6 +39,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Navegacion;
@@ -70,14 +72,29 @@ public class LogInDefController implements Initializable {
     private TextField passwordTextField;
     @FXML
     private HBox aux;
+    @FXML
+    private Label logInLabel;
     
     Navegacion navegation;
-   
+    @FXML
+    private VBox side;
+    private double width;
+    private double height;
 
     public void initStage(Stage stage)
     {
-        stage.setResizable(false);
         primaryStage = stage;
+        width = primaryStage.getWidth();
+        height = primaryStage.getHeight();
+        primaryStage.widthProperty().addListener((obs, oldv, newv) -> {
+             width = (double) newv;     
+             setSide(width, height);
+        });
+        primaryStage.heightProperty().addListener((obs, oldv, newv) ->{
+             height = (double) newv;
+             setSide(width, height);
+        
+        });
         
         
     }
@@ -189,5 +206,29 @@ public class LogInDefController implements Initializable {
         catch(Exception e) {}
     }
 
-    
+    private void setSide(double w, double h)
+    {
+        System.out.println("w: " + w + "\th: " + h);
+        if(w > 650){
+            side.setMinWidth( w * 0.3 );
+            side.setMaxWidth( w * 0.3 );
+            //logInLabel.setPadding(new Insets(0,0,w*0.05,0));
+            logInLabel.setFont(new Font(logInLabel.getFont().getName(), 40 + (int)w*0.0025));
+                    
+        }else{
+            side.setMinWidth(180);
+            side.setMaxWidth(180);
+            logInLabel.setFont(new Font(logInLabel.getFont().getName(), 40));
+            //logInLabel.setPadding(new Insets(0,0,0,0));
+        if(h > 500)
+        {
+            System.out.println(25+ h*0.05);
+            side.setSpacing(25+ h*0.04);
+        }
+        else{
+            side.setSpacing(25);
+            
+        }
+        }
+    }
 }
