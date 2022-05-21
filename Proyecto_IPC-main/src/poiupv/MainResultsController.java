@@ -26,8 +26,12 @@ import model.Navegacion;
 import javafx.scene.control.DatePicker;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -54,15 +58,9 @@ public class MainResultsController implements Initializable {
     private SidebarController sidebarController;
     @FXML
     private DatePicker datePicker;
-    @FXML
-    private TableView<Session> tableResults;
-    @FXML
-    public TableColumn<Session, Integer> hits;
-    @FXML
-    public TableColumn<Session, Integer> faults;
-    @FXML
-    public TableColumn<Session, LocalDateTime> timestamp;
-
+    
+    private ArrayList<Session> l;
+    private ObservableList<Session> data = null;
     User user;
     Session session;
     Navegacion navegation;
@@ -72,6 +70,8 @@ public class MainResultsController implements Initializable {
     private Label ageError;
     @FXML
     private Label currentSessionLabel;
+    @FXML
+    private ListView<Session> listView;
     
     /**
      * Initializes the controller class.
@@ -80,7 +80,7 @@ public class MainResultsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sidebarController.initialize(url, rb);
-        setupTable();
+        //setupTable();
     }
     
     public void initStage(Stage stage, User us)
@@ -95,11 +95,14 @@ public class MainResultsController implements Initializable {
         sidebarController.primaryStage = primaryStage;
         user = us;
         sidebarController.setUser(user);
+        l = new ArrayList<Session>();
+        data = FXCollections.observableArrayList(l);
         loadResults();
         currentSessionLabel.setText("Current session:\t" + MainLogOutController.hits + " hits\t" + 
                                       MainLogOutController.faults + " faults");
         
         
+        /*
         tableResults.widthProperty().addListener((obs, oldv, newv) -> {            
             hits.setMinWidth((double)newv*0.2);
             hits.setMaxWidth((double)newv*0.2);
@@ -108,7 +111,7 @@ public class MainResultsController implements Initializable {
             timestamp.setMinWidth((double)newv*0.6);           
             timestamp.setMaxWidth((double)newv*0.6);           
         });
-        
+        */
         primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
             System.out.println("prin: "+ newv);;
             calcSize((double)newv);
@@ -126,25 +129,28 @@ public class MainResultsController implements Initializable {
         sidebarController.clearSidebar(w);
         sidebarController.boldResultsButton(w);
     }
-    
+    /*
     private void setupTable()
     {
         hits.setCellValueFactory(new PropertyValueFactory<>("hits"));
         faults.setCellValueFactory(new PropertyValueFactory<>("faults"));
         timestamp.setCellValueFactory(new PropertyValueFactory<>("timeStamp"));
     }
+    */
     
     @FXML
     public void loadResults()
     {
-        tableResults.getItems().clear();
+        listView.getItems().clear();
         try{
             List<Session> sessions = user.getSessions();
+            System.out.println(sessions.get(0).toString());
             for (Session sess: sessions) {
                 if ((datePicker.getValue() != null && (sess.getLocalDate().isAfter(datePicker.getValue()) ||sess.getLocalDate().isEqual(datePicker.getValue()) )) || datePicker.getValue() == null) {
-                    tableResults.getItems().add(sess);
+                    data.add(sess);
                 }
             }
+            listView.setItems(data);
         }
         catch(NullPointerException e)
         {}
@@ -189,4 +195,5 @@ public class MainResultsController implements Initializable {
             ageError.setFont(fontEr);      
         }
     }
+
 }

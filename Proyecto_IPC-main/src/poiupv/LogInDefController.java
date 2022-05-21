@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import javafx.scene.text.Font;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -31,13 +27,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
@@ -149,7 +143,7 @@ public class LogInDefController implements Initializable {
             alert.getDialogPane().getStyleClass().add("customAlert");
             alert.setTitle("Exception Dialog");
             alert.setHeaderText("An error has occurred");
-            alert.setContentText("An unexcpected error has occurred when loading the sign up scene. Please try again");
+            alert.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();
@@ -210,7 +204,7 @@ public class LogInDefController implements Initializable {
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
                 alert.setHeaderText("An error has occurred");
-                alert.setContentText("There has been an error loading the scene");
+                alert.setContentText("An unexpected error has occurred when loading the scene. Please try again");
                 
                 
                 StringWriter sw = new StringWriter();

@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -111,10 +112,11 @@ public class MainTestController implements Initializable {
         sidebarController.boldTestButton(w);
     }
     
-
+    
 
     @FXML
     private void handleRandom(ActionEvent event) {
+        
         try{
             Navegacion navegation = Navegacion.getSingletonNavegacion();
             List<Problem> problemas = navegation.getProblems();
@@ -122,13 +124,14 @@ public class MainTestController implements Initializable {
             Random generator = new Random();
             int index = generator.nextInt(1000) % (problemas.size() -1);
             Problem p = problemas.get(index);
+            
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Map.fxml"));
             try{
                 Parent root = (Parent) loader.load();
                 MapController controller = loader.<MapController>getController();
-                System.out.println(user);
                 controller.initStage(primaryStage, user, p, index+1);
+
                 primaryStage.getScene().setRoot(root);
             }
             catch(IOException e)
@@ -143,7 +146,7 @@ public class MainTestController implements Initializable {
                 alertErr.getDialogPane().getStyleClass().add("customAlert");
                 alertErr.setTitle("Exception Dialog");
                 alertErr.setHeaderText("An error has occurred");
-                alertErr.setContentText("An unexpected error happened trying to open the map scene. Please try again");
+                alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
                 StringWriter sw = new StringWriter();
@@ -167,6 +170,7 @@ public class MainTestController implements Initializable {
                 alertErr.getDialogPane().setExpandableContent(expContent);
                 alertErr.showAndWait();
             }
+            
         }
         catch(NavegacionDAOException e)
         {
@@ -229,7 +233,7 @@ public class MainTestController implements Initializable {
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error occurred trying to load the testList scene. Please try again");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();

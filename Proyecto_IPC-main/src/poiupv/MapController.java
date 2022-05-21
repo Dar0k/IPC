@@ -8,6 +8,8 @@ package poiupv;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -44,12 +45,11 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -57,8 +57,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.ImagePattern;
+import javafx.scene.layout.Priority;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -552,7 +551,7 @@ public class MapController implements Initializable {
     }
 
     @FXML
-    private void handleGoBackButton(ActionEvent event) throws IOException {
+    private void handleGoBackButton(ActionEvent event)  {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
@@ -567,18 +566,57 @@ public class MapController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK){
             System.out.println("OK");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainTest.fxml"));
-            Parent root = (Parent) loader.load();
-            MainTestController mTCtrl = loader.<MainTestController>getController();
-            mTCtrl.initStage(primaryStage, user);
-            primaryStage.getScene().setRoot(root);
-            primaryStage.show();
+            try{
+                Parent root = (Parent) loader.load();
+                MainTestController mTCtrl = loader.<MainTestController>getController();
+                mTCtrl.initStage(primaryStage, user);
+                primaryStage.getScene().setRoot(root);
+                primaryStage.show();
+            }
+            catch(IOException e)
+        {
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStyleClass().add("customAlert");
+            alertErr.setTitle("Exception Dialog");
+            alertErr.setHeaderText("An error has occurred");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alertErr.getDialogPane().setExpandableContent(expContent);
+            alertErr.showAndWait();
+        }
+            
         } else {
             System.out.println("CANCEL");
         }   
     }
 
     @FXML
-    private void handleSendButton(ActionEvent event) throws IOException {
+    private void handleSendButton(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Cancel");
@@ -615,11 +653,51 @@ public class MapController implements Initializable {
             }
             /*
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainResults.fxml"));
-            Parent root = (Parent) loader.load();
-            MainResultsController mRCtrl = loader.<MainResultsController>getController();
-            mRCtrl.initStage(primaryStage, user);
-            primaryStage.getScene().setRoot(root);
-            primaryStage.show();*/
+            try{
+                Parent root = (Parent) loader.load();
+                MainResultsController mRCtrl = loader.<MainResultsController>getController();
+                mRCtrl.initStage(primaryStage, user);
+                primaryStage.getScene().setRoot(root);
+                primaryStage.show();
+            }
+            catch(IOException e)
+        {
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+
+            ((Button) alertErr.getDialogPane().lookupButton(ButtonType.OK)).setText("Accept");
+
+            Stage alertStageErr = (Stage) alertErr.getDialogPane().getScene().getWindow();
+            alertStageErr.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            alertErr.getDialogPane().getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            alertErr.getDialogPane().getStyleClass().add("customAlert");
+            alertErr.setTitle("Exception Dialog");
+            alertErr.setHeaderText("An error has occurred");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
+
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label,0,0);
+            expContent.add(textArea, 0, 1);
+
+            alertErr.getDialogPane().setExpandableContent(expContent);
+            alertErr.showAndWait();
+        }
+            
+            */
         }else {
             System.out.println("CANCEL");
         }           

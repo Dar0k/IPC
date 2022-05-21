@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="652.0" style="-fx-background-image: url('./resources/fondo2.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestListController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="652.0" stylesheets="@logOutStyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.TestListController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="546.0" HBox.hgrow="ALWAYS">

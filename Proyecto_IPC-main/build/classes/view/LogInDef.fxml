@@ -14,11 +14,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
+
 <HBox fx:id="aux" onKeyPressed="#handleKeyPressed" prefHeight="438.0" prefWidth="591.0"  stylesheets="@logInStyleSheet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
-=======
-<HBox fx:id="aux" onKeyPressed="#handleKeyPressed" prefHeight="438.0" prefWidth="591.0" style="-fx-background-image: url('./resources/fondo1.jpg'); -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
->>>>>>> e2c3a17251c5295214a39f0b7ea156a909a77c5b
+
    <children>
       <VBox id="vbox1" fx:id="side" alignment="CENTER" maxWidth="350.0" prefHeight="371.0" prefWidth="235.0" spacing="25.0" >
          <children>

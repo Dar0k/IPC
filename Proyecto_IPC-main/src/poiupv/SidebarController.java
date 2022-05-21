@@ -10,8 +10,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,10 +24,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -156,7 +152,7 @@ public class SidebarController implements Initializable {
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error occurred trying to load the main test scene. Please try again");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();
@@ -206,7 +202,7 @@ public class SidebarController implements Initializable {
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error occurred trying to load the results. Please try again");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();
@@ -303,7 +299,7 @@ public class SidebarController implements Initializable {
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error occurred trying to load the log out scene. Please try again");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();

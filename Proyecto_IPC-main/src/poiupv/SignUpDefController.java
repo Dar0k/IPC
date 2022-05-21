@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.FadeTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -46,7 +45,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -54,8 +52,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
-import javax.swing.text.NavigationFilter;
 import model.Navegacion;
 import model.User;
 
@@ -265,7 +261,7 @@ public class SignUpDefController implements Initializable {
                 alert.getDialogPane().getStyleClass().add("customAlert");
                 alert.setTitle("Exception Dialog");
                 alert.setHeaderText("An error has occurred");
-                alert.setContentText("There has been an error loading the scene");
+                alert.setContentText("An unexpected error has occurred when loading the scene. Please try again");
                 
                 
                 StringWriter sw = new StringWriter();

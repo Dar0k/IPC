@@ -17,23 +17,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.User;
 import model.Navegacion;
 import model.Problem;
-import java.util.List;
 import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
 import javafx.scene.control.ListView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import java.util.ArrayList;
-import javafx.beans.binding.Bindings;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -165,7 +160,7 @@ public class TestListController implements Initializable {
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error occurred trying to load the main test scene. Please try again");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();
@@ -217,7 +212,7 @@ public class TestListController implements Initializable {
             alertErr.getDialogPane().getStyleClass().add("customAlert");
             alertErr.setTitle("Exception Dialog");
             alertErr.setHeaderText("An error has occurred");
-            alertErr.setContentText("An unexpected error occurred trying to load the test list scene. Please try again");
+            alertErr.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();

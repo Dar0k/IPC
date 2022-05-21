@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="sb" alignment="CENTER" fillWidth="false" maxWidth="283.0" minHeight="320.0" minWidth="125.0" prefHeight="441.0" prefWidth="136.0" spacing="25.0" style="-fx-background-color: rgba(255,255,255,0.7);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.SidebarController">
+<VBox fx:id="sb" alignment="CENTER" fillWidth="false" maxWidth="283.0" minHeight="320.0" minWidth="125.0" prefHeight="441.0" prefWidth="136.0" spacing="25.0" stylesheets="@sidebarStyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.SidebarController">
     <children>
-        <Button fx:id="testButton" mnemonicParsing="false" onAction="#handleTest" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" style="-fx-background-color: transparent; -fx-background-radius: 50;" text="TEST">
+        <Button fx:id="testButton" mnemonicParsing="false" onAction="#handleTest" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited"  text="TEST">
             <font>
                 <Font size="15.0" />
             </font>
@@ -16,7 +16,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="resultsButton" mnemonicParsing="false" onAction="#handleResult" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefWidth="105.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" text="RESULTS">
+        <Button fx:id="resultsButton" mnemonicParsing="false" onAction="#handleResult" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefWidth="105.0" text="RESULTS">
             <font>
                 <Font size="15.0" />
             </font>
@@ -24,7 +24,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfile" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefWidth="105.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" text="PROFILE">
+        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfile" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefWidth="105.0"  text="PROFILE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -32,7 +32,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleLogOut" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefWidth="105.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" text="LOG OUT">
+        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleLogOut" onMouseEntered="#OnMouseHoverEnter" onMouseExited="#OnMouseHoverExited" prefWidth="105.0"  text="LOG OUT">
             <font>
                 <Font size="15.0" />
             </font>

@@ -24,12 +24,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -200,7 +197,7 @@ public class MainLogOutController implements Initializable {
             alert.getDialogPane().getStyleClass().add("customAlert");
             alert.setTitle("Exception Dialog");
             alert.setHeaderText("An error has occurred");
-            alert.setContentText("An unexcpected error has occurred when loading the log in scene. Please try again");
+            alert.setContentText("An unexpected error has occurred when loading the scene. Please try again");
 
 
             StringWriter sw = new StringWriter();
