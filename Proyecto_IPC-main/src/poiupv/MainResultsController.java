@@ -131,10 +131,10 @@ public class MainResultsController implements Initializable {
             hits.setMaxWidth((double)newv*0.2);
             faults.setMinWidth((double)newv*0.2);            
             faults.setMaxWidth((double)newv*0.2);
-            dateT.setMinWidth((double)newv*0.2);           
-            dateT.setMaxWidth((double)newv*0.2);  
-            timestamp.setMinWidth((double)newv*0.4);           
-            timestamp.setMaxWidth((double)newv*0.4);           
+            dateT.setMinWidth((double)newv*0.25);           
+            dateT.setMaxWidth((double)newv*0.25);  
+            timestamp.setMinWidth((double)newv*0.35);           
+            timestamp.setMaxWidth((double)newv*0.35);           
         });
         primaryStage.heightProperty().addListener((obs, oldv, newv)-> {
             System.out.println("prin: "+ newv);;
@@ -165,7 +165,7 @@ public class MainResultsController implements Initializable {
     @FXML
     public void loadResults()
     {
-        listView.getItems().clear();
+        tableView.getItems().clear();
         try{
             List<Session> sessions = user.getSessions();
             System.out.println(sessions.get(0).toString());

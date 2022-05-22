@@ -14,43 +14,42 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox fx:id="aux" onKeyPressed="#handleKeyPressed" prefHeight="438.0" prefWidth="591.0"  stylesheets="@logInStyleSheet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
+<HBox fx:id="aux" onKeyPressed="#handleKeyPressed" prefHeight="438.0" prefWidth="591.0" stylesheets="@logInStyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LogInDefController">
 
    <children>
-      <VBox id="vbox1" fx:id="side" alignment="CENTER" maxWidth="350.0" prefHeight="371.0" prefWidth="235.0" spacing="25.0" >
+      <VBox id="vbox1" fx:id="side" alignment="CENTER" prefHeight="371.0" prefWidth="235.0" spacing="25.0">
          <children>
             <Label fx:id="logInLabel" alignment="BOTTOM_CENTER" text="LOG IN">
                <font>
                   <Font name="Serif Regular" size="43.0" />
                </font>
             </Label>
-            <VBox fillWidth="false" maxWidth="200.0" prefHeight="64.0" prefWidth="180.0" >
+            <VBox>
                <children>
-                  <Label text="Username: " />
-                  <TextField id="textField" fx:id="usernameField" prefHeight="26.0" prefWidth="238.0"  />
-                  <Label fx:id="usernameError" prefHeight="17.0" prefWidth="180.0" text="Incorrect username" textFill="RED" visible="false" />
+                  <Label fx:id="uLabel" text="Username: " />
+                  <TextField id="textField" fx:id="usernameField" />
+                  <Label fx:id="usernameError" text="Incorrect username" textFill="RED" visible="false" />
                </children>
             </VBox>
-            <VBox fillWidth="false" maxWidth="200.0" prefHeight="68.0" prefWidth="198.0">
+            <VBox>
                <children>
-                  <Label text="Password:" />
-                  <HBox id="passField" alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="225.0" >
+                  <Label fx:id="pLabel" text="Password:" />
+                  <HBox id="passField" alignment="CENTER_LEFT">
                      <children>
-                        <StackPane prefHeight="25.0" prefWidth="163.0">
+                        <StackPane prefWidth="500.0">
                            <children>
-                              <TextField fx:id="passwordTextField" maxWidth="162.5" prefHeight="26.0" prefWidth="162.5"  visible="false" />
-                              <PasswordField fx:id="passwordField" maxWidth="162.5" prefHeight="26.0" prefWidth="162.5"  />
+                              <TextField fx:id="passwordTextField" prefHeight="25.0" prefWidth="500.0" visible="false" />
+                              <PasswordField fx:id="passwordField" prefWidth="500.0" />
                            </children>
                         </StackPane>
-                        <StackPane onMouseClicked="#handleEyeCicked">
+                        <StackPane onMouseClicked="#handleEyeCicked" prefHeight="25.0" prefWidth="66.0">
                            <children>
-                              <ImageView fitHeight="16.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="eyeIm" fitHeight="16.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/OpenEye.png" />
                                  </image>
                               </ImageView>
-                              <Line fx:id="passwordEyeLine" endY="8.034704208374023" startX="-26.217239379882812" startY="-6.757354736328125" />
+                              <Line fx:id="passwordEyeLine" rotate="36.0" startX="30.0" />
                            </children>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -58,7 +57,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <Label fx:id="passwordError" prefHeight="121.0" prefWidth="215.0" text="Incorrect password" textFill="RED" visible="false">
+                  <Label fx:id="passwordError" text="Incorrect password" textFill="RED" visible="false">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

@@ -40,7 +40,7 @@ public class PoiUPVApp extends Application {
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("../resources/alerts.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
             LogInDefController logInCtrl = loader.<LogInDefController>getController();
             //MapController logInCtrl = loader.<MapController>getController();
             Problem problem = new Problem("Problem", new Answer("Answer1", false), new Answer("Answer2", false), new Answer("Answer3", false), new Answer("Answer4", true));

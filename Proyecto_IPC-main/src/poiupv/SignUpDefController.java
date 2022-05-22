@@ -330,7 +330,10 @@ public class SignUpDefController implements Initializable {
         prevRoot = stage.getScene().getRoot();
         prevTitle = stage.getTitle();
         primaryStage = stage;
-        primaryStage.setTitle("SIGN UP");        
+        primaryStage.setTitle("SIGN UP"); 
+        
+        primaryStage.setMinHeight(460);
+        primaryStage.setMinWidth(600);
     }
 
     @FXML
