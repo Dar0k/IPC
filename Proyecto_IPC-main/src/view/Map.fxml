@@ -23,7 +23,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="427.0" prefWidth="812.0" stylesheets="@mapToolbar.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="427.0" prefWidth="812.0" stylesheets="@mapToolbar.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
 
       <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
