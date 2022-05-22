@@ -136,7 +136,7 @@ public class LogInDefController implements Initializable {
 
     @FXML
     private void handleSignUpClick(MouseEvent event) {
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../viw/SignUpDef.fxml"));
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/SignUpDef.fxml"));
         try{
             Parent root = (Parent) myLoader.load();
             SignUpDefController signUpContr = myLoader.<SignUpDefController>getController();

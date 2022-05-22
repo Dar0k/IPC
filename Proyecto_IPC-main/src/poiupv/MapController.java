@@ -898,10 +898,9 @@ public class MapController implements Initializable {
             
             questionNumber.setFont(fontLa);
             questionLabel.setFont(fontTe);
-            radioButtonA1.setFont(fontRa);   
-            radioButtonC.setFont(fontRa);
+            radioButtonA1.setFont(fontRa);  
             radioButtonA.setFont(fontRa);
-             radioButtonB.setFont(fontRa);
+            radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
@@ -925,7 +924,6 @@ public class MapController implements Initializable {
             questionNumber.setFont(fontLa);
             questionLabel.setFont(fontTe);
             radioButtonA1.setFont(fontRa);
-            radioButtonC.setFont(fontRa);
             radioButtonA.setFont(fontRa);
             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
@@ -943,7 +941,6 @@ public class MapController implements Initializable {
             questionNumber.setFont(fontLa);
             questionLabel.setFont(fontTe);
             radioButtonA1.setFont(fontRa);
-            radioButtonC.setFont(fontRa);
             radioButtonA.setFont(fontRa);
             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
@@ -1007,6 +1004,11 @@ public class MapController implements Initializable {
         helper.setTextAlignment(TextAlignment.JUSTIFY);
         System.out.println("quest Heigth: " +h);
         System.out.println("calc Heigth: " +helper.getLayoutBounds().getHeight());
+        if(helper.getLayoutBounds().getHeight()>h){
+            questionLabel.setPrefHeight(100);
+        }else{
+            questionLabel.setPrefHeight(helper.getLayoutBounds().getHeight());
+        }
         
         /*ScrollBar sb = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
         double difVT = vboxQuest.getWidth() - questionLabel.getWidth();
@@ -1027,7 +1029,5 @@ public class MapController implements Initializable {
                 questionLabel.setPrefHeight(questionLabel.getPrefHeight() + 10);
             }
         };*/
-    }
-  
-    
+    }   
 }
