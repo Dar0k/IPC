@@ -242,7 +242,17 @@ public class MapController implements Initializable {
         vboxQuest.widthProperty().addListener((obs, oldv, newv)-> {
             calcWSize((double)newv);
         });
-        calcWSize(170);     
+        calcWSize(170);
+        try{
+            handleQuest(new ActionEvent());
+            handleQuest(new ActionEvent());
+
+        }
+        catch(Exception e)
+        {
+            System.err.println("Error loading fullscreenImage");
+        }
+        
     }
      
     @Override
@@ -403,6 +413,7 @@ public class MapController implements Initializable {
                 Circle dot = new Circle(event.getX(), event.getY(), sizeSlider.getValue());
                 dot.setStroke(colorPicker.getValue());
                 dot.setFill(colorPicker.getValue());
+                dot.setStrokeWidth(0);
                 zoomGroup.getChildren().add(dot);
                 dot.setOnMousePressed(c -> {removeElement(dot); map_scrollpane.setPannable(false);});
                 /*dot.setOnMouseExited(c -> {
@@ -517,7 +528,7 @@ public class MapController implements Initializable {
                 lineX.setStrokeWidth(3);
                 lineX.setFill(colorPicker.getValue());
                 lineX.setStroke(colorPicker.getValue());
-                lineX.strokeProperty().bind(lineY.strokeProperty());
+                lineX.strokeProperty().bindBidirectional(lineY.strokeProperty());
                 zoomGroup.getChildren().add(lineX);
                 zoomGroup.getChildren().add(lineY);
                 lineXArr.add(lineX);
@@ -549,12 +560,23 @@ public class MapController implements Initializable {
             int index = zoomGroup.getChildren().indexOf(node);
             Node n =  zoomGroup.getChildren().get(index);
             
+            
             if(n instanceof Shape)
             {
+                
                 Shape s = (Shape) n;
-                s.setStroke(colorPicker.getValue());
-                s.setFill(colorPicker.getValue());
+                if(s.getFill().equals(Color.TRANSPARENT))
+                {
+                    s.setStroke(colorPicker.getValue());
+                }
+                else
+                {
+                    s.setStroke(colorPicker.getValue());
+                    s.setFill(colorPicker.getValue());
+                }
                 zoomGroup.getChildren().set(index, s);
+
+                
             }                        
         }
     }
