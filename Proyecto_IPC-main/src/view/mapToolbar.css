@@ -182,8 +182,7 @@ and open the template in the editor.
 }
 
 .radio-button .radio {
-    -fx-background-color: white;
-    -fx-background-image: null;    
+    -fx-background-color: white; 
 }
 .radio-button{
     -fx-padding: 3

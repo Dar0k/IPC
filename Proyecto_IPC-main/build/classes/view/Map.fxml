@@ -23,10 +23,10 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="map" minWidth="300.0" prefHeight="427.0" prefWidth="812.0" stylesheets="@mapToolbar.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
+<BorderPane fx:id="map" minWidth="300.0" prefHeight="427.0" prefWidth="812.0" stylesheets="@mapToolbar.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MapController">
    <top>
 
-      <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
+      <ToolBar id="toolbar" prefHeight="21.0" prefWidth="618.0" BorderPane.alignment="CENTER">
 
         <items>
             <ToggleButton id="button1" fx:id="dot" mnemonicParsing="false" onAction="#handleDot" prefHeight="53.0" prefWidth="65.0">
@@ -143,7 +143,7 @@
       </ToolBar>
    </top>
    <center>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.7839506172839507" stylesheets="@../resources/buttonToolbar.css" BorderPane.alignment="CENTER">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.7839506172839507" BorderPane.alignment="CENTER">
          <items>
             <StackPane prefHeight="332.0" prefWidth="564.0">
                <children>
@@ -169,7 +169,7 @@
                      <children>
                         <VBox alignment="BOTTOM_RIGHT" prefHeight="51.0" prefWidth="538.0">
                            <children>
-                              <Button id="buttonPlus" fx:id="zoomInButton" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="24.0" prefWidth="25.0" stylesheets="@../resources/buttonToolbar.css">
+                              <Button id="buttonPlus" fx:id="zoomInButton" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="24.0" prefWidth="25.0">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -181,7 +181,7 @@
                                     <Insets right="4.0" />
                                  </VBox.margin>
                               </Button>
-                              <Button id="buttonMinus" fx:id="zoomOutButton" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="27.0" prefWidth="30.0" stylesheets="@../resources/buttonToolbar.css">
+                              <Button id="buttonMinus" fx:id="zoomOutButton" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="27.0" prefWidth="30.0">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -198,7 +198,7 @@
                               <Insets />
                            </VBox.margin>
                         </VBox>
-                        <Button id="button3" fx:id="fullscreen" alignment="CENTER" mnemonicParsing="false" onAction="#handleQuest" stylesheets="@../resources/buttonToolbar.css">
+                        <Button id="button3" fx:id="fullscreen" alignment="CENTER" mnemonicParsing="false" onAction="#handleQuest">
                            <graphic>
                               <ImageView fx:id="fullscreenImageView" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -220,7 +220,7 @@
                   </VBox>
                </children>
             </StackPane>
-            <VBox id="quest" fx:id="vboxQuest" maxWidth="380.0" minWidth="150.0" spacing="10.0" stylesheets="@../resources/buttonToolbar.css">
+            <VBox id="quest" fx:id="vboxQuest" maxWidth="380.0" minWidth="150.0" spacing="10.0">
                <children>
                   <Label fx:id="questionNumber" text="Label" />
                   <TextArea fx:id="questionLabel" editable="false" maxHeight="640.0" prefHeight="640.0" prefWidth="152.0" text="Texto de ejemplo uhfduihsafuhdsufhiudsahfiuf ddsjsfld asfv;sdavdscwae" wrapText="true">
@@ -231,19 +231,24 @@
                         <Font size="16.0" />
                      </font>
                   </TextArea>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                  <VBox alignment="CENTER" prefHeight="250.0" prefWidth="100.0" spacing="10.0">
                      <children>
-                        <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="rad" />
-                           </toggleGroup>
-                        </RadioButton>
+                        <StackPane>
+                           <children>
+                              <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="rad" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="radioButtonA1" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" visible="false" />
+                           </children>
+                        </StackPane>
                         <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
                         <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
                         <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" toggleGroup="$rad" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </VBox>
                   <HBox fx:id="hbButton" alignment="BOTTOM_CENTER" spacing="10.0">

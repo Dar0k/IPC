@@ -30,7 +30,10 @@
                         <Insets left="50.0" right="25.0" />
                      </VBox.margin>
                   </ListView>
-                  <TextArea fx:id="problemDescription" prefHeight="157.0" prefWidth="467.0" styleClass="text-area" stylesheets="@textAreaStyleSheet.css" wrapText="true" />
+                  <TextArea fx:id="problemDescription" editable="false" prefHeight="157.0" prefWidth="467.0" styleClass="text-area" stylesheets="@textAreaStyleSheet.css" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></TextArea>
                   <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="419.0" spacing="25.0">
                      <children>
                         <Button id="button1" fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="100.0" stylesheets="@buttonStyleSheet.css" text="CANCEL" textFill="WHITE">

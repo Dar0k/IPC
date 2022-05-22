@@ -30,7 +30,7 @@
                               </Label>
                               <HBox id="datepickHbox" prefHeight="5.0" prefWidth="150.0">
                                  <children>
-                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" promptText="Choose a date" stylesheets="@datePickerStyleSheet.css" />
+                                    <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#loadResults" prefHeight="16.0" prefWidth="150.0" promptText="Choose date" stylesheets="@datePickerStyleSheet.css" />
                                  </children>
                               </HBox>
                            </children>

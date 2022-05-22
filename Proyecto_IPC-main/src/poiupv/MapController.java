@@ -48,7 +48,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -66,6 +65,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.PopupWindow;
 import javafx.util.Duration;
 import model.Answer;
@@ -186,14 +186,13 @@ public class MapController implements Initializable {
     private Line lineY;
     private ArrayList<Line> lineXArr;
     private ArrayList<Line> lineYArr;
-    
-    
-
-
     @FXML
     private HBox hbButton;
     private boolean eraserCondition;
     private boolean arcCondition;
+    @FXML
+    private RadioButton radioButtonA1;
+    private Font fontTemp;
 
     /**
      * Initializes the controller class.
@@ -236,7 +235,14 @@ public class MapController implements Initializable {
         
         
         scrollBarv = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
+        fontTemp = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
         
+        questionLabel.heightProperty().addListener((obs, oldv, newv)-> {
+            checkScrollBar(fontTemp, questionLabel.getText(),  questionLabel.getWidth() + 8, (double) newv);
+        });
+        questionLabel.widthProperty().addListener((obs, oldv, newv)-> {
+            checkScrollBar(fontTemp, questionLabel.getText(), (double) newv + 8, questionLabel.getHeight());
+        });
         vboxQuest.heightProperty().addListener((obs, oldv, newv)-> {
             calcHSize((double)newv);
         });
@@ -247,7 +253,9 @@ public class MapController implements Initializable {
         calcWSize(170);
         
         
-        
+        /*radioButtonA.styleProperty().bindBidirectional(radioButtonB.styleProperty());
+        radioButtonB.styleProperty().bindBidirectional(radioButtonC.styleProperty());
+        radioButtonC.styleProperty().bindBidirectional(radioButtonD.styleProperty());*/       
     }
      
     @Override
@@ -268,7 +276,8 @@ public class MapController implements Initializable {
             sendButton.setDisable(false);            
         });
         
-        toolTip();      
+        toolTip();  
+        
     }
     
     // esta funcion es invocada al cambiar el value del slider zoom_slider
@@ -514,13 +523,14 @@ public class MapController implements Initializable {
             
             case "coords":
                 Line lineY = new Line(event.getX(), 0, event.getX(), 5760);
-                lineY.setStrokeWidth(3);
+                lineY.setStrokeWidth(3);                
                 lineY.setFill(colorPicker.getValue());
                 lineY.setStroke(colorPicker.getValue());
                 Line lineX = new Line(0, event.getY(), 8960, event.getY());
                 lineX.setStrokeWidth(3);
                 lineX.setFill(colorPicker.getValue());
                 lineX.setStroke(colorPicker.getValue());
+                lineX.strokeProperty().bind(lineY.strokeProperty());
                 zoomGroup.getChildren().add(lineX);
                 zoomGroup.getChildren().add(lineY);
                 lineXArr.add(lineX);
@@ -529,8 +539,7 @@ public class MapController implements Initializable {
                 lineX.setOnMouseClicked(c -> removeLine(lineX, true));
                 lineY.setOnMouseClicked(c -> removeLine(lineY, false));
 
-                break;
-                
+                break;             
                 
             default:
                 map_scrollpane.setPannable(true);
@@ -574,20 +583,18 @@ public class MapController implements Initializable {
                 index = lineXArr.indexOf(line);
                 zoomGroup.getChildren().remove(line);
                 temp = lineYArr.get(index);
-                zoomGroup.getChildren().remove(temp);
-                
+                zoomGroup.getChildren().remove(temp);                
             }
             else{
                 index = lineYArr.indexOf(line);
                 zoomGroup.getChildren().remove(line);
                 temp = lineXArr.get(index);
-                zoomGroup.getChildren().remove(temp);
-                
+                zoomGroup.getChildren().remove(temp);                
             }
             
-        }
-        
-        
+        }if(buttonSelection.equals("cubo")){
+            line.setStroke(colorPicker.getValue());            
+        }       
     }
 
     
@@ -879,21 +886,27 @@ public class MapController implements Initializable {
         System.out.println("stage: " + temp);
         System.out.println("vbox: " + newv);
         System.out.println("row: " + questionLabel.getPrefRowCount());
-        checkScrollBar();
+        
+            
+
         if((double)newv < 350){
             Font fontRa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
-            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12); 
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);            
+            fontTemp = fontTe;
             
             questionNumber.setFont(fontLa);
             questionLabel.setFont(fontTe);
+            radioButtonA1.setFont(fontRa);   
+            radioButtonC.setFont(fontRa);
             radioButtonA.setFont(fontRa);
-            radioButtonB.setFont(fontRa);
+             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
-            sendButton.setFont(fontBu);           
+            sendButton.setFont(fontBu);     
+            //checkScrollBar(fontTe, questionLabel.getText(), questionLabel.getWidth() +10, questionLabel.getHeight());
         }  else if((double)newv >= 350 && (double)newv <450){
             double act = 450-(double)newv;
             int stageDif = 450-350;
@@ -907,36 +920,43 @@ public class MapController implements Initializable {
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (laDif*per));
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (teDif*per));
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (buDif*per)); 
+            fontTemp = fontTe;
             
             questionNumber.setFont(fontLa);
             questionLabel.setFont(fontTe);
+            radioButtonA1.setFont(fontRa);
+            radioButtonC.setFont(fontRa);
             radioButtonA.setFont(fontRa);
             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
-            sendButton.setFont(fontBu);           
+            sendButton.setFont(fontBu);        
+            //checkScrollBar(fontTe, questionLabel.getText(),questionLabel.getWidth());
         }else{
             Font fontRa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 18);
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16); 
+            fontTemp = fontTe;
             
             questionNumber.setFont(fontLa);
             questionLabel.setFont(fontTe);
+            radioButtonA1.setFont(fontRa);
+            radioButtonC.setFont(fontRa);
             radioButtonA.setFont(fontRa);
             radioButtonB.setFont(fontRa);
             radioButtonC.setFont(fontRa);
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
-            sendButton.setFont(fontBu);              
+            sendButton.setFont(fontBu);         
+            //checkScrollBar(fontTe, questionLabel.getText(),questionLabel.getWidth());
         }
     }
     
     private void calcWSize(double newv){
         System.out.println("vbox H: " + newv);
         System.out.println("row: " + questionLabel.getPrefRowCount());
-        checkScrollBar();
         if((double)newv < 250){
             goBackButton.setPrefWidth(newv*0.4);
             sendButton.setPrefWidth(newv*0.4);
@@ -978,7 +998,16 @@ public class MapController implements Initializable {
         return tooltip;
     }
     
-    private void checkScrollBar() {  
+    private void checkScrollBar(Font font, String text, double wrappingWidth, double h) {  
+        Text helper = new Text();
+        System.out.println("font: "+font);
+        helper.setText(text);
+        helper.setFont(font);
+        helper.setWrappingWidth((int)wrappingWidth);
+        helper.setTextAlignment(TextAlignment.JUSTIFY);
+        System.out.println("quest Heigth: " +h);
+        System.out.println("calc Heigth: " +helper.getLayoutBounds().getHeight());
+        
         /*ScrollBar sb = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
         double difVT = vboxQuest.getWidth() - questionLabel.getWidth();
         System.out.println("scrollBar: " +difVT );
@@ -999,4 +1028,6 @@ public class MapController implements Initializable {
             }
         };*/
     }
+  
+    
 }
