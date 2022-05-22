@@ -157,7 +157,17 @@ public class MainResultsController implements Initializable {
     {
         hits.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHits() + ""));
         faults.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFaults()+ ""));
-        timestamp.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTimeStamp().getHour() + ":" + param.getValue().getTimeStamp().getMinute() + ":" + param.getValue().getTimeStamp().getSecond()));
+        timestamp.setCellValueFactory(param ->
+        {
+            String hour = "";
+            String minute = "";
+            String second = "";
+            if((int) (param.getValue().getTimeStamp().getHour() / 10) == 0) hour = "0";
+            if((int) (param.getValue().getTimeStamp().getMinute() / 10) == 0) minute = "0";
+            if((int) (param.getValue().getTimeStamp().getSecond() / 10) == 0) second = "0";
+
+            return new SimpleStringProperty(hour + param.getValue().getTimeStamp().getHour() + ":" + minute + param.getValue().getTimeStamp().getMinute() + ":" + second + param.getValue().getTimeStamp().getSecond());
+                });
         dateT.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getLocalDate()+ ""));
     }
     

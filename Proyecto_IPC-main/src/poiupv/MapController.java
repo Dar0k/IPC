@@ -11,13 +11,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -178,8 +181,20 @@ public class MapController implements Initializable {
     private ScrollBar scrollBarv;
     @FXML
     private Circle sizeProf;
+
+    private Line lineX;
+    private Line lineY;
+    private ArrayList<Line> lineXArr;
+    private ArrayList<Line> lineYArr;
+    
+    
+
+
     @FXML
     private HBox hbButton;
+    private boolean eraserCondition;
+    private boolean arcCondition;
+
     /**
      * Initializes the controller class.
      */
@@ -214,7 +229,11 @@ public class MapController implements Initializable {
         questionNumber.setText("Problem " + number);
         
         cList = new ArrayList<Circle>();
-        tList = new ArrayList<Tooltip>();  
+        tList = new ArrayList<Tooltip>();
+        
+        lineXArr = new ArrayList<Line>();
+        lineYArr = new ArrayList<Line>();
+        
         
         scrollBarv = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
         
@@ -375,16 +394,13 @@ public class MapController implements Initializable {
             default:
                 break;
                 
-        }
-        
-        
-        
-        
+        }        
     }
 
     @FXML
     private void handleMapMousePress(MouseEvent event) {
         map_scrollpane.setPannable(false);
+        arcCondition = true;
         switch(buttonSelection)
         {
             case "dot":
@@ -393,7 +409,7 @@ public class MapController implements Initializable {
                 dot.setFill(colorPicker.getValue());
                 zoomGroup.getChildren().add(dot);
                 dot.setOnMousePressed(c -> {removeElement(dot); map_scrollpane.setPannable(false);});
-                dot.setOnMouseExited(c -> {
+                /*dot.setOnMouseExited(c -> {
                     if(buttonSelection.equals("coords")) { 
                         map_scrollpane.getScene().setCursor(Cursor.DEFAULT);
                         dotTooltip(dot, false);
@@ -405,16 +421,28 @@ public class MapController implements Initializable {
                         map_scrollpane.getScene().setCursor(Cursor.HAND);                        
                         dotTooltip(dot, true);                  
                     }
-                });
+                });*/
                 break;
+                
             case "arc":
                 circle = new Circle(event.getX(), event.getY(), sizeSlider.getValue());
                 circle.setStrokeWidth(sizeSlider.getValue());
                 circle.setStroke(colorPicker.getValue());
                 circle.setFill(Color.TRANSPARENT);
                 startXArc = event.getX();
-                zoomGroup.getChildren().add(circle);
-                circle.setOnMousePressed(c -> removeElement(circle));
+                zoomGroup.getChildren().add(1, circle);
+                Circle tempC = circle;
+                circle.setOnMousePressed(new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent me)
+                    {
+                        
+                        handleMapMousePress(me);
+                        if(eraserCondition) removeElement(tempC);
+                        eraserCondition = false;
+                        
+                    }
+                    
+                });
                 break;
             case "line":
                 linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
@@ -423,7 +451,17 @@ public class MapController implements Initializable {
                 linePainting.setStroke(colorPicker.getValue());
                 zoomGroup.getChildren().add(linePainting);
                 Line temp = linePainting;
-                linePainting.setOnMousePressed(c -> {removeElement(temp);map_scrollpane.setPannable(false);});
+                linePainting.setOnMousePressed(new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent me)
+                    {
+                        handleMapMousePress(me);
+                        System.out.println(eraserCondition);
+                        if(eraserCondition) removeElement(temp);
+                        map_scrollpane.setPannable(false);
+                        eraserCondition = false;
+                    }
+                    
+                });
                 linePainting.setOnMouseExited(c -> {map_scrollpane.setPannable(true);});
                 linePainting.setOnContextMenuRequested(eventContext -> {
                     ContextMenu menuContext = new ContextMenu();
@@ -446,7 +484,7 @@ public class MapController implements Initializable {
                     zoomGroup.getChildren().add(textField);
                     textField.setLayoutX(event.getX());
                     textField.setLayoutY(event.getY());
-                    textField.requestFocus();
+                    textField.requestFocus();                   
                     textField.setOnMousePressed(c -> removeElement(textField));
                     textField.setOnAction(eventC ->{
                         Text label = new Text(textField.getText());
@@ -468,9 +506,31 @@ public class MapController implements Initializable {
                     textDone = false;
                 }
                 break;
+            case "eraser":
+                
             case "cubo":
+                eraserCondition = true;
                 break;
             
+            case "coords":
+                Line lineY = new Line(event.getX(), 0, event.getX(), 5760);
+                lineY.setStrokeWidth(3);
+                lineY.setFill(colorPicker.getValue());
+                lineY.setStroke(colorPicker.getValue());
+                Line lineX = new Line(0, event.getY(), 8960, event.getY());
+                lineX.setStrokeWidth(3);
+                lineX.setFill(colorPicker.getValue());
+                lineX.setStroke(colorPicker.getValue());
+                zoomGroup.getChildren().add(lineX);
+                zoomGroup.getChildren().add(lineY);
+                lineXArr.add(lineX);
+                lineYArr.add(lineY);
+                
+                lineX.setOnMouseClicked(c -> removeLine(lineX, true));
+                lineY.setOnMouseClicked(c -> removeLine(lineY, false));
+
+                break;
+                
                 
             default:
                 map_scrollpane.setPannable(true);
@@ -480,11 +540,13 @@ public class MapController implements Initializable {
         System.out.println(sizeSlider.getValue());
     }
     
-    private void removeElement(Object node)
+    private void removeElement(Node node)
     {
         if(buttonSelection.equals("eraser"))
         {
             zoomGroup.getChildren().remove(node);
+            
+
         }
         if(buttonSelection.equals("cubo"))
         {
@@ -497,12 +559,38 @@ public class MapController implements Initializable {
                 s.setStroke(colorPicker.getValue());
                 s.setFill(colorPicker.getValue());
                 zoomGroup.getChildren().set(index, s);
-            }
-            
-            
+            }                        
         }
     }
 // rgba(132, 81, 43, 0.75)
+    private void removeLine(Line line, boolean isX)
+    {
+        if(buttonSelection.equals("eraser"))
+        {
+            int index;
+            Line temp;
+            if(isX)
+            {
+                index = lineXArr.indexOf(line);
+                zoomGroup.getChildren().remove(line);
+                temp = lineYArr.get(index);
+                zoomGroup.getChildren().remove(temp);
+                
+            }
+            else{
+                index = lineYArr.indexOf(line);
+                zoomGroup.getChildren().remove(line);
+                temp = lineXArr.get(index);
+                zoomGroup.getChildren().remove(temp);
+                
+            }
+            
+        }
+        
+        
+    }
+
+    
     @FXML
     private void handleTransportador(ActionEvent event) {
         transportador.setTranslateX(map_scrollpane.getHvalue()*8960);
@@ -696,7 +784,7 @@ public class MapController implements Initializable {
                     temp.setStyle("-fx-border-color: red; -fx-border-width: 0 0 2 0; -fx-padding: 3");
                     buttonsT.get(i).setStyle("-fx-border-color: green; -fx-border-width: 0 0 2 0; -fx-padding: 3");
                 }
-                for(i = 0; i<4 && !tempB; i++){
+                for(i = 0; i<4; i++){
                     buttonsT.get(i).setDisable(true);
                 }
                 sendButton.setText("Stats");
