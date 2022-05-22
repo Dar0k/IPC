@@ -97,14 +97,14 @@ public class LogInDefController implements Initializable {
         });
         primaryStage.heightProperty().addListener((obs, oldv, newv) ->{
              height = (double) newv;
-             //setSide(width, height);
              calcHSide(height);        
-        });
-        primaryStage.setMinHeight(410);
-        primaryStage.setMinWidth(420);
+        });  
         
-        calcWSide(600);
-        calcHSide(450);
+        primaryStage.setMinHeight(460);
+        primaryStage.setMinWidth(600);
+        
+        calcWSide(primaryStage.getWidth());
+        calcHSide(primaryStage.getHeight());
     }
     /**
      * Initializes the controller class.
@@ -203,6 +203,7 @@ public class LogInDefController implements Initializable {
                 mtCtrl.initStage(primaryStage, user);
                 primaryStage.getScene().setRoot(root);
                 
+                
             }
             catch(IOException e)
             {
@@ -254,6 +255,8 @@ public class LogInDefController implements Initializable {
         System.out.println("width: " + w);   
        
         if(w<600){
+            Font fontTi = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 43);
+            logInLabel.setFont(fontTi);
             side.setPadding(new Insets(side.getPadding().getTop(),20,side.getPadding().getBottom(),20));
             side.setMinWidth(200);
             side.setMaxWidth(200);
@@ -264,12 +267,17 @@ public class LogInDefController implements Initializable {
             double per = 1 - (act/stageDif);
             double horPad = 80-20;
             double buDif = 150-100;
+            double fontTiDif = 60-43;
             
+            Font fontTi = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 43 + (fontTiDif*per));
+            logInLabel.setFont(fontTi);
             side.setPadding(new Insets(side.getPadding().getTop(), 25+(horPad*per), side.getPadding().getBottom(), 25+(horPad*per)));
             side.setMinWidth(w * 0.333);
             side.setMaxWidth(w * 0.333);
             enterButton.setPrefWidth(100 + (buDif*per));
         }else{
+            Font fontTi = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 60);
+            logInLabel.setFont(fontTi);
             side.setPadding(new Insets(side.getPadding().getTop(), 80, side.getPadding().getBottom(), 80));
             side.setMinWidth(w * 0.333);
             side.setMaxWidth(w * 0.333); 
@@ -279,15 +287,13 @@ public class LogInDefController implements Initializable {
     
     public void calcHSide(double h){
         System.out.println("height: " + h);   
-        if(h<475){
-            Font fontTi = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 43);
+        if(h<475){            
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
             Font fontSi = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 17);
-            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 15);
-           
-            logInLabel.setFont(fontTi);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 15);          
+            
             uLabel.setFont(fontLa);
             pLabel.setFont(fontLa);
             usernameField.setFont(fontTe);
@@ -308,24 +314,21 @@ public class LogInDefController implements Initializable {
             double per = 1 - (act/stageDif);
             double verPad = 80-25;
             double spaDif = 50-25;
-            double fontTiDif = 60-43;
             double fontLaDif = 20-12;
             double fontTeDif = 20-12;
             double fontErDif = 20-12;
             double fontSiDif = 25-17;
-            double fontBuDif = 25-17;
+            double fontBuDif = 23-17;
             double eyeXDif = 40-30;
             double eyeYDif = 20-16;
             double eyeLinDif = 40-30;
             
-            Font fontTi = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 43 + (fontTiDif*per));
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontLaDif*per));
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontTeDif*per));
             Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12 + (fontErDif*per));
             Font fontSi = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 17 + (fontSiDif*per));
             Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 15 + (fontBuDif*per));            
             
-            logInLabel.setFont(fontTi);
             uLabel.setFont(fontLa);
             pLabel.setFont(fontLa);
             usernameField.setFont(fontTe);
@@ -341,14 +344,12 @@ public class LogInDefController implements Initializable {
             eyeIm.setFitHeight(16 + (eyeYDif*per));
             passwordEyeLine.setStartX(30 + (eyeLinDif*per));
         }else{
-            Font fontTi = Font.font("Serif", FontWeight.NORMAL, FontPosture.REGULAR, 60);
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 20);
             Font fontTe = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 20);
             Font fontEr = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 20);
             Font fontSi = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 25);
-            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 25);
+            Font fontBu = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 23);
            
-            logInLabel.setFont(fontTi);
             uLabel.setFont(fontLa);
             pLabel.setFont(fontLa);
             usernameField.setFont(fontTe);
@@ -362,8 +363,7 @@ public class LogInDefController implements Initializable {
             eyeIm.setFitHeight(20);
             passwordEyeLine.setStartX(40);           
             side.setPadding(new Insets(80, side.getPadding().getRight(), 80, side.getPadding().getLeft()));
-            side.setSpacing(50);
-            
+            side.setSpacing(50);            
         }
     }
 }

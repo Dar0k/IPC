@@ -8,11 +8,10 @@ and open the template in the editor.
     Author     : DROCPER
 */
 .root{
-    -fx-background-image: url('../resources/fondo2.jpg');
+    -fx-background-color: linear-gradient(#87cefa, #ffffff );
     -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;
 }
 #vbox1{
-    -fx-background-color: rgba(255,255,255,0.7); 
     -fx-background-radius: 25;
 }
 #datepickHbox{
@@ -24,7 +23,7 @@ and open the template in the editor.
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color: linear-gradient(#404040 0%, #303030 25%, #202020 75%, #101010 100%);
+    -fx-background-color: black;
     -fx-text-fill: white;
 }
 
@@ -37,13 +36,12 @@ and open the template in the editor.
 }
 
 .list-cell:filled:hover {
-    -fx-background-color: linear-gradient(#b0b0b0 0%, #a0a0a0 25%, #909090 75%, #808080 100%);;
+    -fx-background-color: black;
     -fx-text-fill: white;
 }
 .table-view {
-    -fx-border: none;
     -fx-background-color: white;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 15;
     -fx-text-background-color: black;
 }
 
@@ -57,7 +55,7 @@ and open the template in the editor.
     -fx-background-color: transparent;
 }
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(to bottom, #585858, #808080);
+    -fx-background-color: black;
     -fx-background-radius: 15px;
     -fx-padding: 7px;
     -fx-text-background-color: white;

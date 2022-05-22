@@ -233,16 +233,8 @@ public class MapController implements Initializable {
         lineXArr = new ArrayList<Line>();
         lineYArr = new ArrayList<Line>();
         
-        
-        scrollBarv = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
         fontTemp = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12);
         
-        questionLabel.heightProperty().addListener((obs, oldv, newv)-> {
-            checkScrollBar(fontTemp, questionLabel.getText(),  questionLabel.getWidth() + 8, (double) newv);
-        });
-        questionLabel.widthProperty().addListener((obs, oldv, newv)-> {
-            checkScrollBar(fontTemp, questionLabel.getText(), (double) newv + 8, questionLabel.getHeight());
-        });
         vboxQuest.heightProperty().addListener((obs, oldv, newv)-> {
             calcHSize((double)newv);
         });
@@ -250,12 +242,7 @@ public class MapController implements Initializable {
         vboxQuest.widthProperty().addListener((obs, oldv, newv)-> {
             calcWSize((double)newv);
         });
-        calcWSize(170);
-        
-        
-        /*radioButtonA.styleProperty().bindBidirectional(radioButtonB.styleProperty());
-        radioButtonB.styleProperty().bindBidirectional(radioButtonC.styleProperty());
-        radioButtonC.styleProperty().bindBidirectional(radioButtonD.styleProperty());*/       
+        calcWSize(170);     
     }
      
     @Override
@@ -655,7 +642,7 @@ public class MapController implements Initializable {
             alert.getDialogPane().getStyleClass().add("customAlert");
             alert.setTitle("Go back");
             alert.setHeaderText("Are you sure you want to leave the test?");
-            alert.setContentText("All your progress will be lost and you will not be able com back. Are you sure you want to continue?");
+            alert.setContentText("All your progress will be lost and you will not be able come back. Are you sure you want to continue?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.CANCEL){
                 System.out.println("OK");
@@ -765,8 +752,8 @@ public class MapController implements Initializable {
             alert.getDialogPane().getStylesheets().add(getClass().getResource("../view/alerts.css").toExternalForm());
             alert.getDialogPane().getStyleClass().add("customAlert");
             alert.setTitle("Send");
-            alert.setHeaderText("Are you sure you want to send you answere?");
-            alert.setContentText("Your answere will be submitted and you will not be able com back. Are you sure you want to continue?");
+            alert.setHeaderText("Are you sure you want to send your answer?");
+            alert.setContentText("Your answer will be submitted and you will not be able come back. Are you sure you want to continue?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.CANCEL){
                 boolean tempB = false; int i;            
@@ -905,7 +892,6 @@ public class MapController implements Initializable {
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
             sendButton.setFont(fontBu);     
-            //checkScrollBar(fontTe, questionLabel.getText(), questionLabel.getWidth() +10, questionLabel.getHeight());
         }  else if((double)newv >= 350 && (double)newv <450){
             double act = 450-(double)newv;
             int stageDif = 450-350;
@@ -930,7 +916,6 @@ public class MapController implements Initializable {
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
             sendButton.setFont(fontBu);        
-            //checkScrollBar(fontTe, questionLabel.getText(),questionLabel.getWidth());
         }else{
             Font fontRa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
             Font fontLa = Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 16);
@@ -947,7 +932,6 @@ public class MapController implements Initializable {
             radioButtonD.setFont(fontRa);
             goBackButton.setFont(fontBu);
             sendButton.setFont(fontBu);         
-            //checkScrollBar(fontTe, questionLabel.getText(),questionLabel.getWidth());
         }
     }
     
@@ -993,41 +977,5 @@ public class MapController implements Initializable {
         tooltip.setAnchorLocation(PopupWindow.AnchorLocation.WINDOW_BOTTOM_LEFT);
         tooltip.setShowDelay(Duration.millis(100)); 
         return tooltip;
-    }
-    
-    private void checkScrollBar(Font font, String text, double wrappingWidth, double h) {  
-        Text helper = new Text();
-        System.out.println("font: "+font);
-        helper.setText(text);
-        helper.setFont(font);
-        helper.setWrappingWidth((int)wrappingWidth);
-        helper.setTextAlignment(TextAlignment.JUSTIFY);
-        System.out.println("quest Heigth: " +h);
-        System.out.println("calc Heigth: " +helper.getLayoutBounds().getHeight());
-        if(helper.getLayoutBounds().getHeight()>h){
-            questionLabel.setPrefHeight(100);
-        }else{
-            questionLabel.setPrefHeight(helper.getLayoutBounds().getHeight());
-        }
-        
-        /*ScrollBar sb = (ScrollBar)questionLabel.lookup(".scroll-bar:vertical");
-        double difVT = vboxQuest.getWidth() - questionLabel.getWidth();
-        System.out.println("scrollBar: " +difVT );
-        /*questionLabel.setScrollTop(1);
-        
-        double help = questionLabel.getScrollTop();
-        boolean temp = help == 0.0;
-        System.out.println("boolean: " + temp );*/
-
-        /*if (!scrollBarv.isVisible()){
-            while (!scrollBarv.isVisible()) {
-                questionLabel.setPrefHeight(questionLabel.getPrefHeight() - 10);
-            }
-            questionLabel.setPrefHeight(questionLabel.getPrefHeight() + 10);
-        }else if (scrollBarv.isVisible()){
-            while (!scrollBarv.isVisible() && questionLabel.getPrefHeight()< questionLabel.getMaxHeight()) {
-                questionLabel.setPrefHeight(questionLabel.getPrefHeight() + 10);
-            }
-        };*/
-    }   
+    }     
 }

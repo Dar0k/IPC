@@ -47,6 +47,8 @@ public class PoiUPVApp extends Application {
 
             //logInCtrl.initStage(stage,null, problem, 1);
             stage.getIcons().add(new Image("file:src/resources/navegacion.png"));
+            stage.setHeight(460);
+            stage.setWidth(600);
             logInCtrl.initStage(stage);
             stage.setTitle("Log in");
             stage.setScene(scene);

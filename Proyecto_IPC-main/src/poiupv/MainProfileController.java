@@ -255,7 +255,7 @@ public class MainProfileController implements Initializable {
         alert.getDialogPane().getStyleClass().add("customAlert");
         alert.setTitle("Save");
         alert.setHeaderText("Are you sure you want to save?");
-        alert.setContentText("Your profile information will be updated but you can't undo the action. Are you sure you want to continue?");
+        alert.setContentText("Your profile information will be updated but you will not be able to undo the action. Are you sure you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.CANCEL){
             System.out.println("OK");

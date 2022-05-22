@@ -15,7 +15,7 @@
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox alignment="CENTER" prefHeight="441.0" prefWidth="546.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox fx:id="aux" alignment="CENTER" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 25;">
+            <VBox fx:id="aux" alignment="CENTER" maxHeight="575.0" maxWidth="600.0" minHeight="306.0" minWidth="189.0" prefHeight="575.0" prefWidth="600.0" spacing="15.0">
                <children>
                   <Label fx:id="titleLabel" text="SELECT PROBLEM">
                      <VBox.margin>

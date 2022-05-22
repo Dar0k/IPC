@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="420.0" stylesheets="@testsStyleSheet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainTestController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="420.0" stylesheets="@testsStyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.MainTestController">
    <children>
       <fx:include fx:id="sidebar" source="Sidebar.fxml" />
       <HBox fx:id="aux" alignment="CENTER" prefHeight="441.0" prefWidth="514.0" HBox.hgrow="ALWAYS">
          <children>
             <VBox fx:id="aux1" alignment="CENTER" prefHeight="441.0" prefWidth="684.0" spacing="25.0">
                <children>
-                  <Button id="button3" fx:id="randomButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleRandom" stylesheets="@buttonStyleSheet.css" text="Random">
+                  <Button id="button3" fx:id="randomButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleRandom" style="-fx-border-color: black; -fx-border-radius: 500;" stylesheets="@buttonStyleSheet.css" text="Random">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -22,7 +22,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="button3" fx:id="listButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleList" stylesheets="@buttonStyleSheet.css" text="  Select  ">
+                  <Button id="button3" fx:id="listButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleList" style="-fx-border-color: black; -fx-border-radius: 500;" stylesheets="@buttonStyleSheet.css" text="  Select  ">
                      <font>
                         <Font size="30.0" />
                      </font>

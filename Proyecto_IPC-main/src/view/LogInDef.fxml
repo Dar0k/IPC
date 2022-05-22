@@ -64,7 +64,7 @@
                   </Label>
                </children>
             </VBox>
-            <Label fx:id="signUpLink" onMouseClicked="#handleSignUpClick" stylesheets="@buttonStyleSheet.css" text="Sign Up" textFill="#2b00ff">
+            <Label fx:id="signUpLink" focusTraversable="false" onMouseClicked="#handleSignUpClick" stylesheets="@buttonStyleSheet.css" text="Sign Up" textFill="#2b00ff">
                <font>
                   <Font size="17.0" />
                </font>

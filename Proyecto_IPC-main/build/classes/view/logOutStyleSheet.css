@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .root{
-    -fx-background-image: url('../resources/fondo2.jpg'); 
+    -fx-background-color: linear-gradient(#87cefa, #ffffff );
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
 }
